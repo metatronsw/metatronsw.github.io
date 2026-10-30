@@ -41,14 +41,14 @@
       .phone-image { position: relative; isolation: isolate; }
       .phone-image::before { content: ''; position: absolute; z-index: -1; inset: 0.5% 1%; border-radius: 20% / 10%; box-shadow: 0 14px 24px rgb(0 0 0 / 24%); pointer-events: none; }
       .phone-image img { display: block; width: 100%; transform: perspective(900px) rotateX(0deg); transition: transform 0.5s cubic-bezier(0.2, 0.65, 0.3, 1); }
-      #version { margin: 165px 0; background: linear-gradient(#ececec, white); }
+      #version { margin: 40px 0 165px; background: linear-gradient(#ececec, white); }
       .history { padding-left: 3em; }
       .history h3 { padding-left: 0.1em; margin: 0.8em 0 0; font-size: 21pt; }
       footer { padding: 0.5em 0; color: #10293d; font-weight: 400; text-align: center; background: whitesmoke; }
 
       /* Links */
-      .hover-underline-animation { display: inline-block; position: relative; color: #0096ff; font-weight: 400; text-decoration: none; }
-      .hover-underline-animation::after { content: ''; position: absolute; width: 100%; height: 2px; bottom: 0; left: 0; background: #0087ca; transform: scaleX(0); transform-origin: bottom right; transition: transform 0.25s ease-out; }
+      .hover-underline-animation { display: inline-block; position: relative; color: #0096ff; font-weight: 400; text-decoration: none; transition: color 1s ease-in; }
+      .hover-underline-animation::after { content: ''; position: absolute; width: 100%; height: 2px; bottom: 0; left: 0; background: #0096ff; transform: scaleX(0); transform-origin: bottom right; transition: transform 0.25s ease-out; }
       .hover-underline-animation:is(:hover, :focus-visible)::after { transform: scaleX(1); transform-origin: bottom left; }
       .content-link { white-space: nowrap; }
       .content-link .hover-underline-animation { font-size: 1em; line-height: inherit; vertical-align: baseline; }
@@ -75,3 +75,31 @@
         .heading > img { flex: 1; width: 0; }
         .appstr { --icon-size: 40px; gap: 8px; }
       }
+
+.footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; }
+.footer-brand { display: inline-flex; align-items: center; gap: 0.75rem; color: #172b3b; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 0.88rem; letter-spacing: -0.02em; text-decoration: none; }
+.footer-brand strong { font-weight: 700; }
+.brand-mark { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 10px; background: #0e4f79; color: white; font-size: 1rem; font-weight: 700; }
+.footer-inner > p { margin: 0 0 0 auto; text-align: right; color: #000; font-weight: 300; }
+
+.history h3 { display: flex; align-items: center; gap: 0.7em; }
+.history h3 > span { flex: none; }
+.version-line { display: block; width: 70%; height: 12px; flex: none; }
+@keyframes version-line-grow {
+  from { width: 12%; }
+  to { width: 70%; }
+}
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .version-line {
+      animation: version-line-grow linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 65%;
+    }
+  }
+}
+
+section h2 { transition: color 1s ease-in; }
+section h2:hover { color: #000; }
+
+.hover-underline-animation:is(:hover, :focus-visible) { color: #000; }

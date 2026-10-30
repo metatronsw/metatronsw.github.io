@@ -3,19 +3,20 @@
   <head>
     <meta charset="UTF-8">
     <title>Signee Timer</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=links-3">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  </head>
+    <link rel="stylesheet" href="../../common/app-artwork.css">
+</head>
   <body>
     <header>
       <div class="wrap heading">
-        <img src="signee-header-logo.svg" alt="Signee Timer" width="830" height="300">
+        <img class="app-artwork" src="signee-header-logo.svg" alt="Signee Timer" width="830" height="300">
         <a href="https://apps.apple.com/kz/app/signee-timer/id1558214467" target="_blank" rel="noopener" class="appstr">
           <picture>
             <source media="(max-width: 879px)" srcset="../../common/appstore-logo-black-box.svg">
             <img src="../../common/appstore-logo-black.svg" alt="Download on the App Store" height="64">
           </picture>
-          <img src="appicon.svg" alt="">
+          <img class="app-artwork" src="appicon.svg" alt="">
         </a>
       </div>
       <div class="ribbon">
@@ -114,14 +115,14 @@
         <div class="wrap d-right">
           <h2>Version history</h2>
           <div class="history">
-            <h3>1.5</h3>
+            <h3><span>1.5</span><img class="version-line" src="version-line.svg?v=4" alt="" aria-hidden="true" height="12"></h3>
             <ul>
               <li>Timer sequences</li>
               <li>Status icons</li>
               <li>Improved history</li>
               <li>iPad support</li>
             </ul>
-            <h3>1.4</h3>
+            <h3><span>1.4</span><img class="version-line" src="version-line.svg?v=4" alt="" aria-hidden="true" height="12"></h3>
             <ul>
               <li>Massive code refactoring, new core engine, more precise time counting</li>
               <li>Notifications, signs when the app is background or closed</li>
@@ -130,7 +131,7 @@
               <li>Localisation languages: German, Spanish, Hungarian</li>
               <li>Guide tour and help</li>
             </ul>
-            <h3>1.3</h3>
+            <h3><span>1.3</span><img class="version-line" src="version-line.svg?v=4" alt="" aria-hidden="true" height="12"></h3>
             <ul>
               <li>Quick launching actions, easy start with the desired setting - from the home screen</li>
               <li>Editing history notes, full screen history</li>
@@ -138,7 +139,7 @@
               <li>Quick time settings panel,  loop period reset, maximum time increased to 24 hours</li>
               <li>Optional three decimal seconds display</li>
             </ul>
-            <h3>1.2</h3>
+            <h3><span>1.2</span><img class="version-line" src="version-line.svg?v=4" alt="" aria-hidden="true" height="12"></h3>
             <ul>
               <li>New counter mode, shows only the elapsed laps. You can touch the timer to increment manually</li>
               <li>Larger history when the interval counter is inactive</li>
@@ -149,7 +150,7 @@
               <li>Displays the total intervals and idle times after reset</li>
               <li>Presets, saves personal settings, changes quickly</li>
             </ul>
-            <h3>1.1</h3>
+            <h3><span>1.1</span><img class="version-line" src="version-line.svg?v=4" alt="" aria-hidden="true" height="12"></h3>
             <ul>
               <li>New detailed history, event logging system</li>
               <li>New core engine, more accurate time measurement</li>
@@ -162,8 +163,13 @@
       </section>
     </main>
     <footer>
-      <p class="wrap">Signee Timer — a versatile stopwatch, interval timer and event logger.<br>
-        Made for sports, cooking, creative work and everyday routines.</p>
+      <div class="wrap footer-inner">
+        <a class="footer-brand" href="../../index.html" aria-label="Metatron Software home">
+          <span class="brand-mark" aria-hidden="true">M</span>
+          <span>Metatron <strong>Software</strong></span>
+        </a>
+        <p>If you have an idea or a request, we'd love to hear from you. <a class="hover-underline-animation" href="mailto:softwaremetatron@gmail.com">Send us an email</a>.</p>
+      </div>
     </footer>
   </body>
 </html>
