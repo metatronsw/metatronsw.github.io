@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Chess bishop">
+  <g fill="#326c95">
+    <circle cx="32" cy="7" r="4"/>
+    <path d="M32 11C25 16 18 23 18 30c0 6 6 10 14 10s14-4 14-10c0-3-1-6-4-10L31 31l-3-3 11-11Z"/>
+    <path d="M25 42h14l7 12H18Z"/>
+    <rect x="13" y="54" width="38" height="6" rx="3"/>
+  </g>
+  <rect x="21" y="38" width="22" height="5" rx="2" fill="#78a5c4"/>
+</svg>

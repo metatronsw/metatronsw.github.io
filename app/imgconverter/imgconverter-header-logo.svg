@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 200" role="img" aria-labelledby="title">
+  <title id="title">Image Auto Convert</title>
+  <rect x="10" y="20" width="160" height="160" rx="34" fill="#1b2d36"/>
+  <rect x="48" y="48" width="78" height="103" rx="10" fill="#fff"/>
+  <circle cx="103" cy="72" r="10" fill="#ffbf00"/>
+  <path d="M58 133 82 103l17 20 10-12 18 22v8H58z" fill="#3478f6"/>
+  <path d="m126 106 24 1-1 24" fill="none" stroke="#ff3f00" stroke-linecap="round" stroke-linejoin="round" stroke-width="9"/>
+  <path d="M149 107a35 35 0 0 1-34 39" fill="none" stroke="#ff3f00" stroke-linecap="round" stroke-width="9"/>
+  <text x="202" y="92" fill="#1b2d36" font-family="Arial, Helvetica, sans-serif" font-size="48" font-weight="700">Image Auto</text>
+  <text x="202" y="148" fill="#3478f6" font-family="Arial, Helvetica, sans-serif" font-size="48" font-weight="700">Convert</text>
+</svg>

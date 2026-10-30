@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap');
+
+    * { box-sizing: border-box; }
+    body { margin: 0; color: #45413a; background: white; font-family: 'Montserrat', sans-serif; font-weight: 300; line-height: 1.7; }
+    img { display: block; max-width: 100%; height: auto; }
+    h1, h2, p { margin: 0 0 1rem; }
+    h1, h2 { color: #3c321c; font-family: Georgia, serif; font-weight: 400; line-height: 1.2; }
+    h1 { font-size: clamp(2rem, 4vw, 3rem); }
+    h2 { font-size: 1.8rem; }
+    a { color: #655332; text-underline-offset: 0.2em; }
+    a:hover { color: #30281a; }
+    a:focus-visible { outline: 2px solid #655332; outline-offset: 6px; }
+    p:last-child { margin-bottom: 0; }
+    .wrap { width: 90%; max-width: 1180px; margin-inline: auto; }
+    .row { display: flex; flex-wrap: wrap; align-items: center; gap: 2.5rem; }
+    header { background: #f3f3f3; padding-block: 3rem; }
+    .icon { flex: 0 1 180px; position: relative; z-index: 1; }
+    .icon img { border-radius: 22%; box-shadow: 0 8px 20px rgb(0 0 0 / 0%); transition: transform 0.35s ease, box-shadow 0.35s ease; }
+    .icon:is(:hover, :focus-visible) img { transform: translateY(-5px) rotate(8deg) scale(1.03); box-shadow: 0 8px 20px rgb(0 0 0 / 18%); }
+    .intro { flex: 2 1 300px; }
+    .intro p { color: #786b51; font-size: 1.2rem; transition: color 0.6s ease; }
+    .icon:is(:hover, :focus-visible) + .intro p { color: #30200e; }
+    .intro p span { transition: color 0.4s ease, text-shadow 0.4s ease; }
+    .icon:is(:hover, :focus-visible) + .intro p span { color: #9b4b1c; text-shadow: 0.4px 0 currentColor, -0.4px 0 currentColor; }
+    .icon:is(:hover, :focus-visible) + .intro p span:nth-child(2) { transition-delay: 0.15s; }
+    .icon:is(:hover, :focus-visible) + .intro p span:nth-child(3) { transition-delay: 0.3s; }
+    .store { flex: 1 1 210px; max-width: 260px; }
+    .store img { width: 220px; margin-bottom: 1rem; transition: transform 0.35s ease; }
+    .store a:is(:hover, :focus-visible) img { transform: translateY(5px); }
+    .store p { font-size: 0.85rem; }
+    main { padding-block: 4rem; }
+    .features { align-items: flex-start; text-align: center; }
+    .features article { flex: 1 1 250px; min-width: 0; }
+    .features img { width: 100%; max-width: 360px; margin: 0 auto 1.5rem; }
+    .detail { margin-top: 5rem; }
+    .detail > img { flex: 2 1 420px; min-width: 0; }
+    .detail > p { flex: 1 1 260px; }
+    .info { margin-top: 5rem; padding-top: 3rem; border-top: 1px solid #dedbd5; align-items: flex-start; }
+    .info section { flex: 1 1 300px; }
+    .info h2 { display: flex; align-items: center; gap: 0.6rem; }
+    .info h2 img { width: 32px; height: 32px; object-fit: contain; flex: none; }
+    footer { padding-block: 2rem; background: #f3f3f3; font-size: 0.9rem; text-align: center; }
+
+    @media (max-width: 600px) {
+      header { padding-block: 2rem; }
+      header .row { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+      .icon, .intro, .store { flex: auto; }
+      .icon { width: 120px; }
+      main { padding-block: 2.5rem; }
+      .features { gap: 3rem; }
+      .detail, .info { margin-top: 3rem; }
+    }

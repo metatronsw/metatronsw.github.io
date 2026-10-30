@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Split Clock: a free chess and board game timer with multiple game modes, precise timing and flexible settings.">
+  <title>Split Clock</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="wrap">
+    <img src="appicon.svg" alt="Split Clock App icon" width="256" height="256">
+    <div><h1><img src="splitclock-header-logo.svg" alt="Split Clock" width="1024" height="290"></h1><p>Partner and assistance for chess or any game!</p></div>
+    <a class="store" href="https://apps.apple.com/hu/app/split-clock/id6695346979"><img src="../../common/appstore-logo-black.svg" alt="Download Split Clock on the App Store" width="380" height="128"></a>
+  </header>
+  <main class="wrap">
+    <section class="columns" aria-labelledby="intro-heading">
+      <div>
+        <h2 id="intro-heading"><img src="chess-bishop.svg" alt="" width="28" height="28" loading="lazy">Plenty of game modes for everyone.</h2>
+        <p>The app is primarily for chess players, but not only for them. It can be used in the traditional simple way or with several types of time delays. Official and exact tournament rules, or for board games in specific game modes. It also has an hourglass and many other time modes, the possibilities are not limited to chess, you can use it for Go, Scrabble, Shogi and any board or skill game.</p>
+        <p>Provides players with extremely accurate and precise time measurement thanks to special built-in algorithms and freely adjustable touch sensitivity.</p>
+        <p>Useful settings make it easy to customise the game mode, and almost everything you need is there. It can be used in two layouts, the counter can be placed anywhere on the screen, the player can rotate its view and change its colour freely. The clicks and other events have very nice effects and sounds that you can also adjust so that they don&#x27;t disturb you accidentally.</p>
+        <p>The app is completely free, ad-free and does not collect any data about you.</p>
+        <p><a href="https://apps.apple.com/hu/app/splitclock/id6695346979">Download from the App Store</a></p>
+      </div>
+      <div class="intro-art">
+        <img src="chessboard-phone.webp" alt="A chessboard beside a phone showing Split Clock" width="1010" height="578">
+        <img class="scrabtime" src="scrabtime.webp" alt="A cluster of Scrabble letter tiles spelling TIME" width="1065" height="940" loading="lazy">
+      </div>
+    </section>
+    <section class="gallery" aria-label="Split Clock screenshots">
+      <img src="iphone-splitclock-1.webp" alt="Split Clock timer interface" width="710" height="1440" loading="lazy">
+      <img src="iphone-splitclock-2.webp" alt="Split Clock game configuration" width="710" height="1440" loading="lazy">
+      <img src="iphone-splitclock-2webp.webp" alt="Split Clock timing options" width="710" height="1440" loading="lazy">
+    </section>
+    <section class="columns" aria-labelledby="uses-heading">
+      <div><h2 id="uses-heading"><img src="letter-tiles.svg" alt="" width="28" height="28" loading="lazy">A wide range of uses</h2>
+        <p>Is there another game I can use it for besides chess? Yes! It can be a great addition to already familiar and boring games by adding a time limit to make the game more difficult. Board games or games of skill, but also word or card games are more exciting if you don&#x27;t have to wait endlessly for another.</p>
+        <p>This app is definitely a fun way to spice up your Scrabble or Jenga games. The hourglass is a really fun way to play, as is the division into rounds. You can also use these freer settings according to your own rules. Try it out with your friends!</p>
+        <p>What would you like to add to make it more fun to use ? If you have any ideas or wishes, special game rule ideas, please feel free to contact us. If there is sufficient interest, support for more than two players is planned.</p>
+      </div>
+      <img class="jenga" src="jenga-game.webp" alt="A wooden block stacking game" width="320" height="512" loading="lazy">
+    </section>
+    <section aria-labelledby="modes-heading">
+      <h2 id="modes-heading"><img src="dice.svg" alt="" width="28" height="28" loading="lazy">Game modes</h2>
+      <dl>
+        <dt>Basic chess</dt><dd>Standard chess clock with the usual operation, the clock timer counts down to zero.</dd>
+        <dt>US delay</dt><dd>Simple delay, after each step the lap time is reset. If the lap time is exceeded, it is reduced from the main time.</dd>
+        <dt>Bronstein delay</dt><dd>If a player expends more than the specified delay then the entire delay is added to the player&#x27;s clock, but if a player moves faster than the delay, only the exact amount of time expended by the player is added.</dd>
+        <dt>Fischer bonus</dt><dd>A specified amount of time is added to the players main time each move, unless the player&#x27;s main time ran out before they completed their move.</dd>
+        <dt>Forward counting</dt><dd>Time runs incrementally from the initial value until the set limit is reached. Also known as a reverse chess clock.</dd>
+        <dt>Unlimited</dt><dd>Time passes incrementally from the initial value, but there is no limitation, the game can go on for as long as you like.</dd>
+        <dt>Free to touch</dt><dd>The clock counts for the player who has just pressed it. Opposite logic to the chess clock and no time limit.</dd>
+        <dt>Round based</dt><dd>When the round time runs out, the other player is next. Time limit is fixed for each round.</dd>
+        <dt>Hourglass</dt><dd>All time spent goes to the opposite player. When the time runs out, the game is over.</dd>
+      </dl>
+    </section>
+    <section aria-labelledby="precision-heading">
+      <h2 id="precision-heading"><img src="../../common/github.svg" alt="" width="28" height="28" loading="lazy">Time Precision</h2>
+      <p><strong>DateX</strong> is a small but useful project of our own: a free, open-source library that enables cross-platform development while avoiding the imprecise floating-point time representation used by Foundation&#x27;s Date structure. Instead, it uses a traditional 2 × 32-bit integer representation for accurate and precise time measurement. It retains the functionality of the original Date type: simply replace references to Date with <strong>DateX</strong> in your project to benefit from precise timekeeping.</p>
+      <p>Try it, share your thoughts, and help us improve it, view the <a href="https://github.com/metatronsw/DateX">project on GitHub</a>.</p>
+    </section>
+    <section class="info" aria-labelledby="contact-heading">
+      <div><h2 id="contact-heading"><img src="../../common/mail.svg" alt="" width="28" height="28" loading="lazy">Contact</h2>
+        <p>The program is free of charge for anyone, and we are not responsible for any problems that may arise from its use. If you have any comments or ideas for development, please send us an <a href="mailto:softwaremetatron@gmail.com">email</a>.</p>
+      </div>
+    </section>
+    <section class="info" aria-labelledby="privacy-heading">
+      <div><h2 id="privacy-heading"><img src="../../common/nodatacollect.svg" alt="" width="28" height="28" loading="lazy">Data Not Collected</h2>
+        <p>The developer does not collect any data from this app. Made with love, free for anyone. Please rate it with a few stars if you like it. I welcome all feedback and comments.</p>
+      </div>
+    </section>
+    <section class="columns history" aria-labelledby="history-heading">
+      <img src="iphone-splitclock-landscape.webp" alt="Split Clock in landscape layout" width="1190" height="590" loading="lazy">
+      <div><h2 id="history-heading"><img src="notebook.svg" alt="" width="28" height="28" loading="lazy">Version history</h2>
+        <h3>1.4</h3><ul>
+        <li>New game modes</li>
+        <li>Delay time</li>
+        <li>New config settings</li>
+        <li>Presets</li>
+        </ul>
+        <h3>1.3</h3><ul>
+        <li>Minor changes</li>
+        <li>UI improvements</li>
+        <li>Alarm flag</li>
+        <li>iPad support</li>
+        </ul>
+        <h3>1.2</h3><ul>
+        <li>Handicap for players</li>
+        <li>Design improvements</li>
+        <li>Signal before the end</li>
+        <li>Percentage display</li>
+        <li>Convenience and safety features</li>
+        </ul>
+        <h3>1.1</h3><ul>
+        <li>iOS fine tuning</li>
+        <li>View display options enhanced</li>
+        <li>Minor changes</li>
+        </ul>
+        <h3>1.0</h3><ul>
+        <li>macOS first release</li>
+        <li>Keyboard shortcut keys</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <p class="wrap">If you are interested, have an idea of your own that you would like to implement and we can help you, please <a href="mailto:softwaremetatron@gmail.com">contact us</a> for custom requirements.</p>
+  </footer>
+</body>
+</html>

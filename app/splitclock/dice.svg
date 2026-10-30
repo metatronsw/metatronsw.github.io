@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Game modes">
+  <path d="m32 5 26 14-26 15L6 19Z" fill="#e6c18a"/>
+  <path d="m6 19 26 15v26L6 45Z" fill="#c99b62"/>
+  <path d="m32 34 26-15v26L32 60Z" fill="#c99b62"/>
+  <g fill="#795331">
+    <ellipse cx="23" cy="17" rx="3" ry="2"/>
+    <ellipse cx="41" cy="21" rx="3" ry="2"/>
+    <ellipse cx="15" cy="30" rx="2.5" ry="3"/>
+    <ellipse cx="23" cy="46" rx="2.5" ry="3"/>
+    <ellipse cx="41" cy="36" rx="2.5" ry="3"/>
+    <ellipse cx="45" cy="41" rx="2.5" ry="3"/>
+    <ellipse cx="49" cy="46" rx="2.5" ry="3"/>
+  </g>
+</svg>

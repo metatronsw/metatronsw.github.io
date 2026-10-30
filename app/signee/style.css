@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap');
+
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body { background: white; font-family: "Lato", sans-serif; font-weight: 300; }
+      img { height: auto; }
+      h1, h2, h3 { margin-bottom: 1em; color: #0096ff; font-weight: 400; }
+      h1 { font-size: 21pt; }
+      h2 { margin-bottom: 0.7em; font-size: 24pt; }
+      #intro h1 { font-size: 24pt; }
+      h3 { font-size: 16pt; }
+      p { margin-bottom: 1.2em; }
+      li { margin-bottom: 0.5em; }
+      .wrap { width: 80%; max-width: 1280px; margin-inline: auto; }
+
+      /* Header */
+      .heading { height: 150px; display: flex; align-items: center; justify-content: space-between; gap: 1em; }
+      .heading > img { width: min(64%, 415px); min-width: 0; }
+      .appstr { --icon-size: 64px; display: inline-flex; align-items: center; gap: 10px; flex: none; transition: transform 0.2s ease-in-out; }
+      .appstr picture { display: block; flex: none; width: 190px; height: var(--icon-size); }
+      .appstr img { display: block; border-radius: calc(var(--icon-size) * 0.1875); box-shadow: 3px 3px 6px rgb(0 0 0 / 20%); }
+      .appstr picture img { width: 100%; height: 100%; }
+      .appstr > img { flex: none; width: var(--icon-size); height: var(--icon-size); }
+      .appstr:is(:hover, :focus-visible) { transform: scale(1.05); }
+      .ribbon { display: flex; align-items: center; min-height: 64px; padding-block: 0.5em; color: white; background: #366b8f; font-size: 21pt; text-align: left; }
+      .ribbon p { margin-block: 0; }
+      #intro a { margin-top: 0; }
+      .store-link { margin-top: 2em; }
+
+      /* Content */
+      .d-left { display: flex; align-items: flex-start; padding-top: 2em; margin-bottom: 5.5em; }
+      .d-left > img { max-width: 33%; min-width: 250px; margin: 0 3em 3em 0; }
+      .d-left > div { flex-shrink: 3; min-width: 0; }
+      .d-right { padding-top: 2.86em; }
+      .d-right > img { max-width: 33%; float: right; margin: 0 0 3em 2em; }
+      .d-right ul { padding-left: 3em; }
+      .triple { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-bottom: 5.5em; }
+      .caps { text-align: center; }
+      .caps h2 { font-size: 16pt; }
+      /* Recreate the original 1024 × 1664 canvas around the cropped 710 × 1440 phones. */
+      .phone-slot { padding: 7.421875% 15.33203125% 14.453125%; }
+      .phone-image { position: relative; isolation: isolate; }
+      .phone-image::before { content: ''; position: absolute; z-index: -1; inset: 0.5% 1%; border-radius: 20% / 10%; box-shadow: 0 14px 24px rgb(0 0 0 / 24%); pointer-events: none; }
+      .phone-image img { display: block; width: 100%; transform: perspective(900px) rotateX(0deg); transition: transform 0.5s cubic-bezier(0.2, 0.65, 0.3, 1); }
+      #version { margin: 165px 0; background: linear-gradient(#ececec, white); }
+      .history { padding-left: 3em; }
+      .history h3 { padding-left: 0.1em; margin: 0.8em 0 0; font-size: 21pt; }
+      footer { padding: 0.5em 0; color: #10293d; font-weight: 400; text-align: center; background: whitesmoke; }
+
+      /* Links */
+      .hover-underline-animation { display: inline-block; position: relative; color: #0096ff; font-weight: 400; text-decoration: none; }
+      .hover-underline-animation::after { content: ''; position: absolute; width: 100%; height: 2px; bottom: 0; left: 0; background: #0087ca; transform: scaleX(0); transform-origin: bottom right; transition: transform 0.25s ease-out; }
+      .hover-underline-animation:is(:hover, :focus-visible)::after { transform: scaleX(1); transform-origin: bottom left; }
+      .content-link { white-space: nowrap; }
+      .content-link .hover-underline-animation { font-size: 1em; line-height: inherit; vertical-align: baseline; }
+      .content-icon { display: inline-block; width: 16px; height: 16px; margin-right: 0.15em; vertical-align: -0.15em; }
+      a:focus-visible { outline: 2px solid #0087ca; outline-offset: 4px; }
+
+      @media (hover: hover) and (pointer: fine) {
+        .phone-image:hover img { transform: perspective(900px) rotateX(5deg); }
+      }
+
+      @media (max-width: 879px) {
+        .appstr picture { width: var(--icon-size); }
+      }
+
+      @media (max-width: 800px) {
+        .wrap { width: 92%; }
+        .d-left { flex-direction: column; }
+        .d-left > img { max-width: 90%; min-width: 0; margin: 2em auto; }
+        .triple { grid-template-columns: 1fr; }
+        .ribbon > p { width: 100%; padding-inline: 10px; text-align: center; }
+      }
+
+      @media (max-width: 480px) {
+        .heading > img { flex: 1; width: 0; }
+        .appstr { --icon-size: 40px; gap: 8px; }
+      }

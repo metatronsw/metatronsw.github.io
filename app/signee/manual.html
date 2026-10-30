@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signee Timer — User manual</title>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap');
+
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body { background: white; font-family: "Lato", sans-serif; font-weight: 300; }
+      img { height: auto; }
+      h1, h2, h3 { margin-bottom: 1em; color: #0096ff; font-weight: 400; }
+      h1 { font-size: 21pt; }
+      h2 { font-size: 32pt; }
+      h3 { font-size: 16pt; }
+      p { margin-bottom: 1.2em; }
+      li { margin-bottom: 0.5em; }
+      .wrap { width: 80%; max-width: 1280px; margin-inline: auto; }
+
+      /* Header */
+      .heading { height: 150px; display: flex; align-items: center; justify-content: space-between; gap: 1em; }
+      .heading > img { width: min(64%, 415px); min-width: 0; }
+      .appstr { --icon-size: 64px; display: inline-flex; align-items: center; gap: 10px; flex: none; transition: transform 0.2s ease-in-out; }
+      .appstr picture { display: block; flex: none; width: 190px; height: var(--icon-size); }
+      .appstr img { display: block; border-radius: calc(var(--icon-size) * 0.1875); box-shadow: 3px 3px 6px rgb(0 0 0 / 20%); }
+      .appstr picture img { width: 100%; height: 100%; }
+      .appstr > img { flex: none; width: var(--icon-size); height: var(--icon-size); }
+      .appstr:is(:hover, :focus-visible) { transform: scale(1.05); }
+      .ribbon { display: flex; align-items: center; min-height: 64px; padding-block: 0.5em; color: white; background: #366b8f; font-size: 21pt; text-align: left; }
+      .ribbon p { margin-block: 0; }
+      .phone-image { position: relative; isolation: isolate; }
+      .phone-image::before { content: ''; position: absolute; z-index: -1; inset: 0.5% 1%; border-radius: 20% / 10%; box-shadow: 0 14px 24px rgb(0 0 0 / 24%); pointer-events: none; }
+      .phone-image img { display: block; width: 100%; transform: perspective(900px) rotateX(0deg); transition: transform 0.5s cubic-bezier(0.2, 0.65, 0.3, 1); }
+      /* Links */
+      .hover-underline-animation { display: inline-block; position: relative; color: #0096ff; font-weight: 400; text-decoration: none; }
+      .hover-underline-animation::after { content: ''; position: absolute; width: 100%; height: 2px; bottom: 0; left: 0; background: #0087ca; transform: scaleX(0); transform-origin: bottom right; transition: transform 0.25s ease-out; }
+      .hover-underline-animation:is(:hover, :focus-visible)::after { transform: scaleX(1); transform-origin: bottom left; }
+      a:focus-visible { outline: 2px solid #0087ca; outline-offset: 4px; }
+
+      @media (max-width: 879px) {
+        .appstr picture { width: var(--icon-size); }
+      }
+
+      @media (max-width: 800px) {
+        .wrap { width: 92%; }
+        .ribbon > p { width: 100%; padding-inline: 10px; text-align: center; }
+      }
+
+      @media (max-width: 480px) {
+        .heading > img { flex: 1; width: 0; }
+        .appstr { --icon-size: 40px; gap: 8px; }
+      }
+    
+      .manual { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 3em; align-items: start; padding-block: 2em 5em; }
+      .manual article { min-width: 0; line-height: 1.5; }
+      .manual h2 { font-size: 21pt; margin: 1.5em 0 0.75em; }
+      .manual h1 { margin-top: 0.75em; }
+      .manual strong { font-weight: 400; }
+      .manual-illustration { position: sticky; top: 2em; padding: 2em 1em; }
+      .manual-illustration .phone-image { max-width: 320px; margin-inline: auto; }
+      footer { padding: 0.5em 0; color: #10293d; font-weight: 400; text-align: center; background: whitesmoke; }
+      @media (hover: hover) and (pointer: fine) {
+        .phone-image:hover img { transform: perspective(900px) rotateX(5deg); }
+      }
+      @media (max-width: 800px) {
+        .manual { grid-template-columns: 1fr; gap: 1em; }
+        .manual-illustration { position: static; grid-row: 1; padding-block: 1em; }
+        .manual-illustration .phone-image { max-width: 200px; }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="wrap heading">
+        <img src="signee-header-logo.svg" alt="Signee Timer" width="830" height="300">
+        <a href="https://apps.apple.com/kz/app/signee-timer/id1558214467" target="_blank" rel="noopener" class="appstr">
+          <picture>
+            <source media="(max-width: 879px)" srcset="../../common/appstore-logo-black-box.svg">
+            <img src="../../common/appstore-logo-black.svg" alt="Download on the App Store" height="64">
+          </picture>
+          <img src="appicon.svg" alt="">
+        </a>
+      </div>
+      <div class="ribbon">
+        <p class="wrap">Advanced stopwatch and event logger app</p>
+      </div>
+    </header>
+    <main class="wrap manual">
+      <article>
+        <a class="hover-underline-animation" href="index.html">← Signee Timer</a>
+        <h1>Signee user manual</h1>
+          <h2>Clock</h2>
+          <p><strong>Refresh rate:</strong> The smaller value does not only change the appearance of the digits, it also uses less CPU resources and therefore drains the battery less. However, the accuracy of the measured time is not affected, it always works at maximum resolution and the display of values can be freely changed at any time.</p>
+          <p><strong>Display mode:</strong> Sec - Shows only the elapsed seconds. Static - Always shows the minute and, if on, the hours. Dynamic - If a whole minute or hour has not elapsed, only the value is shown.</p>
+          <p><strong>Separator:</strong> Free to choose, regardless of the phone&#x27;s local settings.</p>
+          <p><strong>Display fixed hour-minute:</strong> As long as the number is not more than 10, it takes up only one space and does not show the prefix 0. In static mode the number of empty hours is also displayed.</p>
+          <p><strong>Display auxiliary timer:</strong> Shows the idle time or the  time of a lap started. If the timestamp function is activated, the current time is also displayed.</p>
+          <p><strong>Display actual time:</strong> In order to use it you must also authorise the auxiliary clock.</p>
+          <p><strong>Display of precise time:</strong> If enabled, it will display times to 3 decimal places, but only if the clock is stopped, otherwise the update and display will depend on the refresh rate setting.</p>
+          <h2>Sign Interval</h2>
+          <p><strong>Loop timer:</strong> At the specified intervals the period time meter is restarted, if the signal function is activated, it will be activated at the end. At the end of the period the counter will increment by one. 24 hours is the maximum period, with a setting of 0 seconds the function will be automatically inactive. The period time is always counted from the start of the stopwatch, regardless  whether the function is activated or not.</p>
+          <h2>Signals</h2>
+          <p><strong>Sound:</strong> Currently only the factory sounds of the phone are available, this will change in the future. There are 3 distinctions in the list:  The signal is inaudible in silent mode. The signal can be heard in silent mode. In addition to the beep sound, there is also a vibration.</p>
+          <p><strong>Screen flash:</strong> The phone screen will flash in the selected colour when the repeat period has ended. A choice of five colours.</p>
+          <p><strong>Vibration:</strong> The phone will start to vibrate at the selected intensity when the repeat period has ended.</p>
+          <h2>Speech</h2>
+          <p><strong>Say it:</strong> When the repetition period comes to an end, it will say the number of laps elapsed or the elapsed time, depending on the mode set. A minimum of 10 seconds is required between repeats. In the additional settings it is possible to set the words that the program will say next to the numbers.</p>
+          <p><strong>SkipZeroValues:</strong> If the option is activated, it will not say zero seconds for whole minutes.</p>
+          <p>Prefix and Postfix words only work in the Count mode.</p>
+          <h2>Counter</h2>
+          <p>Shows the elapsed and remaining time set for the repeat and the laps completed. Touching the display brings up an adjustment panel where you can conveniently change the values on the fly. If the Counter Display is off, this is not possible, but the counter still works in the background. You can toggle the displayed items on and off individually.</p>
+          <p><strong>Reset counter on new lap:</strong> If the switch is active, tapping the counter on the main screen will start a new round, but the repeat counter will also restart.</p>
+          <p><strong>Counter mode:</strong> If activated, the central big time display will show only the number of laps elapsed instead of the time. You can manually increase each one by touching it, regardless of the timer or whether the stopwatch has been started.</p>
+          <h2>Behaviour</h2>
+          <p><strong>Theme:</strong> Appearance, automatic or fixed day - night mode.</p>
+          <p>Copying time result to clipboard. Only the elapsed seconds, or in Automatic mode according to the currently set format.</p>
+          <p><strong>Sending to clipboard:</strong> Automatically copies the current time to the clipboard when you exit. The format can be seconds or the commonly used setting.</p>
+          <p><strong>Restoringl last session:</strong> Saves the current time after exit and reloads it when the program is restarted. If Continue last session is also enabled, it behaves as if the program was not closed ( like the factory apple stopwatch ). In the case of active Auto stop on exit, it will stop the counter when moving from one program to another or when closing.</p>
+          <p><strong>Swap mark-lap button:</strong> It replaces / changes???/ the touch function of the auxiliary clock and the big main time counter on the main screen.</p>
+          <p><strong>Hiding status bar:</strong> It hides the factory clock and the mobile phone&#x27;s signal for signal strength and battery charge.</p>
+          <h2>History</h2>
+          <p><strong>Use history:</strong> If it is not turned on, the program will still log the activity, it just does not display it and does not save it. So if you remember to turn it on later, you haven&#x27;t lost anything.</p>
+          <p>You can display the separator lines and adjust the scrolling behaviour.</p>
+          <p><strong>Auto mark interval:</strong> If enabled, a record is automatically made at the end of each repetition, with the time elapsed and the number of laps.</p>
+          <p>If you are interested, have an idea of your own that you would like to implement and we can help you, please <a href="mailto:softwaremetatron@gmail.com">contact us</a> for custom requirements.</p>
+      </article>
+      <aside class="manual-illustration" aria-label="Signee Timer screenshot">
+        <div class="phone-image">
+          <img src="iphone-comment.png" alt="Editing a lap comment in Signee Timer" width="710" height="1440">
+        </div>
+      </aside>
+    </main>
+    <footer>
+      <p class="wrap">Signee Timer — a versatile stopwatch, interval timer and event logger.<br>
+        Made for sports, cooking, creative work and everyday routines.</p>
+    </footer>
+  </body>
+</html>
