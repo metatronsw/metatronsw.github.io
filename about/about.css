@@ -1,4 +1,4 @@
-.about-hero { padding-block: clamp(4rem, 8vw, 7rem); background: linear-gradient(120deg, #f5f8fb, #e6f1f7); }
+.about-hero { position: relative; overflow: hidden; padding-block: clamp(4rem, 8vw, 7rem); background: linear-gradient(120deg, #f5f8fb, #e6f1f7); }
 .about-hero h1 { max-width: 900px; }
 .profession { margin-bottom: 1.6rem; color: var(--blue-dark); font-size: 1.25rem; }
 .lead { max-width: 760px; font-size: clamp(1.4rem, 3vw, 2rem); line-height: 1.35; letter-spacing: -0.025em; }
@@ -21,3 +21,17 @@
 .references { font-size: 1.2rem; line-height: 2; color: var(--muted); margin: 0; }
 @media (max-width: 760px) { .profile-columns, .skills-grid { grid-template-columns: 1fr; gap: 1.3rem; } .project-list, .library-list { grid-template-columns: repeat(2, minmax(0, 1fr)); } .career-row { grid-template-columns: 105px 1fr; gap: 1rem; } .profile-section { padding-block: 3rem; } }
 @media (max-width: 480px) { .project-list, .library-list { grid-template-columns: 1fr; } .career-row { grid-template-columns: 95px minmax(0, 1fr); gap: 0.75rem; } }
+
+.about-hero-art {
+  position: absolute;
+  right: 0;
+  transform: translateX(30%);
+  bottom: 0;
+  width: 96%;
+  height: 96%;
+  object-fit: contain;
+  object-position: right bottom;
+  opacity: 0.1;
+  pointer-events: none;
+}
+.about-hero > .section-wrap { position: relative; }
