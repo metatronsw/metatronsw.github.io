@@ -4,10 +4,99 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Meet Szerencsés Gábor: programmer and graphic designer working across Apple platforms, visual media and custom development.">
-    <title>About — Szerencsés Gábor · Metatron Software</title>
+    <title>Eye tracking test — Szerencsés Gábor · Metatron Software</title>
     <link rel="stylesheet" href="main/global.css">
     <link rel="stylesheet" href="about.css">
     <link rel="stylesheet" href="main/interactions.css">
+    <style>
+      .eye-test {
+        --eye-transition-duration: 300ms;
+      }
+
+      .eye-test :is(#eye, #eye-gaze) {
+        transition: transform var(--eye-transition-duration) ease-out !important;
+      }
+
+      .eye-test .hero-background-art {
+        --hero-art-left: 110%;
+        --hero-art-top: -25%;
+        --hero-art-width: 1000px;
+        --hero-art-height: auto;
+      }
+
+      .eye-test .gaze-zones {
+        position: absolute;
+        inset: 0;
+        z-index: 2;
+        display: grid;
+        grid-template-columns: repeat(9, 1fr);
+        grid-template-rows: repeat(5, 1fr);
+      }
+
+      .eye-test > .section-wrap {
+        pointer-events: none;
+      }
+
+      .eye-test .button {
+        pointer-events: auto;
+        z-index: 3;
+      }
+
+      .eye-test:has(.gaze-zone-0:hover) { --gaze-x: -44px; --gaze-y: -34px; --eye-angle: -7deg; }
+      .eye-test:has(.gaze-zone-1:hover) { --gaze-x: -43px; --gaze-y: -36px; --eye-angle: -7deg; }
+      .eye-test:has(.gaze-zone-2:hover) { --gaze-x: -36px; --gaze-y: -36px; --eye-angle: -6deg; }
+      .eye-test:has(.gaze-zone-3:hover) { --gaze-x: -26px; --gaze-y: -36px; --eye-angle: -4deg; }
+      .eye-test:has(.gaze-zone-4:hover) { --gaze-x: -16px; --gaze-y: -36px; --eye-angle: -3deg; }
+      .eye-test:has(.gaze-zone-5:hover) { --gaze-x: -6px; --gaze-y: -36px; --eye-angle: -1deg; }
+      .eye-test:has(.gaze-zone-6:hover) { --gaze-x: 4px; --gaze-y: -36px; --eye-angle: 1deg; }
+      .eye-test:has(.gaze-zone-7:hover) { --gaze-x: 14px; --gaze-y: -36px; --eye-angle: 2deg; }
+      .eye-test:has(.gaze-zone-8:hover) { --gaze-x: 24px; --gaze-y: -36px; --eye-angle: 4deg; }
+      .eye-test:has(.gaze-zone-9:hover) { --gaze-x: -45px; --gaze-y: -22px; --eye-angle: -7deg; }
+      .eye-test:has(.gaze-zone-10:hover) { --gaze-x: -45px; --gaze-y: -21px; --eye-angle: -7deg; }
+      .eye-test:has(.gaze-zone-11:hover) { --gaze-x: -36px; --gaze-y: -21px; --eye-angle: -6deg; }
+      .eye-test:has(.gaze-zone-12:hover) { --gaze-x: -26px; --gaze-y: -21px; --eye-angle: -4deg; }
+      .eye-test:has(.gaze-zone-13:hover) { --gaze-x: -16px; --gaze-y: -21px; --eye-angle: -3deg; }
+      .eye-test:has(.gaze-zone-14:hover) { --gaze-x: -6px; --gaze-y: -21px; --eye-angle: -1deg; }
+      .eye-test:has(.gaze-zone-15:hover) { --gaze-x: 4px; --gaze-y: -21px; --eye-angle: 1deg; }
+      .eye-test:has(.gaze-zone-16:hover) { --gaze-x: 14px; --gaze-y: -21px; --eye-angle: 2deg; }
+      .eye-test:has(.gaze-zone-17:hover) { --gaze-x: 24px; --gaze-y: -21px; --eye-angle: 4deg; }
+      .eye-test:has(.gaze-zone-18:hover) { --gaze-x: -42px; --gaze-y: -11px; --eye-angle: -6deg; }
+      .eye-test:has(.gaze-zone-19:hover) { --gaze-x: -40px; --gaze-y: -8px; --eye-angle: -6deg; }
+      .eye-test:has(.gaze-zone-20:hover) { --gaze-x: -36px; --gaze-y: -6px; --eye-angle: -6deg; }
+      .eye-test:has(.gaze-zone-21:hover) { --gaze-x: -26px; --gaze-y: -6px; --eye-angle: -4deg; }
+      .eye-test:has(.gaze-zone-22:hover) { --gaze-x: -16px; --gaze-y: -6px; --eye-angle: -3deg; }
+      .eye-test:has(.gaze-zone-23:hover) { --gaze-x: -6px; --gaze-y: -6px; --eye-angle: -1deg; }
+      .eye-test:has(.gaze-zone-24:hover) { --gaze-x: 4px; --gaze-y: -6px; --eye-angle: 1deg; }
+      .eye-test:has(.gaze-zone-25:hover) { --gaze-x: 14px; --gaze-y: -6px; --eye-angle: 2deg; }
+      .eye-test:has(.gaze-zone-26:hover) { --gaze-x: 24px; --gaze-y: -6px; --eye-angle: 4deg; }
+      .eye-test:has(.gaze-zone-27:hover) { --gaze-x: -37px; --gaze-y: -3px; --eye-angle: -6deg; }
+      .eye-test:has(.gaze-zone-28:hover) { --gaze-x: -34px; --gaze-y: 0px; --eye-angle: -5deg; }
+      .eye-test:has(.gaze-zone-29:hover) { --gaze-x: -30px; --gaze-y: 3px; --eye-angle: -5deg; }
+      .eye-test:has(.gaze-zone-30:hover) { --gaze-x: -24px; --gaze-y: 7px; --eye-angle: -4deg; }
+      .eye-test:has(.gaze-zone-31:hover) { --gaze-x: -16px; --gaze-y: 9px; --eye-angle: -3deg; }
+      .eye-test:has(.gaze-zone-32:hover) { --gaze-x: -6px; --gaze-y: 9px; --eye-angle: -1deg; }
+      .eye-test:has(.gaze-zone-33:hover) { --gaze-x: 4px; --gaze-y: 9px; --eye-angle: 1deg; }
+      .eye-test:has(.gaze-zone-34:hover) { --gaze-x: 14px; --gaze-y: 9px; --eye-angle: 2deg; }
+      .eye-test:has(.gaze-zone-35:hover) { --gaze-x: 23px; --gaze-y: 8px; --eye-angle: 4deg; }
+      .eye-test:has(.gaze-zone-36:hover) { --gaze-x: -31px; --gaze-y: 2px; --eye-angle: -5deg; }
+      .eye-test:has(.gaze-zone-37:hover) { --gaze-x: -28px; --gaze-y: 5px; --eye-angle: -4deg; }
+      .eye-test:has(.gaze-zone-38:hover) { --gaze-x: -24px; --gaze-y: 7px; --eye-angle: -4deg; }
+      .eye-test:has(.gaze-zone-39:hover) { --gaze-x: -18px; --gaze-y: 10px; --eye-angle: -3deg; }
+      .eye-test:has(.gaze-zone-40:hover) { --gaze-x: -12px; --gaze-y: 12px; --eye-angle: -2deg; }
+      .eye-test:has(.gaze-zone-41:hover) { --gaze-x: -5px; --gaze-y: 13px; --eye-angle: -1deg; }
+      .eye-test:has(.gaze-zone-42:hover) { --gaze-x: 3px; --gaze-y: 13px; --eye-angle: 0deg; }
+      .eye-test:has(.gaze-zone-43:hover) { --gaze-x: 10px; --gaze-y: 12px; --eye-angle: 2deg; }
+      .eye-test:has(.gaze-zone-44:hover) { --gaze-x: 17px; --gaze-y: 10px; --eye-angle: 3deg; }
+
+      .eye-test #eye-gaze {
+        transform: translate(var(--gaze-x, 0px), var(--gaze-y, -25px));
+      }
+      .eye-test #eye {
+        transform-box: view-box;
+        transform-origin: 875px 456px;
+        transform: rotate(var(--eye-angle, 0deg));
+      }
+    </style>
   </head>
   <body class="site-effects">
     <header class="site-header">
@@ -20,14 +109,74 @@
       </nav>
     </header>
     <main>
-      <section class="about-hero hero-with-art">
+      <section class="about-hero hero-with-art eye-test">
+        <div class="gaze-zones" aria-hidden="true">
+          <span class="gaze-zone gaze-zone-0" aria-hidden="true"></span>
+          <span class="gaze-zone gaze-zone-1" aria-hidden="true"></span>
+          <span class="gaze-zone gaze-zone-2" aria-hidden="true"></span>
+          <span class="gaze-zone gaze-zone-3" aria-hidden="true"></span>
+          <span class="gaze-zone gaze-zone-4" aria-hidden="true"></span>
+          <span class="gaze-zone gaze-zone-5" aria-hidden="true"></span>
+          <span class="gaze-zone gaze-zone-6" aria-hidden="true"></span>
+          <span class="gaze-zone gaze-zone-7" aria-hidden="true"></span>
+          <span class="gaze-zone gaze-zone-8" aria-hidden="true"></span>
+          <span class="gaze-zone gaze-zone-9" aria-hidden="true"></span>
+          <span class="gaze-zone gaze-zone-10" aria-hidden="true"></span>
+          <span class="gaze-zone gaze-zone-11" aria-hidden="true"></span>
+          <span class="gaze-zone gaze-zone-12" aria-hidden="true"></span>
+          <span class="gaze-zone gaze-zone-13" aria-hidden="true"></span>
+          <span class="gaze-zone gaze-zone-14" aria-hidden="true"></span>
+          <span class="gaze-zone gaze-zone-15" aria-hidden="true"></span>
+          <span class="gaze-zone gaze-zone-16" aria-hidden="true"></span>
+          <span class="gaze-zone gaze-zone-17" aria-hidden="true"></span>
+          <span class="gaze-zone gaze-zone-18" aria-hidden="true"></span>
+          <span class="gaze-zone gaze-zone-19" aria-hidden="true"></span>
+          <span class="gaze-zone gaze-zone-20" aria-hidden="true"></span>
+          <span class="gaze-zone gaze-zone-21" aria-hidden="true"></span>
+          <span class="gaze-zone gaze-zone-22" aria-hidden="true"></span>
+          <span class="gaze-zone gaze-zone-23" aria-hidden="true"></span>
+          <span class="gaze-zone gaze-zone-24" aria-hidden="true"></span>
+          <span class="gaze-zone gaze-zone-25" aria-hidden="true"></span>
+          <span class="gaze-zone gaze-zone-26" aria-hidden="true"></span>
+          <span class="gaze-zone gaze-zone-27" aria-hidden="true"></span>
+          <span class="gaze-zone gaze-zone-28" aria-hidden="true"></span>
+          <span class="gaze-zone gaze-zone-29" aria-hidden="true"></span>
+          <span class="gaze-zone gaze-zone-30" aria-hidden="true"></span>
+          <span class="gaze-zone gaze-zone-31" aria-hidden="true"></span>
+          <span class="gaze-zone gaze-zone-32" aria-hidden="true"></span>
+          <span class="gaze-zone gaze-zone-33" aria-hidden="true"></span>
+          <span class="gaze-zone gaze-zone-34" aria-hidden="true"></span>
+          <span class="gaze-zone gaze-zone-35" aria-hidden="true"></span>
+          <span class="gaze-zone gaze-zone-36" aria-hidden="true"></span>
+          <span class="gaze-zone gaze-zone-37" aria-hidden="true"></span>
+          <span class="gaze-zone gaze-zone-38" aria-hidden="true"></span>
+          <span class="gaze-zone gaze-zone-39" aria-hidden="true"></span>
+          <span class="gaze-zone gaze-zone-40" aria-hidden="true"></span>
+          <span class="gaze-zone gaze-zone-41" aria-hidden="true"></span>
+          <span class="gaze-zone gaze-zone-42" aria-hidden="true"></span>
+          <span class="gaze-zone gaze-zone-43" aria-hidden="true"></span>
+          <span class="gaze-zone gaze-zone-44" aria-hidden="true"></span>
+        </div>
         <div class="section-wrap">
-			  <img class="hero-background-art" src="main/varjubacsi.svg" alt="" aria-hidden="true" style="--hero-art-left: 110%;
-	--hero-art-top: -25%;
-	--hero-art-width: 1000px;
-	--hero-art-height: auto;">
+          <svg class="hero-background-art" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="2504" height="1955" viewBox="0 0 2504 1955">
+    <path id="wing2" fill="#002b48" fill-rule="evenodd" stroke="#646464" stroke-width="12.881789" stroke-opacity="0.245679" stroke-linecap="round" stroke-linejoin="round" d="M 1092.680908 699.165161 C 816.493103 1026.258789 554.829773 1175.876221 177.309494 1167.490723 C 129.821198 1166.436035 69.005234 1150.855957 62.944065 1182.886719 C 55.140743 1224.125488 186.281174 1308.752197 301.205963 1306.781616 C 335.199127 1306.19873 2.558274 1307.243896 43.883839 1342.705078 C 258.963348 1527.263672 445.299561 1326.059082 432.196838 1342.897827 C 326.724884 1478.441406 28.158827 1436.162964 132.590942 1501.790039 C 294.021729 1603.236084 550.75 1471.424072 538.753723 1482.3125 C 472.533966 1542.416992 399.445435 1567.766846 334.930054 1575.100342 C 277.928864 1581.57959 201.647537 1557.701538 209.568008 1575.10083 C 243.240387 1649.073975 342.860382 1685.265137 477.886963 1674.803223 C 1413.562744 1602.304443 1231.557373 534.691772 1092.680908 699.165161 Z"><animateTransform attributeName="transform" type="rotate" values="0 1206.018 681.968;-15 1206.018 681.968;15 1206.018 681.968;0 1206.018 681.968;0 1206.018 681.968" keyTimes="0;0.055555556;0.111111111;0.166666667;1" dur="18s" repeatCount="1" calcMode="spline" keySplines="0.42 0 0.58 1;0.42 0 0.58 1;0.42 0 0.58 1;0 0 1 1" /></path>
+    <path id="body" fill="#003d66" fill-rule="evenodd" stroke="#000000" stroke-width="4.29393" stroke-linecap="round" stroke-linejoin="round" d="M 712.685486 496.093262 C 701.670593 385.891479 799.924927 228.507202 799.924927 228.507202 C 799.924927 228.507202 693.646301 256.592651 711.951538 240.970459 C 806.321411 160.432007 895.844727 112.354126 895.844727 112.354126 C 895.844727 112.354126 826.007202 88.397949 831.345154 87.663574 C 988.97168 65.978027 1050.781982 80.973022 1050.781982 80.973022 C 1050.781982 80.973022 1007.609741 26.811157 1008.709106 27.001343 C 1120.780762 46.378906 1180.788086 89.029785 1187.323975 90.624268 C 1215.447632 97.485596 1166.323486 33.804321 1182.593872 39.310791 C 1234.547729 56.893921 1382.748291 163.991333 1382.748291 163.991333 C 1382.748291 163.991333 1358.133057 92.514771 1373.950928 106.808716 C 1516.688599 235.79541 1540.387817 308.860352 1544.05188 304.072998 C 1547.71582 299.285767 1573.821655 247.120972 1573.821655 247.120972 L 1578.489746 350.934082 C 1578.489746 350.934082 2000.785522 1002.677307 1866.606567 1476.992432 C 1828.63623 1611.215576 1791.532349 1909.868164 1682.875732 2010 C 1471.953857 2204.373535 1120.56543 2123.737061 874.875671 1955 C 558.8703 1737.970703 670.16687 1033.464233 670.16687 1033.464233 C 670.16687 1033.464233 730.556458 674.885864 712.685486 496.093262 Z" />
+    <path id="wing1" fill="#004a7e" fill-rule="evenodd" stroke="#000000" stroke-width="4.29393" stroke-linecap="round" stroke-linejoin="round" d="M 1192.289795 819.659546 C 1461.131958 384.970337 1633.813232 858.827515 1997.047607 1139.630615 C 2102.034912 1220.792603 2531.408936 1400.421875 2416.038574 1438.282227 C 2200.335693 1509.068115 1836.287964 1219.05481 1844.109741 1226.721924 C 1929.925781 1310.840088 2412.283936 1521.607788 2359.382568 1546.188477 C 2186.752197 1626.400879 1800.312378 1416.513672 1800.312378 1416.513672 C 1800.312378 1416.513672 2304.016846 1647.935425 2215.106934 1656.972412 C 1916.74707 1687.297607 1718.950562 1521.595703 1796.87793 1578.824219 C 1877.999878 1638.39917 2104.071533 1704.254761 2039.055908 1710.217651 C 1475.717529 1761.884888 878.576538 1326.900879 1192.289795 819.659546 Z"><animateTransform attributeName="transform" type="rotate" values="0 1105.636 643.839;15 1105.636 643.839;-15 1105.636 643.839;0 1105.636 643.839;0 1105.636 643.839" keyTimes="0;0.055555556;0.111111111;0.166666667;1" dur="18s" repeatCount="1" calcMode="spline" keySplines="0.42 0 0.58 1;0.42 0 0.58 1;0.42 0 0.58 1;0 0 1 1" /></path>
+    <path id="csor" fill="#c87807" fill-rule="evenodd" stroke="#000000" stroke-width="7.331115" stroke-linecap="round" stroke-linejoin="round" d="M 713.654724 490.433594 C 794.20813 566.364014 971.09375 741.462524 908.599731 823.656006 C 810.405884 952.802673 403.868591 972.307007 420.908875 968.218079 C 661.790344 910.417236 740.494812 702.943726 715.618896 744.618042 C 587.480347 959.287354 287.626465 985.768738 290.989197 972.657898 C 366.800171 677.058838 699.097534 476.711914 713.654724 490.433594 Z" />
+    <g id="eye">
+        <path id="eyeball" fill="#ffffff" fill-rule="evenodd" stroke="none" d="M 992.701233 456.137695 C 992.701477 521.121948 940.021484 573.802368 875.037231 573.802612 C 810.052979 573.802734 757.37262 521.122803 757.372375 456.13855 C 757.372131 391.154297 810.052124 338.473877 875.036377 338.473755 C 940.02063 338.473511 992.700989 391.153442 992.701233 456.137695 Z" />
+        <defs><clipPath id="eye-boundary"><use href="#eyeball" /></clipPath></defs>
+        <g clip-path="url(#eye-boundary)">
+        <g id="eye-gaze">
+            <path id="pupille" fill="#000000" fill-rule="evenodd" stroke="none" d="M 884.68512 423.484253 C 926.197449 446.186768 940.995972 503.8125 919.874023 542.824707 C 896.316101 586.336548 844.72229 567.762085 815.704895 550.151489 C 788.196777 533.457153 759.452209 493.946411 776.376648 451.514771 C 792.722961 410.533081 843.172729 400.781616 884.68512 423.484253 Z" />
+        <path id="highlight" fill="#ffffff" fill-rule="evenodd" stroke="none" d="M 849.43811 441.021606 C 860.763123 457.546387 857.500549 479.470337 842.150818 489.98999 C 826.801147 500.509644 805.177002 495.641602 793.85199 479.116821 C 782.526978 462.592041 785.789551 440.668091 801.139282 430.148438 C 816.488953 419.628784 838.113098 424.496948 849.43811 441.021606 Z"><animateTransform attributeName="transform" type="translate" values="0 0;0 0;-4 8;-4 8;0 0;0 0;5 3;5 3;-9 3;-9 3;-6 7;-6 7;0 0" keyTimes="0.000000000;0.161812298;0.166666667;0.328478964;0.333333333;0.495145631;0.500000000;0.661812298;0.666666667;0.828478964;0.833333333;0.995145631;1.000000000" dur="61.8s" repeatCount="indefinite" calcMode="spline" keySplines="0.2 0.7 0.3 1;0.2 0.7 0.3 1;0.2 0.7 0.3 1;0.2 0.7 0.3 1;0.2 0.7 0.3 1;0.2 0.7 0.3 1;0.2 0.7 0.3 1;0.2 0.7 0.3 1;0.2 0.7 0.3 1;0.2 0.7 0.3 1;0.2 0.7 0.3 1;0.2 0.7 0.3 1" /><animate attributeName="opacity" values="1;1;0.88;0.88;1;1;0.93;0.93;0.85;0.85;0.9;0.9;1" keyTimes="0.000000000;0.161812298;0.166666667;0.328478964;0.333333333;0.495145631;0.500000000;0.661812298;0.666666667;0.828478964;0.833333333;0.995145631;1.000000000" dur="61.8s" repeatCount="indefinite" calcMode="spline" keySplines="0.2 0.7 0.3 1;0.2 0.7 0.3 1;0.2 0.7 0.3 1;0.2 0.7 0.3 1;0.2 0.7 0.3 1;0.2 0.7 0.3 1;0.2 0.7 0.3 1;0.2 0.7 0.3 1;0.2 0.7 0.3 1;0.2 0.7 0.3 1;0.2 0.7 0.3 1;0.2 0.7 0.3 1" /></path>
+        </g>
+        </g>
+        <path id="path13" fill="#929292" fill-rule="evenodd" stroke="none" d="M 1038.920044 451.372314 C 1038.920044 451.372314 1010.864746 395.664307 961.2099 351.669434 C 914.708923 310.468872 851.242981 315.01416 851.242981 315.01416 C 851.242981 315.01416 921.472534 297.931274 964.875366 324.544312 C 1011.400452 353.071777 1038.920044 451.372314 1038.920044 451.372314 Z"><animateTransform attributeName="transform" type="translate" values="0 0;0 0;0 -40;0 0;0 0;0 -40;0 0;0 0;0 -40;0 0;0 0;0 -40;0 0;0 0;0 -40;0 0;0 0;0 -40;0 0" keyTimes="0.000000000;0.161812298;0.164239482;0.166666667;0.328478964;0.330906149;0.333333333;0.495145631;0.497572816;0.500000000;0.661812298;0.664239482;0.666666667;0.828478964;0.830906149;0.833333333;0.995145631;0.997572816;1.000000000" dur="61.8s" repeatCount="indefinite" calcMode="spline" keySplines="0.25 0.1 0.25 1;0.25 0.1 0.25 1;0.25 0.1 0.25 1;0.25 0.1 0.25 1;0.25 0.1 0.25 1;0.25 0.1 0.25 1;0.25 0.1 0.25 1;0.25 0.1 0.25 1;0.25 0.1 0.25 1;0.25 0.1 0.25 1;0.25 0.1 0.25 1;0.25 0.1 0.25 1;0.25 0.1 0.25 1;0.25 0.1 0.25 1;0.25 0.1 0.25 1;0.25 0.1 0.25 1;0.25 0.1 0.25 1;0.25 0.1 0.25 1" /><animateTransform attributeName="transform" type="rotate" additive="sum" values="0 945 375;0 945 375;-10 945 375;0 945 375;0 945 375;-10 945 375;0 945 375;0 945 375;-10 945 375;0 945 375;0 945 375;-10 945 375;0 945 375;0 945 375;-10 945 375;0 945 375;0 945 375;-10 945 375;0 945 375" keyTimes="0.000000000;0.161812298;0.164239482;0.166666667;0.328478964;0.330906149;0.333333333;0.495145631;0.497572816;0.500000000;0.661812298;0.664239482;0.666666667;0.828478964;0.830906149;0.833333333;0.995145631;0.997572816;1.000000000" dur="61.8s" repeatCount="indefinite" calcMode="spline" keySplines="0.25 0.1 0.25 1;0.25 0.1 0.25 1;0.25 0.1 0.25 1;0.25 0.1 0.25 1;0.25 0.1 0.25 1;0.25 0.1 0.25 1;0.25 0.1 0.25 1;0.25 0.1 0.25 1;0.25 0.1 0.25 1;0.25 0.1 0.25 1;0.25 0.1 0.25 1;0.25 0.1 0.25 1;0.25 0.1 0.25 1;0.25 0.1 0.25 1;0.25 0.1 0.25 1;0.25 0.1 0.25 1;0.25 0.1 0.25 1;0.25 0.1 0.25 1" /></path>
+    </g>
+</svg>
 	
-          <p class="eyebrow">Meet Metatron · Budapest, Hungary</p>
+          <p class="eyebrow">CSS-only eye tracking test · Move your mouse across this header</p>
           <h1>Szerencsés Gábor</h1>
           <p class="profession">Programmer &amp; graphic designer</p>
           <p class="lead">Connecting software, visual design and practical problem-solving.</p>
