@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Metatron Software offers print and DTP work, animation production and creative collaboration on art projects.">
+    <title>Design — Metatron Software</title>
+    <link rel="stylesheet" href="../main/global.css">
+    <link rel="stylesheet" href="../style.css">
+    <style>
+      .design-services {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 2rem;
+      }
+
+
+      .design-services h3 {
+        margin-bottom: 0.6rem;
+        font-size: 1.4rem;
+      }
+
+
+      .design-services p {
+        margin-bottom: 0;
+        color: var(--muted);
+      }
+
+
+      @media (max-width: 760px) {
+        .design-services {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+
+
+  <body>
+    <header class="site-header">
+      <a class="brand" href="../index.html" aria-label="Metatron Software home">
+        <span class="brand-mark" aria-hidden="true">M</span>
+        <span>Metatron <strong>Software</strong></span>
+      </a>
+      <nav aria-label="Main navigation">
+        <a href="../app/index.html">Develop</a>
+        <a href="../about.html">About</a>
+        <a href="../realtime/index.html">Realtime</a>
+        <a href="../design/index.html" aria-current="page">Design</a>
+        <a href="../sitemap.html">Sitemap</a>
+        <a href="../contact.html">Contact</a>
+      </nav>
+    </header>
+
+
+    <main>
+      <section class="contact-hero" aria-labelledby="design-title">
+        <div class="section-wrap">
+          <p class="eyebrow">Design &amp; creative work</p>
+          <h1 id="design-title">Print, animation &amp; art projects.</h1>
+          <p class="contact-lead">We undertake print and DTP work, create animations, and collaborate on art projects.</p>
+          <a class="button" href="../contact.html">Discuss your project <span aria-hidden="true">→</span></a>
+        </div>
+      </section>
+
+
+      <section class="section-wrap project-section" aria-labelledby="services-title">
+        <div class="project-heading">
+          <p class="eyebrow">What we do</p>
+          <h2 id="services-title">Creative work across media.</h2>
+        </div>
+        <div class="design-services">
+          <article>
+            <h3>Print &amp; DTP</h3>
+            <p>Graphic design, page layout and preparation of publications and other materials for print.</p>
+          </article>
+
+          <article>
+            <h3>Animation</h3>
+            <p>Animation production to bring visual ideas, stories and creative projects to life.</p>
+          </article>
+
+          <article>
+            <h3>Art projects</h3>
+            <p>Creative and technical collaboration on artistic projects, from the initial idea to the finished work.</p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+
+    <footer class="site-footer">
+      <div class="section-wrap footer-inner footer-standard">
+        <a class="brand footer-brand" href="../index.html" aria-label="Metatron Software home">
+          <span class="brand-mark" aria-hidden="true">M</span>
+          <span>Metatron <strong>Software</strong></span>
+        </a>
+        <p class="footer-description">Independent software development from Budapest, Hungary.</p>
+        <p class="footer-years">2018-2026</p>
+      </div>
+    </footer>
+  </body>
+</html>
