@@ -1,3 +1,105 @@
+/* One shadow preset for transparent images and rounded card frames. */
+:root {
+  --shadow: 0 8px 10px rgb(13 45 67 / 20%);
+  --image-shadow: drop-shadow(var(--shadow));
+}
+
+.app-artwork,
+.image-shadow {
+  filter: var(--image-shadow);
+}
+
+.app-grid .card-image {
+  box-shadow: var(--shadow);
+}
+
+/* A card casts one shadow; its artwork must not cast a second one. */
+.app-grid .card-image :is(.app-artwork, .image-shadow) {
+  filter: none;
+}
+
+
+/* Standard footer for the main pages, excluding the homepage. */
+footer.site-footer {
+  padding: 0;
+  color: var(--ink);
+  background: var(--white);
+  text-align: start;
+}
+
+.footer-inner.footer-standard {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+}
+
+.footer-standard > .footer-brand {
+  justify-self: start;
+  white-space: nowrap;
+}
+
+.footer-standard > .footer-description {
+  text-align: center;
+}
+
+.footer-standard > .footer-years {
+  justify-self: end;
+  white-space: nowrap;
+}
+
+@media (max-width: 900px) {
+  .footer-inner.footer-standard {
+    grid-template-columns: minmax(0, 1fr) auto;
+    padding-block: 1.3rem;
+    gap: 1rem;
+  }
+
+  .footer-standard > .footer-description {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+
+  .footer-standard > .footer-years {
+    grid-column: 2;
+    grid-row: 1;
+  }
+}
+
+
+/* Shared hover interactions. App pages retain their own movement styles. */
+.site-effects :is(.card-image, .virtual-preview a, .studio-grid a, .work-card:not(:has(.virtual-preview)), .github-card:not(.github-card-static), .contact-links a, .social-links a, .hero-icon img) {
+  position: relative;
+  transition: transform 0.2s ease-out;
+}
+
+.site-effects :is(.virtual-preview a, .studio-grid a) {
+  display: block;
+}
+
+.site-effects .virtual-preview a {
+  border-radius: 7px;
+}
+
+.site-effects .social-links a {
+  border-radius: 6px;
+}
+
+.site-effects :is(.virtual-preview a, .studio-grid a) img {
+  border-radius: inherit;
+}
+
+.site-effects.app-grid-effects-only .app-grid .card-image:is(:hover, :focus-visible),
+.site-effects:not(.app-grid-effects-only) :is(.card-image, .virtual-preview a, .studio-grid a, .work-card:not(:has(.virtual-preview)), .github-card:not(.github-card-static), .contact-links a, .social-links a):is(:hover, :focus-visible),
+.site-effects:not(.app-grid-effects-only) .hero-icon:is(:hover, :focus-visible) img {
+  transform: scale(1.045);
+  z-index: 1;
+}
+
+.site-effects:not(.app-grid-effects-only) :is(.virtual-preview a, .studio-grid a, .work-card:not(:has(.virtual-preview)), .github-card:not(.github-card-static), .contact-links a, .social-links a):is(:hover, :focus-visible) {
+  filter: var(--image-shadow);
+}
+
+
 /* Homepage layout and animations. */
 .hero {
   position: relative;
@@ -46,13 +148,11 @@
   width: 100%;
   height: auto;
   overflow: visible;
-  filter: drop-shadow(0 14px 12px rgb(13 45 67 / 25%));
-  transition: transform 400ms ease, filter 400ms ease;
+  transition: transform 400ms ease;
 }
 
 body:not(.site-effects) .hero-icon:is(:hover, :focus-visible) img {
   transform: scale(1.07);
-  filter: drop-shadow(0 22px 20px rgb(13 45 67 / 38%));
 }
 
 .hero-icon-signee {
@@ -300,4 +400,16 @@ body:not(.site-effects) .hero-icon:is(:hover, :focus-visible) img {
   width: 100%;
   height: auto;
   border-radius: 7px;
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-icon {
+    animation: none;
+  }
+
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
 }

@@ -15,8 +15,8 @@
     .row { display: flex; flex-wrap: wrap; align-items: center; gap: 2.5rem; }
     header { background: #f3f3f3; padding-block: 3rem; }
     .icon { flex: 0 1 180px; position: relative; z-index: 1; }
-    .icon img { border-radius: 22%; box-shadow: 0 8px 20px rgb(0 0 0 / 0%); transition: transform 0.35s ease, box-shadow 0.35s ease; }
-    .icon:is(:hover, :focus-visible) img { transform: translateY(-5px) rotate(8deg) scale(1.03); box-shadow: 0 8px 20px rgb(0 0 0 / 18%); }
+    .icon img { transition: transform 0.35s ease; }
+    .icon:is(:hover, :focus-visible) img { transform: translateY(-5px) rotate(8deg) scale(1.03); }
     .intro { flex: 2 1 300px; }
     .intro p { color: #786b51; font-size: 1.2rem; transition: color 0.6s ease; }
     .icon:is(:hover, :focus-visible) + .intro p { color: #30200e; }

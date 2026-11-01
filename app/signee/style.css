@@ -17,7 +17,7 @@
       .heading > img { width: min(64%, 415px); min-width: 0; }
       .appstr { --icon-size: 64px; display: inline-flex; align-items: center; gap: 10px; flex: none; transition: transform 0.2s ease-in-out; }
       .appstr picture { display: block; flex: none; width: 190px; height: var(--icon-size); }
-      .appstr img { display: block; border-radius: calc(var(--icon-size) * 0.1875); box-shadow: 3px 3px 6px rgb(0 0 0 / 20%); }
+      .appstr img { display: block; }
       .appstr picture img { width: 100%; height: 100%; }
       .appstr > img { flex: none; width: var(--icon-size); height: var(--icon-size); }
       .appstr:is(:hover, :focus-visible) { transform: scale(1.05); }
@@ -38,8 +38,6 @@
       .caps h2 { font-size: 16pt; }
       /* Recreate the original 1024 × 1664 canvas around the cropped 710 × 1440 phones. */
       .phone-slot { padding: 7.421875% 15.33203125% 14.453125%; }
-      .phone-image { position: relative; isolation: isolate; }
-      .phone-image::before { content: ''; position: absolute; z-index: -1; inset: 0.5% 1%; border-radius: 20% / 10%; box-shadow: 0 14px 24px rgb(0 0 0 / 24%); pointer-events: none; }
       .phone-image img { display: block; width: 100%; transform: perspective(900px) rotateX(0deg); transition: transform 0.5s cubic-bezier(0.2, 0.65, 0.3, 1); }
       #version { margin: 40px 0 165px; background: linear-gradient(#ececec, white); }
       .history { padding-left: 3em; }

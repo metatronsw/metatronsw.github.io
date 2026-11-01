@@ -6,9 +6,164 @@
     <meta name="description" content="Meet Szerencsés Gábor: programmer and graphic designer working across Apple platforms, visual media and custom development.">
     <title>Eye tracking test — Szerencsés Gábor · Metatron Software</title>
     <link rel="stylesheet" href="main/global.css">
-    <link rel="stylesheet" href="about.css">
-    <link rel="stylesheet" href="main/interactions.css">
+    <link rel="stylesheet" href="style.css">
     <style>
+      /* Profile layout. */
+      .about-hero h1 {
+        max-width: 900px;
+      }
+
+
+      .profession {
+        margin-bottom: 1.6rem;
+        color: var(--blue-dark);
+        font-size: 1.25rem;
+      }
+
+
+      .lead {
+        max-width: 760px;
+        font-size: clamp(1.4rem, 3vw, 2rem);
+        line-height: 1.35;
+        letter-spacing: -0.025em;
+      }
+
+
+      .hero-summary {
+        max-width: 720px;
+        color: var(--muted);
+        margin-bottom: 1.8rem;
+      }
+
+
+      .profile-section {
+        padding-block: 4rem;
+      }
+
+
+      .profile-columns {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 2rem;
+        color: var(--muted);
+      }
+
+
+      .profile-columns p {
+        margin-bottom: 0;
+      }
+
+
+      .experience-band {
+        background: var(--paper);
+      }
+
+
+      .career-row {
+        display: grid;
+        align-items: baseline;
+        grid-template-columns: 150px 1fr;
+        gap: 2rem;
+        padding-block: 1.5rem;
+        border-top: 1px solid var(--line);
+      }
+
+
+      .career-date {
+        color: var(--blue);
+        font-weight: 650;
+        white-space: nowrap;
+        margin: 0;
+      }
+
+
+      .career-row h3, .skills-grid h3, .profile-project h3 {
+        margin-bottom: 0.4rem;
+        font-size: 1.25rem;
+      }
+
+
+      .career-role {
+        margin-bottom: 0.4rem;
+        font-weight: 600;
+      }
+
+
+      .skills-grid, .project-list {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1.5rem;
+      }
+
+
+      .career-row div > p:last-child, .library-list dd, .skills-grid p, .profile-project > p:last-child {
+        margin: 0;
+        color: var(--muted);
+      }
+
+
+      .profile-project {
+        border-top: 1px solid var(--line);
+        padding-top: 1.3rem;
+      }
+
+
+      .library-list {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1.5rem 2rem;
+        margin: 0;
+      }
+
+
+      .library-list dt {
+        font-weight: 650;
+        margin-bottom: 0.3rem;
+      }
+
+
+      .references {
+        font-size: 1.2rem;
+        line-height: 2;
+        color: var(--muted);
+        margin: 0;
+      }
+
+
+      @media (max-width: 760px) {
+        .profile-columns, .skills-grid {
+          grid-template-columns: 1fr;
+          gap: 1.3rem;
+        }
+        .project-list, .library-list {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        .career-row {
+          grid-template-columns: 105px 1fr;
+          gap: 1rem;
+        }
+        .profile-section {
+          padding-block: 3rem;
+        }
+      }
+
+
+      @media (max-width: 480px) {
+        .project-list, .library-list {
+          grid-template-columns: 1fr;
+        }
+        .career-row {
+          grid-template-columns: 95px minmax(0, 1fr);
+          gap: 0.75rem;
+        }
+      }
+
+
+      .career-row h3 .text-link, .profile-project h3 .text-link, .library-list dt .text-link {
+        font-size: inherit;
+      }
+
+
       .eye-test {
         --eye-transition-duration: 300ms;
       }
@@ -22,6 +177,7 @@
         --hero-art-top: -25%;
         --hero-art-width: 1000px;
         --hero-art-height: auto;
+        overflow: visible;
       }
 
       .eye-test .gaze-zones {
@@ -100,12 +256,17 @@
   </head>
   <body class="site-effects">
     <header class="site-header">
-      <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true">M</span><span>Metatron <strong>Software</strong></span></a>
+      <a class="brand" href="index.html" aria-label="Metatron Software home">
+        <span class="brand-mark" aria-hidden="true">M</span>
+        <span>Metatron <strong>Software</strong></span>
+      </a>
       <nav aria-label="Main navigation">
-        <a href="index.html#apps">Our apps</a>
-        <a href="#experience">Experience</a>
-        <a href="contact.html">Contact</a>
+        <a href="app/index.html">Develop</a>
+        <a href="about.html" aria-current="page">About</a>
+        <a href="realtime/index.html">Realtime</a>
+        <a href="design/index.html">Design</a>
         <a href="sitemap.html">Sitemap</a>
+        <a href="contact.html">Contact</a>
       </nav>
     </header>
     <main>
@@ -176,7 +337,7 @@
     </g>
 </svg>
 	
-          <p class="eyebrow">CSS-only eye tracking test · Move your mouse across this header</p>
+          <p class="eyebrow">Metatron Software and Design</p>
           <h1>Szerencsés Gábor</h1>
           <p class="profession">Programmer &amp; graphic designer</p>
           <p class="lead">Connecting software, visual design and practical problem-solving.</p>
@@ -352,7 +513,7 @@
           </article>
           <article class="profile-project">
             <p class="card-label">2025–</p>
-            <h3><a class="text-link" href="app/catalogue/index.html">Catalogue</a></h3>
+            <h3>Catalogue</h3>
             <p>Media and artwork cataloguing with fast JSON processing, HTML and PDF generation, advanced search, and colour and shape matching using a custom colour-space library.</p>
           </article>
         </div>
@@ -443,11 +604,14 @@
         </div>
       </section>
     </main>
-    <footer>
-      <div class="section-wrap footer-inner">
-        <a class="brand footer-brand" href="index.html"><span class="brand-mark" aria-hidden="true">M</span><span>Metatron <strong>Software</strong></span></a>
-        <a class="text-link" href="index.html">Back to home</a>
-        <p>© Metatron Software</p>
+    <footer class="site-footer">
+      <div class="section-wrap footer-inner footer-standard">
+        <a class="brand footer-brand" href="index.html" aria-label="Metatron Software home">
+          <span class="brand-mark" aria-hidden="true">M</span>
+          <span>Metatron <strong>Software</strong></span>
+        </a>
+        <p class="footer-description">Independent software development from Budapest, Hungary.</p>
+        <p class="footer-years">2018-2026</p>
       </div>
     </footer>
   </body>

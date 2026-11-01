@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Signee Timer — User manual</title>
+    <link rel="stylesheet" href="../../style.css">
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap');
 
@@ -23,14 +24,12 @@
       .heading > img { width: min(64%, 415px); min-width: 0; }
       .appstr { --icon-size: 64px; display: inline-flex; align-items: center; gap: 10px; flex: none; transition: transform 0.2s ease-in-out; }
       .appstr picture { display: block; flex: none; width: 190px; height: var(--icon-size); }
-      .appstr img { display: block; border-radius: calc(var(--icon-size) * 0.1875); box-shadow: 3px 3px 6px rgb(0 0 0 / 20%); }
+      .appstr img { display: block; }
       .appstr picture img { width: 100%; height: 100%; }
       .appstr > img { flex: none; width: var(--icon-size); height: var(--icon-size); }
       .appstr:is(:hover, :focus-visible) { transform: scale(1.05); }
       .ribbon { display: flex; align-items: center; min-height: 64px; padding-block: 0.5em; color: white; background: #366b8f; font-size: 21pt; text-align: left; }
       .ribbon p { margin-block: 0; }
-      .phone-image { position: relative; isolation: isolate; }
-      .phone-image::before { content: ''; position: absolute; z-index: -1; inset: 0.5% 1%; border-radius: 20% / 10%; box-shadow: 0 14px 24px rgb(0 0 0 / 24%); pointer-events: none; }
       .phone-image img { display: block; width: 100%; transform: perspective(900px) rotateX(0deg); transition: transform 0.5s cubic-bezier(0.2, 0.65, 0.3, 1); }
       /* Links */
       .hover-underline-animation { display: inline-block; position: relative; color: #0096ff; font-weight: 400; text-decoration: none; }
@@ -69,8 +68,7 @@
         .manual-illustration .phone-image { max-width: 200px; }
       }
     </style>
-    <link rel="stylesheet" href="../../main/app-artwork.css">
-</head>
+  </head>
   <body>
     <header>
       <div class="wrap heading">
@@ -78,7 +76,7 @@
         <a href="https://apps.apple.com/kz/app/signee-timer/id1558214467" target="_blank" rel="noopener" class="appstr">
           <picture>
             <source media="(max-width: 879px)" srcset="../../main/appstore-logo-black-box.svg">
-            <img src="../../main/appstore-logo-black.svg" alt="Download on the App Store" height="64">
+            <img class="image-shadow" src="../../main/appstore-logo-black.svg" alt="Download on the App Store" height="64">
           </picture>
           <img class="app-artwork" src="appicon.svg" alt="">
         </a>
@@ -128,7 +126,7 @@
       </article>
       <aside class="manual-illustration" aria-label="Signee Timer screenshot">
         <div class="phone-image">
-          <img src="iphone-comment.png" alt="Editing a lap comment in Signee Timer" width="710" height="1440">
+          <img class="image-shadow" src="iphone-comment.webp" alt="Editing a lap comment in Signee Timer" width="710" height="1440">
         </div>
       </aside>
     </main>
