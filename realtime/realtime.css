@@ -89,19 +89,6 @@
   min-width: 0;
 }
 
-.studio-grid a {
-  display: block;
-  position: relative;
-  border-radius: 6px;
-}
-
-.studio-grid img {
-  display: block;
-  width: 100%;
-  height: auto;
-  border-radius: inherit;
-}
-
 .studio-grid figcaption {
   margin-top: 0.6rem;
   font-size: 0.85rem;
@@ -178,12 +165,6 @@
   }
   .project-content {
     gap: 2rem;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .studio-grid a {
-    transition: none;
   }
 }
 

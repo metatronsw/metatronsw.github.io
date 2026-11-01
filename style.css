@@ -57,12 +57,12 @@ footer.site-footer {
 
 
 /* Shared hover interactions. App pages retain their own movement styles. */
-.site-effects :is(.virtual-preview a, .studio-grid a, .work-card:not(:has(.virtual-preview)), .contact-links a, .social-links a, .hero-icon img) {
+.site-effects :is(.virtual-preview a, .work-card:not(:has(.virtual-preview)), .contact-links a, .social-links a, .hero-icon img) {
   position: relative;
   transition: transform 0.2s ease-out;
 }
 
-.site-effects :is(.virtual-preview a, .studio-grid a) {
+.site-effects .virtual-preview a {
   display: block;
 }
 
@@ -74,18 +74,41 @@ footer.site-footer {
   border-radius: 6px;
 }
 
-.site-effects :is(.virtual-preview a, .studio-grid a) img {
+.site-effects .virtual-preview a img {
   border-radius: inherit;
 }
 
-.site-effects:not(.app-grid-effects-only) :is(.virtual-preview a, .studio-grid a, .work-card:not(:has(.virtual-preview)), .contact-links a, .social-links a):is(:hover, :focus-visible),
+.site-effects:not(.app-grid-effects-only) :is(.virtual-preview a, .work-card:not(:has(.virtual-preview)), .contact-links a, .social-links a):is(:hover, :focus-visible),
 .site-effects:not(.app-grid-effects-only) .hero-icon:is(:hover, :focus-visible) img {
   transform: scale(1.045);
   z-index: 1;
 }
 
-.site-effects:not(.app-grid-effects-only) :is(.virtual-preview a, .studio-grid a, .work-card:not(:has(.virtual-preview)), .contact-links a, .social-links a):is(:hover, :focus-visible) {
+.site-effects:not(.app-grid-effects-only) :is(.virtual-preview a, .work-card:not(:has(.virtual-preview)), .contact-links a, .social-links a):is(:hover, :focus-visible) {
   filter: var(--image-shadow);
+}
+
+
+/* Realtime gallery previews use one rounded frame and one hover shadow. */
+.studio-grid figure > a {
+  position: relative;
+  display: block;
+  border-radius: 6px;
+  line-height: 0;
+  transition: transform 200ms ease-out, box-shadow 200ms ease-out;
+}
+
+.studio-grid figure > a:is(:hover, :focus-visible) {
+  transform: scale(1.045);
+  box-shadow: var(--shadow);
+  z-index: 1;
+}
+
+.studio-grid figure > a > img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: inherit;
 }
 
 
