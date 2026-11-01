@@ -9,16 +9,6 @@
   filter: var(--image-shadow);
 }
 
-.app-grid .card-image {
-  box-shadow: var(--shadow);
-}
-
-/* A card casts one shadow; its artwork must not cast a second one. */
-.app-grid .card-image :is(.app-artwork, .image-shadow) {
-  filter: none;
-}
-
-
 /* Standard footer for the main pages, excluding the homepage. */
 footer.site-footer {
   padding: 0;
@@ -67,7 +57,7 @@ footer.site-footer {
 
 
 /* Shared hover interactions. App pages retain their own movement styles. */
-.site-effects :is(.card-image, .virtual-preview a, .studio-grid a, .work-card:not(:has(.virtual-preview)), .github-card:not(.github-card-static), .contact-links a, .social-links a, .hero-icon img) {
+.site-effects :is(.virtual-preview a, .studio-grid a, .work-card:not(:has(.virtual-preview)), .contact-links a, .social-links a, .hero-icon img) {
   position: relative;
   transition: transform 0.2s ease-out;
 }
@@ -88,14 +78,13 @@ footer.site-footer {
   border-radius: inherit;
 }
 
-.site-effects.app-grid-effects-only .app-grid .card-image:is(:hover, :focus-visible),
-.site-effects:not(.app-grid-effects-only) :is(.card-image, .virtual-preview a, .studio-grid a, .work-card:not(:has(.virtual-preview)), .github-card:not(.github-card-static), .contact-links a, .social-links a):is(:hover, :focus-visible),
+.site-effects:not(.app-grid-effects-only) :is(.virtual-preview a, .studio-grid a, .work-card:not(:has(.virtual-preview)), .contact-links a, .social-links a):is(:hover, :focus-visible),
 .site-effects:not(.app-grid-effects-only) .hero-icon:is(:hover, :focus-visible) img {
   transform: scale(1.045);
   z-index: 1;
 }
 
-.site-effects:not(.app-grid-effects-only) :is(.virtual-preview a, .studio-grid a, .work-card:not(:has(.virtual-preview)), .github-card:not(.github-card-static), .contact-links a, .social-links a):is(:hover, :focus-visible) {
+.site-effects:not(.app-grid-effects-only) :is(.virtual-preview a, .studio-grid a, .work-card:not(:has(.virtual-preview)), .contact-links a, .social-links a):is(:hover, :focus-visible) {
   filter: var(--image-shadow);
 }
 
@@ -225,9 +214,25 @@ body:not(.site-effects) .hero-icon:is(:hover, :focus-visible) img {
   gap: 1.25rem;
 }
 
+/* App presentation cards: shared by the homepage and the app catalogue. */
 .app-card {
   min-width: 0;
   border-radius: 10px;
+}
+
+.app-card > .card-image {
+  position: relative;
+  box-shadow: var(--shadow);
+  transition: transform 200ms ease-out;
+}
+
+.app-card > .card-image:is(:hover, :focus-visible) {
+  transform: scale(1.045);
+  z-index: 1;
+}
+
+.app-card > .card-image :is(.app-artwork, .image-shadow) {
+  filter: none;
 }
 
 .card-image {
@@ -257,11 +262,11 @@ body:not(.site-effects) .hero-icon:is(:hover, :focus-visible) img {
   letter-spacing: -0.025em;
 }
 
-.card-copy h3 a, .github-card h3 a {
+.card-copy h3 a, .github-box h3 a {
   text-decoration: none;
 }
 
-.card-copy h3 a:hover, .github-card h3 a:hover {
+.card-copy h3 a:hover, .github-box h3 a:hover {
   color: var(--blue);
 }
 
@@ -313,26 +318,62 @@ body:not(.site-effects) .hero-icon:is(:hover, :focus-visible) img {
   gap: 1.25rem;
 }
 
-.github-card {
+/* GitHub project boxes: logo, project link and animated direction arrow. */
+.github-box {
+  min-width: 0;
+  transition: background-color 100ms ease;
   padding: 1.5rem;
   border: 1px solid var(--line);
   border-radius: 10px;
   background: var(--paper);
 }
 
-.github-card > img {
+.github-box:is(:hover, :focus-within) {
+  background-color: var(--white);
+}
+
+.github-box h3 a {
+  overflow-wrap: anywhere;
+  text-underline-offset: 0.18em;
+}
+
+.github-box h3 a:is(:hover, :focus-visible) {
+  text-decoration: underline;
+}
+
+.github-arrow {
+  display: inline-block;
+  transform-origin: center;
+}
+
+.github-box:is(:hover, :focus-within) .github-arrow {
+  animation: github-arrow-sway 2s ease-in-out infinite;
+}
+
+@keyframes github-arrow-sway {
+  0%, 100% { transform: rotate(-12deg); }
+  50% { transform: rotate(12deg); }
+}
+
+@keyframes github-arrow-steps {
+  0%, 100% { transform: rotate(-12deg); }
+  33.333% { transform: rotate(0deg); }
+  66.667% { transform: rotate(12deg); }
+}
+
+.github-box > img {
   width: 32px;
   height: 32px;
   margin-bottom: 1.15rem;
 }
 
-.github-card h3 {
+.github-box h3 {
   margin-bottom: 0.6rem;
   font-size: 1.3rem;
   letter-spacing: -0.025em;
 }
 
-.github-card p {
+.github-box p {
   margin: 0;
   color: var(--muted);
   font-size: 0.92rem;
@@ -404,8 +445,8 @@ body:not(.site-effects) .hero-icon:is(:hover, :focus-visible) img {
 
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-icon {
-    animation: none;
+  .github-box:is(:hover, :focus-within) .github-arrow {
+    animation: github-arrow-steps 2s steps(1, end) infinite;
   }
 
   *, *::before, *::after {
