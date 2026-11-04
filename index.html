@@ -8,6 +8,52 @@
     <title>Metatron Software — Apps &amp; custom development</title>
     <link rel="stylesheet" href="main/global.css">
     <link rel="stylesheet" href="style.css">
+    <style>
+      .visual-showcase {
+        padding-top: 5.5rem;
+      }
+
+
+      .visual-image-stack {
+        display: grid;
+        align-self: center;
+      }
+
+
+      .visual-image-stack figure {
+        grid-area: 1 / 1;
+        align-self: start;
+        width: 85%;
+        min-width: 0;
+        margin: 0;
+      }
+
+
+      .visual-image-stack figure:last-child {
+        justify-self: end;
+        margin-top: 35%;
+      }
+
+
+      .visual-image-stack a {
+        display: block;
+        border-radius: 7px;
+        box-shadow: var(--shadow);
+      }
+
+
+      .visual-image-stack img {
+        width: 100%;
+        border-radius: inherit;
+      }
+
+
+      @media (max-width: 760px) {
+        .visual-showcase {
+          padding-top: 4rem;
+        }
+      }
+    </style>
   </head>
   <body class="site-effects app-grid-effects-only">
     <header class="site-header">
@@ -20,6 +66,7 @@
         <a href="about.html">About</a>
         <a href="realtime/index.html">Realtime</a>
         <a href="design/index.html">Design</a>
+        <a href="visual/index.html">Visual</a>
         <a href="sitemap.html">Sitemap</a>
         <a href="contact.html">Contact</a>
       </nav>
@@ -260,6 +307,37 @@
         </div>
       </section>
 
+      <section class="work section-wrap visual-showcase" aria-labelledby="visual-title">
+        <div class="about-inner">
+          <div>
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow">Live visuals &amp; projection</p>
+                <h2 id="visual-title">Memories &amp; experience from the past</h2>
+              </div>
+            </div>
+            <div class="about-copy">
+              <p>From underground club nights and festivals to theatre, exhibitions and events, we turn music and spaces into living visual experiences.</p>
+              <p>Explore early experiments with reactive animation, panoramic projections and Aximmetry’s generative visuals, shaped live through touchscreen and gesture control.</p>
+              <a class="text-link" href="visual/index.html">Explore visual projects <span aria-hidden="true">→</span></a>
+            </div>
+          </div>
+          <div class="visual-image-stack">
+            <figure>
+              <a href="visual/index.html#image-2012-1018-2014-goa-farsang-2" aria-label="Explore 2014 GOA Farsang 2">
+                <img src="visual/2012-1018/2014-goa-farsang-2.webp" alt="2014 GOA Farsang 2" width="2800" height="1866" loading="lazy" decoding="async">
+              </a>
+            </figure>
+            <figure>
+              <a href="visual/index.html#image-2005-2012-2010-merlin-clark-2" aria-label="Explore 2010 Merlin - Clark 2">
+                <img src="visual/2005-2012/2010-merlin-clark-2.webp" alt="2010 Merlin - Clark 2" width="2400" height="1600" loading="lazy" decoding="async">
+              </a>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+
       <section class="about" id="about" aria-labelledby="about-title">
         <div class="section-wrap about-inner">
           <div>
@@ -278,11 +356,21 @@
       <div class="section-wrap footer-inner">
         <a class="brand footer-brand" href="index.html"> <span class="brand-mark" aria-hidden="true">M</span> <span>Metatron <strong>Software</strong></span> </a>
         <nav class="social-links" aria-label="Social media and email">
-          <a href="https://www.facebook.com/szerencses.gabor.1" aria-label="Facebook" title="Facebook" target="_blank" rel="noopener noreferrer"><img src="main/facebook.svg" alt="" width="24" height="24" loading="lazy"></a>
-          <a href="https://www.instagram.com/szerencsesg/" aria-label="Instagram" title="Instagram" target="_blank" rel="noopener noreferrer"><img src="main/instagram.svg" alt="" width="24" height="24" loading="lazy"></a>
-          <a href="https://www.youtube.com/@varju-bacsi" aria-label="YouTube" title="YouTube" target="_blank" rel="noopener noreferrer"><img src="main/youtube.svg" alt="" width="24" height="24" loading="lazy"></a>
-          <a href="https://www.linkedin.com/in/g%C3%A1bor-szerencs%C3%A9s-432a01233" aria-label="LinkedIn" title="LinkedIn" target="_blank" rel="noopener noreferrer"><img src="main/linkedin.svg" alt="" width="24" height="24" loading="lazy"></a>
-          <a href="mailto:softwaremetatron@gmail.com" aria-label="Mail" title="Mail"><img src="main/mail-social.svg" alt="" width="24" height="24" loading="lazy"></a>
+          <a href="https://www.facebook.com/szerencses.gabor.1" aria-label="Facebook" title="Facebook" target="_blank" rel="noopener noreferrer">
+            <img src="main/facebook.svg" alt="" width="24" height="24" loading="lazy">
+          </a>
+          <a href="https://www.instagram.com/szerencsesg/" aria-label="Instagram" title="Instagram" target="_blank" rel="noopener noreferrer">
+            <img src="main/instagram.svg" alt="" width="24" height="24" loading="lazy">
+          </a>
+          <a href="https://www.youtube.com/@varju-bacsi" aria-label="YouTube" title="YouTube" target="_blank" rel="noopener noreferrer">
+            <img src="main/youtube.svg" alt="" width="24" height="24" loading="lazy">
+          </a>
+          <a href="https://www.linkedin.com/in/g%C3%A1bor-szerencs%C3%A9s-432a01233" aria-label="LinkedIn" title="LinkedIn" target="_blank" rel="noopener noreferrer">
+            <img src="main/linkedin.svg" alt="" width="24" height="24" loading="lazy">
+          </a>
+          <a href="mailto:softwaremetatron@gmail.com" aria-label="Mail" title="Mail">
+            <img src="main/mail-social.svg" alt="" width="24" height="24" loading="lazy">
+          </a>
         </nav>
         <p>© Metatron Software</p>
       </div>

@@ -74,6 +74,18 @@ footer.site-footer {
   border-radius: 6px;
 }
 
+/* SVG assets contain their own colours; hover reveals them. */
+.social-links img {
+  filter: grayscale(1);
+  transition: transform 200ms ease, opacity 200ms ease, filter 200ms ease;
+}
+
+.social-links a:is(:hover, :focus-visible) img {
+  filter: grayscale(0);
+  opacity: 1;
+}
+
+
 .site-effects .virtual-preview a img {
   border-radius: inherit;
 }
@@ -89,8 +101,18 @@ footer.site-footer {
 }
 
 
+/* Keep the shared navigation readable when all menu items wrap. */
+@media (max-width: 900px) {
+  .site-header {
+    flex-wrap: wrap;
+    padding-block: 1rem;
+    gap: 1rem;
+  }
+}
+
+
 /* Realtime gallery previews use one rounded frame and one hover shadow. */
-.studio-grid figure > a {
+.studio-grid figure > :is(a, button) {
   position: relative;
   display: block;
   border-radius: 6px;
@@ -98,17 +120,121 @@ footer.site-footer {
   transition: transform 200ms ease-out, box-shadow 200ms ease-out;
 }
 
-.studio-grid figure > a:is(:hover, :focus-visible) {
+.studio-grid figure > :is(a, button):is(:hover, :focus-visible) {
   transform: scale(1.045);
   box-shadow: var(--shadow);
   z-index: 1;
 }
 
-.studio-grid figure > a > img {
+.studio-grid figure > :is(a, button) > img {
   display: block;
   width: 100%;
   height: auto;
   border-radius: inherit;
+}
+
+
+/* Native gallery controls preserve the page position when images close. */
+.studio-grid figure > button {
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: zoom-in;
+}
+
+.studio-grid button:focus-visible,
+.lightbox button:focus-visible {
+  outline: 3px solid #f0a94b;
+  outline-offset: 4px;
+}
+
+
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  border: 0;
+  padding: 3rem 4vw;
+  background: rgb(9 19 28 / 94%);
+}
+
+.lightbox:popover-open {
+  display: grid;
+  place-items: center;
+}
+
+.lightbox button {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+
+.lightbox-backdrop {
+  position: absolute;
+  inset: 0;
+}
+
+.lightbox-content {
+  position: relative;
+  max-width: 100%;
+  color: white;
+  text-align: center;
+}
+
+.lightbox-content img {
+  border-radius: 6px;
+  max-width: 92vw;
+  max-height: 72vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+.lightbox-content a {
+  color: white;
+}
+
+.lightbox-image {
+  display: block;
+  cursor: zoom-out;
+}
+
+
+.lightbox-caption {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  margin-top: 0.8rem;
+  font-size: clamp(0.65rem, 2vw, 0.9rem);
+  flex-wrap: wrap;
+}
+
+.lightbox-caption > * {
+  opacity: 0.5;
+}
+
+.lightbox-caption button {
+  text-decoration: underline;
+}
+
+
+.lightbox-caption :is(a, button) {
+  transition: opacity 0.2s ease;
+}
+
+.lightbox-caption :is(a, button):is(:hover, :focus-visible) {
+  opacity: 1;
 }
 
 
