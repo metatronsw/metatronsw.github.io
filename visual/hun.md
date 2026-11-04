@@ -4,6 +4,9 @@ Az előadásban a Syrius együttes szerzeményei olyan színpadi formát kapnak,
 
 További különlegesség, hogy míg a zenekar is központ része az előadásnak, úgy a vetítést vezérlő művész is a színpadi egység tagja a különleges nagy méretű átlátszó - futurisztikus érintőképernyővel, ami a közönség oldaláról is betekintést enged a kulisszák mögé.
 
+Képek az interaktív vetítésből
+A táncosok interakcióba léptek a díszletet adó képi elemekkel. Labdáztak a fénygömbbel, a koffert kinyitva piros bogarak árasztoták el a vásznat, minden jelenet pontosan akkor és úgy indult el, ahogy a zenészek és a táncosok koreográfiája időben elérte a megfelelő pontot.
+
 
 
 Rendezvények és Kiállítások

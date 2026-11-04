@@ -101,6 +101,16 @@ footer.site-footer {
 }
 
 
+.section-nav {
+  padding-block: 1.5rem;
+}
+
+
+.section-nav + .intro-grid {
+  border-top: 1px solid var(--line);
+}
+
+
 /* Keep the shared navigation readable when all menu items wrap. */
 @media (max-width: 900px) {
   .site-header {

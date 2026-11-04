@@ -564,6 +564,32 @@ body:not(.site-effects) .contact-links a:hover {
   color: var(--muted);
 }
 
+/* Shared project content and gallery introductions. */
+.project-content {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.content-block {
+  min-width: 0;
+}
+
+.content-block--text {
+  max-width: 860px;
+  color: var(--muted);
+}
+
+.content-block--text p:last-child {
+  margin-bottom: 0;
+}
+
+@media (max-width: 760px) {
+  .project-content {
+    gap: 2rem;
+  }
+}
+
 .gallery-intro {
   max-width: 800px;
 }

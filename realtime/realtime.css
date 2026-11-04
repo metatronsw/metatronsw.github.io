@@ -42,25 +42,6 @@
   grid-column: 1 / -1;
 }
 
-.project-content {
-  display: flex;
-  flex-direction: column;
-  gap: 3rem;
-}
-
-.content-block {
-  min-width: 0;
-}
-
-.content-block--text {
-  max-width: 860px;
-  color: var(--muted);
-}
-
-.content-block--text p:last-child {
-  margin-bottom: 0;
-}
-
 .showcase {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -118,8 +99,5 @@
   }
   .project-section {
     padding-block: 2.5rem;
-  }
-  .project-content {
-    gap: 2rem;
   }
 }
