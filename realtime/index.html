@@ -127,6 +127,44 @@
           opacity: 0;
         }
       }
+
+
+      .level-design {
+        --ink: #edf3f8;
+        --muted: #a8b8c7;
+        --line: #293746;
+        --shadow: 0 8px 18px rgb(0 0 0 / 35%);
+        color-scheme: dark;
+        color: var(--ink);
+        background: #101923;
+      }
+
+
+      .level-design .studio-grid {
+        --gallery-columns: 4;
+        --gallery-mobile-columns: 2;
+        --gallery-mobile-gap: 1.5rem 0.8rem;
+      }
+
+
+      .level-design .map-preview {
+        overflow: hidden;
+      }
+
+
+      .level-design .map-preview > .map-preview-ai {
+        position: absolute;
+        inset: 0;
+        height: 100%;
+        object-fit: cover;
+        opacity: 1;
+        transition: opacity 1s linear 0s;
+      }
+
+
+      .level-design .map-preview:is(:hover, :focus-visible) > .map-preview-ai {
+        opacity: 0;
+      }
     </style>
   </head>
   <body class="site-effects">
@@ -220,6 +258,7 @@
         <a class="text-link" href="#studios">Virtual studios</a>
         <a class="text-link" href="#interactive-installations">Interactive installations</a>
         <a class="text-link" href="#visuals-projection">Visuals &amp; Projection</a>
+        <a class="text-link" href="#game-levels">Game maps</a>
       </nav>
 
 
@@ -435,6 +474,21 @@
         </div>
       </section>
 
+		
+		<section class="about">
+			<div class="section-wrap about-inner">
+				<div>
+					<p class="eyebrow">Custom projects</p>
+					<h2>Bring your virtual space to life.</h2>
+				</div>
+				<div class="about-copy">
+					<p>Have an idea for a virtual studio, a real-time scene or an interactive installation? Contact us to discuss your requirements.</p>
+					<a class="text-link" href="mailto:softwaremetatron@gmail.com">Get in touch →</a>
+				</div>
+			</div>
+		</section>
+		
+		
       <section class="section-wrap project-section project-section--compact-mobile" id="visuals-projection">
         <header class="project-heading">
           <p class="eyebrow">Art &amp; events</p>
@@ -591,15 +645,66 @@
         
       </section>
 
-      <section class="about">
-        <div class="section-wrap about-inner">
-          <div>
-            <p class="eyebrow">Custom projects</p>
-            <h2>Bring your virtual space to life.</h2>
+      
+
+
+      <section class="level-design" aria-labelledby="level-design-title" id="game-levels">
+        <div class="section-wrap project-section">
+          <div class="project-heading">
+				 <p class="eyebrow">Level Design</p>
+            <h2 id="level-design-title">Echoes of Forgotten Worlds</h2>
+            <p>They say time makes distant memories more beautiful, especially when we enhance the photos with AI.</p>
+				<p>Game design and creating levels are my favourite hobbies. Please indulge me in this little joke of having the images appear like this at first. Yes, these images have been extended using AI. If I were to create these levels today, this is probably what they would look like. But everyone knows, even if they sometimes forget: the joy of gaming doesn't come from the visuals.</p>
           </div>
-          <div class="about-copy">
-            <p>Have an idea for a virtual studio, a real-time scene or an interactive installation? Contact us to discuss your requirements.</p>
-            <a class="text-link" href="mailto:softwaremetatron@gmail.com">Get in touch →</a>
+
+          <div class="studio-grid">
+            <figure>
+              <button type="button" class="map-preview" popovertarget="view-quake-2-contest" aria-label="Enlarge Quake II — Contest, original image">
+                <img src="maps/thumb/quake-2-contest.webp" alt="A Quake II arena with industrial structures and a rocky landscape" width="600" height="450" loading="lazy" decoding="async">
+                <img class="map-preview-ai" src="maps/thumb/quake-2-contest-ai.webp" alt="" aria-hidden="true" width="600" height="450" loading="lazy" decoding="async">
+              </button>
+              <figcaption>Quake II — Contest</figcaption>
+            </figure>
+
+            <figure>
+              <button type="button" class="map-preview" popovertarget="view-quake-2-splax" aria-label="Enlarge Quake II — Splax, original image">
+                <img src="maps/thumb/quake-2-splax.webp" alt="A Quake II level with stone architecture and raised walkways" width="600" height="450" loading="lazy" decoding="async">
+                <img class="map-preview-ai" src="maps/thumb/quake-2-splax-ai.webp" alt="" aria-hidden="true" width="600" height="450" loading="lazy" decoding="async">
+              </button>
+              <figcaption>Quake II — Splax</figcaption>
+            </figure>
+
+            <figure>
+              <button type="button" class="map-preview" popovertarget="view-quake-2-splax-2" aria-label="Enlarge Quake II — Splax 2, original image">
+                <img src="maps/thumb/quake-2-splax-2.webp" alt="Another view of the Quake II Splax level" width="600" height="450" loading="lazy" decoding="async">
+                <img class="map-preview-ai" src="maps/thumb/quake-2-splax-2-ai.webp" alt="" aria-hidden="true" width="600" height="450" loading="lazy" decoding="async">
+              </button>
+              <figcaption>Quake II — Splax 2</figcaption>
+            </figure>
+
+            <figure>
+              <button type="button" class="map-preview" popovertarget="view-quake-2-splax-3" aria-label="Enlarge Quake II — Splax 3, original image">
+                <img src="maps/thumb/quake-2-splax-3.webp" alt="A third view of the Quake II Splax level" width="600" height="450" loading="lazy" decoding="async">
+                <img class="map-preview-ai" src="maps/thumb/quake-2-splax-3-ai.webp" alt="" aria-hidden="true" width="600" height="450" loading="lazy" decoding="async">
+              </button>
+              <figcaption>Quake II — Splax 3</figcaption>
+            </figure>
+
+            <figure>
+              <button type="button" class="map-preview" popovertarget="view-doom-2-reactor" aria-label="Enlarge Doom II — Reactor, original image">
+                <img src="maps/thumb/doom-2-reactor.webp" alt="Doom II Reactor level with a UAC door, metal corridors and a staircase" width="600" height="338" loading="lazy" decoding="async">
+                <img class="map-preview-ai" src="maps/thumb/doom-2-reactor-ai.webp" alt="" aria-hidden="true" width="600" height="338" loading="lazy" decoding="async">
+              </button>
+              <figcaption>Doom II — Reactor</figcaption>
+            </figure>
+
+            <figure>
+              <button type="button" class="map-preview" popovertarget="view-doom-2-bad-place" aria-label="Enlarge Doom II — Bad Place, original image">
+                <img src="maps/thumb/doom-2-bad-place.webp" alt="Doom II Bad Place arena with green industrial walls and an open skylight" width="300" height="169" loading="lazy" decoding="async">
+                <img class="map-preview-ai" src="maps/thumb/doom-2-bad-place-ai.webp" alt="" aria-hidden="true" width="300" height="169" loading="lazy" decoding="async">
+              </button>
+              <figcaption>Doom II — Bad Place</figcaption>
+            </figure>
           </div>
         </div>
       </section>
@@ -1168,6 +1273,80 @@
           <a href="t-system_3.webp">T-System 3</a>
           <span aria-hidden="true">·</span>
           <button type="button" popovertarget="view-t-system_3" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="lightbox" id="view-quake-2-contest" popover role="dialog" aria-label="Quake II — Contest, original image">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-quake-2-contest" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-quake-2-contest" popovertargetaction="hide" aria-label="Close enlarged image"><img src="maps/quake-2-contest.webp" alt="A Quake II arena with industrial structures and a rocky landscape" width="2400" height="1800" loading="lazy" decoding="async"></button>
+        <div class="lightbox-caption">
+          <a href="maps/quake-2-contest.webp">Quake II — Contest</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-quake-2-contest" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="lightbox" id="view-quake-2-splax" popover role="dialog" aria-label="Quake II — Splax, original image">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-quake-2-splax" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-quake-2-splax" popovertargetaction="hide" aria-label="Close enlarged image"><img src="maps/quake-2-splax.webp" alt="A Quake II level with stone architecture and raised walkways" width="2400" height="1800" loading="lazy" decoding="async"></button>
+        <div class="lightbox-caption">
+          <a href="maps/quake-2-splax.webp">Quake II — Splax</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-quake-2-splax" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="lightbox" id="view-quake-2-splax-2" popover role="dialog" aria-label="Quake II — Splax 2, original image">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-quake-2-splax-2" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-quake-2-splax-2" popovertargetaction="hide" aria-label="Close enlarged image"><img src="maps/quake-2-splax-2.webp" alt="Another view of the Quake II Splax level" width="2400" height="1800" loading="lazy" decoding="async"></button>
+        <div class="lightbox-caption">
+          <a href="maps/quake-2-splax-2.webp">Quake II — Splax 2</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-quake-2-splax-2" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="lightbox" id="view-quake-2-splax-3" popover role="dialog" aria-label="Quake II — Splax 3, original image">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-quake-2-splax-3" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-quake-2-splax-3" popovertargetaction="hide" aria-label="Close enlarged image"><img src="maps/quake-2-splax-3.webp" alt="A third view of the Quake II Splax level" width="2400" height="1800" loading="lazy" decoding="async"></button>
+        <div class="lightbox-caption">
+          <a href="maps/quake-2-splax-3.webp">Quake II — Splax 3</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-quake-2-splax-3" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="lightbox" id="view-doom-2-reactor" popover role="dialog" aria-label="Doom II — Reactor, original image">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-doom-2-reactor" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-doom-2-reactor" popovertargetaction="hide" aria-label="Close enlarged image"><img src="maps/doom-2-reactor.webp" alt="Doom II Reactor level with a UAC door, metal corridors and a staircase" width="2400" height="1350" loading="lazy" decoding="async"></button>
+        <div class="lightbox-caption">
+          <a href="maps/doom-2-reactor.webp">Doom II — Reactor</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-doom-2-reactor" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="lightbox" id="view-doom-2-bad-place" popover role="dialog" aria-label="Doom II — Bad Place, original image">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-doom-2-bad-place" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-doom-2-bad-place" popovertargetaction="hide" aria-label="Close enlarged image"><img src="maps/doom-2-bad-place.webp" alt="Doom II Bad Place arena with green industrial walls and an open skylight" width="1920" height="1080" loading="lazy" decoding="async"></button>
+        <div class="lightbox-caption">
+          <a href="maps/doom-2-bad-place.webp">Doom II — Bad Place</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-doom-2-bad-place" popovertargetaction="hide">Close</button>
         </div>
       </div>
     </div>
