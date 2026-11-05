@@ -1,11 +1,10 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="site-page">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Stage visuals, event projections and selected visual experiments from the Metatron Software archive.">
     <title>Visuals &amp; projections — Metatron Software</title>
-    <link rel="stylesheet" href="../main/global.css">
     <link rel="stylesheet" href="../style.css">
     <style>
       /* Typed colours make the gradient and text interpolate smoothly. */
@@ -45,9 +44,8 @@
         --ink: #e5edf5;
         --muted: #acbbc9;
         --blue: #71bcea;
-        padding-block: 4.5rem;
         color: var(--ink);
-        background: linear-gradient(120deg, var(--visual-hero-start), var(--visual-hero-end));
+        --hero-background: linear-gradient(120deg, var(--visual-hero-start), var(--visual-hero-end));
         transition: --lamp-proximity 100ms ease-in-out;
         transition-duration: 100ms !important;
         animation: visual-lights-on 500ms ease-out 1s forwards;
@@ -197,53 +195,6 @@
       }
 
 
-      .virtual-hero p:not(.eyebrow) {
-        color: var(--muted);
-        font-size: 1.2rem;
-      }
-
-      .virtual-hero p:last-child {
-        max-width: 900px;
-        margin-bottom: 0;
-      }
-
-      .studio-grid {
-        display: grid;
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-        gap: 1.5rem;
-        scroll-margin-top: 2rem;
-      }
-
-      .studio-grid figure {
-        margin: 0;
-        min-width: 0;
-      }
-
-      .studio-grid figcaption {
-        margin-top: 0.6rem;
-        font-size: 0.85rem;
-        color: var(--muted);
-        overflow-wrap: anywhere;
-      }
-
-      @media (max-width: 760px) {
-        .studio-grid {
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-          gap: 1.25rem 0.8rem;
-        }
-
-        .studio-grid figcaption {
-          font-size: 0.75rem;
-        }
-
-        .virtual-hero {
-          padding-block: 3rem;
-        }
-
-        .project-section {
-          padding-block: 2.5rem;
-        }
-      }
     </style>
   </head>
   <body class="site-effects">
@@ -334,7 +285,7 @@
       </nav>
 
 
-      <section class="section-wrap project-section" id="collection-mupa" aria-labelledby="title-mupa">
+      <section class="section-wrap project-section project-section--compact-mobile" id="collection-mupa" aria-labelledby="title-mupa">
         <header class="project-heading">
           <p class="eyebrow">Theatre &amp; music</p>
           <h2 id="title-mupa">MÜPA Syrius — Staged concert</h2>
@@ -345,7 +296,7 @@
           <p>Alongside the band, the artist controlling the projections is an integral part of the onstage ensemble. A large, transparent, futuristic touchscreen makes this creative process visible to the audience, offering a glimpse behind the scenes.</p>
         </header>
         <div class="project-content">
-          <div class="content-block content-block--images studio-grid">
+          <div class="content-block content-block--images studio-grid studio-grid--archive">
             <figure id="image-mupa-2012-mupa-syrius-shattered-dreams-1">
               <button type="button" popovertarget="view-mupa-2012-mupa-syrius-shattered-dreams-1" aria-label="Enlarge 2012 Mupa - Syrius - Shattered Dreams 1"><img src="mupa/thumb/2012-mupa-syrius-shattered-dreams-1.webp" alt="2012 Mupa - Syrius - Shattered Dreams 1" width="600" height="400" loading="lazy" decoding="async"></button>
               <figcaption>2012 Bakelit - Syrius 1</figcaption>
@@ -386,7 +337,7 @@
             <p>The dancers interacted with the visual elements that formed the scenery. They played with a glowing sphere, and opening a suitcase sent red beetles swarming across the screen. Each scene began at precisely the right moment and unfolded in step with the musicians’ performance and the dancers’ choreography.</p>
           </div>
 
-          <div class="content-block content-block--images studio-grid">
+          <div class="content-block content-block--images studio-grid studio-grid--archive">
             <figure id="image-mupa-city">
               <button type="button" popovertarget="view-mupa-city" aria-label="Enlarge Night city"><img src="mupa/thumb/city.webp" alt="Night city" width="600" height="338" loading="lazy" decoding="async"></button>
               <figcaption>Night city</figcaption>
@@ -409,7 +360,7 @@
 
 
 		
-      <section class="section-wrap project-section" id="collection-event" aria-labelledby="title-event">
+      <section class="section-wrap project-section project-section--compact-mobile" id="collection-event" aria-labelledby="title-event">
         <header class="project-heading">
           <p class="eyebrow">Spaces &amp; occasions</p>
           <h2 id="title-event">Events &amp; exhibitions</h2>
@@ -420,7 +371,7 @@
           <p>For business events, the work typically involved panoramic projection using multiple projectors, video splitting and media server operation, ensuring seamless presentation of other artists’ work.</p>
         </header>
 		  
-        <div class="studio-grid">
+        <div class="studio-grid studio-grid--archive">
 			  
           <figure id="image-event-2009-kiscell-museum-konok">
             <button type="button" popovertarget="view-event-2009-kiscell-museum-konok" aria-label="Enlarge 2009 Kiscell Museum - Konok"><img src="event/thumb/2009-kiscell-museum-konok.webp" alt="2009 Kiscell Museum - Konok" width="600" height="400" loading="lazy" decoding="async"></button>
@@ -495,7 +446,7 @@
       </section>
 
 
-      <section class="section-wrap project-section" id="collection-2005-2012" aria-labelledby="title-2005-2012">
+      <section class="section-wrap project-section project-section--compact-mobile" id="collection-2005-2012" aria-labelledby="title-2005-2012">
         <header class="project-heading">
           <p class="eyebrow">Archive / 2005–2012</p>
           <h2 id="title-2005-2012">Party projections — The early years</h2>
@@ -503,7 +454,7 @@
 
           <p>Another distinctive experiment involved projecting dense, textural visuals directly onto the audience. The crowd became an organic surface, bringing the imagery to life together with the music and the movement of the participants.</p>
         </header>
-        <div class="studio-grid">
+        <div class="studio-grid studio-grid--archive">
           <figure id="image-2005-2012-2008-katlan-minimalheadz-1">
             <button type="button" popovertarget="view-2005-2012-2008-katlan-minimalheadz-1" aria-label="Enlarge 2008 Katlan - Minimalheadz 1"><img src="2005-2012/thumb/2008-katlan-minimalheadz-1.webp" alt="2008 Katlan - Minimalheadz 1" width="600" height="400" loading="lazy" decoding="async"></button>
             <figcaption>2008 Katlan - Minimalheadz 1</figcaption>
@@ -556,7 +507,7 @@
       </section>
 
 
-      <section class="section-wrap project-section" id="collection-2012-1018" aria-labelledby="title-2012-1018">
+      <section class="section-wrap project-section project-section--compact-mobile" id="collection-2012-1018" aria-labelledby="title-2012-1018">
         <header class="project-heading">
           <p class="eyebrow">Archive / 2012–1018</p>
           <h2 id="title-2012-1018">Aximmetry — Generative visuals</h2>
@@ -564,7 +515,7 @@
 
           <p>Its significance went beyond the spectacular interface. It offered a compelling alternative to the complex, cumbersome node-based systems that dominated the field at the time. Elaborate multi-projector setups, projection mapping and seamlessly aligned panoramic projections combined with never-repeating live generative visuals to create a grand spectacle, all running efficiently on a single computer.</p>
         </header>
-        <div class="studio-grid">
+        <div class="studio-grid studio-grid--archive">
           <figure id="image-2012-1018-2012-alkototabor-1">
             <button type="button" popovertarget="view-2012-1018-2012-alkototabor-1" aria-label="Enlarge 2012 Alkotótábor 1"><img src="2012-1018/thumb/2012-alkototabor-1.webp" alt="2012 Alkotótábor 1" width="600" height="400" loading="lazy" decoding="async"></button>
             <figcaption>2012 Alkotótábor 1</figcaption>
