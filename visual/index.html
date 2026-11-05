@@ -48,6 +48,8 @@
         padding-block: 4.5rem;
         color: var(--ink);
         background: linear-gradient(120deg, var(--visual-hero-start), var(--visual-hero-end));
+        transition: --lamp-proximity 100ms ease-in-out;
+        transition-duration: 100ms !important;
         animation: visual-lights-on 500ms ease-out 1s forwards;
       }
 
@@ -63,6 +65,13 @@
       }
 
 
+      @property --lamp-proximity {
+        syntax: "<number>";
+        inherits: true;
+        initial-value: 0;
+      }
+
+
       .virtual-hero .hero-background-art {
         --hero-art-width: clamp(184.96px, 24.48vw, 337.28px);
         --hero-art-height: auto;
@@ -70,15 +79,46 @@
         --hero-art-top: 50%;
         max-width: calc(100% - 32px);
         max-height: calc(100% - 32px);
-        transform: translate(-50%, -20%);
+        transform: translate(-50%, -20%) scale(calc(1 + var(--lamp-proximity) * 0.15));
         transform-origin: center;
-        animation: visual-lamp-rise 500ms ease-out 1s forwards;
+        overflow: visible;
+        color: #000;
+        opacity: clamp(0.5, calc(0.5 + var(--lamp-proximity) * 0.5), 1);
+        z-index: 1;
+        animation: visual-lamp-rise 500ms ease-out 1s forwards,
+          visual-lamp-on 500ms ease-out 1s forwards;
       }
+
+
+      .virtual-hero > .section-wrap {
+        opacity: clamp(0.5, calc(1 - var(--lamp-proximity) * 0.5), 1);
+      }
+
+
+      /* Concentric hit areas approximate pointer distance without scripts. */
+      .lamp-proximity {
+        fill: transparent;
+        pointer-events: all;
+      }
+
+      .virtual-hero:has(.lamp-proximity--1:hover) { --lamp-proximity: 0.166667; }
+      .virtual-hero:has(.lamp-proximity--2:hover) { --lamp-proximity: 0.333333; }
+      .virtual-hero:has(.lamp-proximity--3:hover) { --lamp-proximity: 0.500000; }
+      .virtual-hero:has(.lamp-proximity--4:hover) { --lamp-proximity: 0.666667; }
+      .virtual-hero:has(.lamp-proximity--5:hover) { --lamp-proximity: 0.833333; }
+      .virtual-hero:has(.lamp-proximity--6:hover) { --lamp-proximity: 1.000000; }
 
 
       @keyframes visual-lamp-rise {
         to {
-          transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%) scale(calc(1 + var(--lamp-proximity) * 0.15));
+        }
+      }
+
+
+      @keyframes visual-lamp-on {
+        to {
+          color: #fff;
         }
       }
 
@@ -94,7 +134,7 @@
       }
 
 
-      .virtual-hero :is(#L1, #L2, #L3, #L4, #L5, #L6, #L7) {
+      .virtual-hero .hero-background-art path:is(#L1, #L2, #L3, #L4, #L5, #L6, #L7) {
         opacity: 0;
         transform-box: view-box;
         transform: rotate(var(--ray-angle, 0deg)) scaleX(0) rotate(calc(0deg - var(--ray-angle, 0deg)));
@@ -140,7 +180,7 @@
       @keyframes visual-rays-on {
         to {
           opacity: 1;
-          transform: rotate(var(--ray-angle, 0deg)) scaleX(1) rotate(calc(0deg - var(--ray-angle, 0deg)));
+          transform: rotate(var(--ray-angle, 0deg)) scaleX(calc(1 + var(--lamp-proximity) * 1.2)) rotate(calc(0deg - var(--ray-angle, 0deg)));
         }
       }
 
@@ -223,6 +263,12 @@
             <path id="L5" fill="#000000" stroke="none" d="M 730.414001 253.388 L 800.385071 183.380981 C 811.251038 172.549988 811.251038 154.97699 800.385071 144.145996 C 789.591064 133.278992 771.980042 133.278992 761.107971 144.145996 L 692.090027 213.158997 C 706.047974 225.281982 718.784973 238.822998 730.414001 253.385986 Z"/>
             <path id="L6" fill="#000000" stroke="none" d="M 894.563049 410.744995 L 795.920044 410.744995 C 797.520081 423.708984 798.55304 436.827026 798.55304 450.228027 C 798.55304 455.677979 798.438049 460.980957 798.248047 466.260986 L 894.563049 466.260986 C 909.895081 466.260986 922.285034 453.832031 922.285034 438.504028 C 922.285034 423.176025 909.895081 410.747009 894.563049 410.747009 Z"/>
             <path id="L7" fill="#000000" stroke="none" d="M 745.017029 638.262024 C 733.731018 654.809021 721.799011 669.10498 710.322021 682.031982 L 761.109009 732.861023 C 771.977051 743.692017 789.592041 743.692017 800.386047 732.861023 C 811.252075 721.994019 811.252075 704.45697 800.386047 693.585999 L 745.015991 638.262024 Z"/>
+          <circle class="lamp-proximity lamp-proximity--1" cx="506" cy="450" r="960"/>
+          <circle class="lamp-proximity lamp-proximity--2" cx="506" cy="450" r="800"/>
+          <circle class="lamp-proximity lamp-proximity--3" cx="506" cy="450" r="640"/>
+          <circle class="lamp-proximity lamp-proximity--4" cx="506" cy="450" r="480"/>
+          <circle class="lamp-proximity lamp-proximity--5" cx="506" cy="450" r="320"/>
+          <circle class="lamp-proximity lamp-proximity--6" cx="506" cy="450" r="160"/>
         </svg>
         <div class="section-wrap">
           <p class="eyebrow">Light, space &amp; moving images</p>

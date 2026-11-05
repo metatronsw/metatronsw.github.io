@@ -80,19 +80,51 @@
       }
 
 
+      .metal-current--hover {
+        animation: none;
+      }
+
+      .metal-current--hover > use {
+        stroke-dashoffset: calc(var(--metal-current-offset) - var(--trail-offset));
+      }
+
+      .virtual-hero:is(:hover, :focus-within) .metal-current--hover {
+        animation: metal-current-hover 4s linear forwards;
+      }
+
+
+      @keyframes metal-current-hover {
+        0% {
+          --metal-current-offset: -65;
+          opacity: 0;
+        }
+        4% {
+          opacity: 0.25;
+        }
+        96% {
+          --metal-current-offset: 1000;
+          opacity: 0.25;
+        }
+        100% {
+          --metal-current-offset: 1000;
+          opacity: 0;
+        }
+      }
+
+
       @keyframes metal-current {
         0% {
           --metal-current-offset: 65;
           opacity: 0;
         }
-        1% {
+        2% {
           opacity: 0.5;
         }
-        24% {
+        48% {
           --metal-current-offset: -1000;
           opacity: 0.5;
         }
-        25%, 100% {
+        50%, 100% {
           --metal-current-offset: -1000;
           opacity: 0;
         }
@@ -128,6 +160,32 @@
             <use class="metal-fill" href="#realtime-metal-outline"/>
             <!-- Short trail segments fade from a bright head to a transparent tail. -->
             <g class="metal-current">
+              <use href="#realtime-metal-outline" style="--trail-offset: 0;" opacity="1.000"/>
+              <use href="#realtime-metal-outline" style="--trail-offset: 3;" opacity="0.957"/>
+              <use href="#realtime-metal-outline" style="--trail-offset: 6;" opacity="0.913"/>
+              <use href="#realtime-metal-outline" style="--trail-offset: 9;" opacity="0.870"/>
+              <use href="#realtime-metal-outline" style="--trail-offset: 12;" opacity="0.826"/>
+              <use href="#realtime-metal-outline" style="--trail-offset: 15;" opacity="0.783"/>
+              <use href="#realtime-metal-outline" style="--trail-offset: 18;" opacity="0.739"/>
+              <use href="#realtime-metal-outline" style="--trail-offset: 21;" opacity="0.696"/>
+              <use href="#realtime-metal-outline" style="--trail-offset: 24;" opacity="0.652"/>
+              <use href="#realtime-metal-outline" style="--trail-offset: 27;" opacity="0.609"/>
+              <use href="#realtime-metal-outline" style="--trail-offset: 30;" opacity="0.565"/>
+              <use href="#realtime-metal-outline" style="--trail-offset: 33;" opacity="0.522"/>
+              <use href="#realtime-metal-outline" style="--trail-offset: 36;" opacity="0.478"/>
+              <use href="#realtime-metal-outline" style="--trail-offset: 39;" opacity="0.435"/>
+              <use href="#realtime-metal-outline" style="--trail-offset: 42;" opacity="0.391"/>
+              <use href="#realtime-metal-outline" style="--trail-offset: 45;" opacity="0.348"/>
+              <use href="#realtime-metal-outline" style="--trail-offset: 48;" opacity="0.304"/>
+              <use href="#realtime-metal-outline" style="--trail-offset: 51;" opacity="0.261"/>
+              <use href="#realtime-metal-outline" style="--trail-offset: 54;" opacity="0.217"/>
+              <use href="#realtime-metal-outline" style="--trail-offset: 57;" opacity="0.174"/>
+              <use href="#realtime-metal-outline" style="--trail-offset: 60;" opacity="0.130"/>
+              <use href="#realtime-metal-outline" style="--trail-offset: 63;" opacity="0.087"/>
+              <use href="#realtime-metal-outline" style="--trail-offset: 66;" opacity="0.043"/>
+              <use href="#realtime-metal-outline" style="--trail-offset: 69;" opacity="0.000"/>
+            </g>
+            <g class="metal-current metal-current--hover">
               <use href="#realtime-metal-outline" style="--trail-offset: 0;" opacity="1.000"/>
               <use href="#realtime-metal-outline" style="--trail-offset: 3;" opacity="0.957"/>
               <use href="#realtime-metal-outline" style="--trail-offset: 6;" opacity="0.913"/>
