@@ -1,7 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 38 38">
-  <rect width="38" height="38" rx="12" fill="#0e4f79" />
-
-  <text x="19" y="26" fill="#fff" text-anchor="middle"
-    font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
-    font-size="19.2" font-weight="700">M</text>
+    <path id="bg" fill="#0e4f79" stroke="none" d="M 12 0 L 26 0 C 32.627419 0 38 5.372581 38 12 L 38 26 C 38 32.627419 32.627419 38 26 38 L 12 38 C 5.372583 38 0 32.627419 0 26 L 0 12 C -0 5.372581 5.372583 0 12 0 Z"/>
+    <path id="M" fill="#ffffff" fill-rule="evenodd" stroke="none" d="M 9.89027 11 L 14.58822 11 L 18.976152 22.995272 L 19.047695 22.995272 L 23.387934 11 L 28.109728 11 L 28.109728 27.884001 L 25.128796 27.884001 L 25.128796 14.314795 L 25.081102 14.314795 L 19.953897 27.884001 L 17.855322 27.884001 L 12.79966 14.314795 L 12.751966 14.314795 L 12.751966 27.884001 L 9.89027 27.884001 Z"/>
 </svg>
