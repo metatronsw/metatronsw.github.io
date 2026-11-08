@@ -1,0 +1,1336 @@
+<!doctype html>
+<html lang="en" class="site-page">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Real-time 3D for virtual studios, interactive broadcasts, weather graphics, projection planning and previsualization.">
+    <title>Real-time experiences — Metatron Software</title>
+    <link rel="icon" type="image/svg+xml" href="../main/favicon.svg">
+    <link rel="stylesheet" href="../style.css">
+    <style>
+      @property --metal-current-offset {
+        syntax: "<number>";
+        inherits: true;
+        initial-value: 65;
+      }
+      .virtual-hero .metal-art {
+        opacity: 1;
+      }
+      .metal-outline {
+        fill: none;
+        stroke: #1674ad;
+        stroke-width: 2;
+        stroke-linejoin: round;
+        stroke-dasharray: 1000 1000;
+        stroke-dashoffset: 1000;
+        opacity: 0.25;
+        animation: metal-draw-forward 1s linear forwards,
+          metal-outline-out 200ms ease-out 1.5s forwards;
+      }
+      .metal-outline--reverse {
+        stroke-dashoffset: -1000;
+        animation-name: metal-draw-reverse, metal-outline-out;
+      }
+      @keyframes metal-draw-forward {
+        to { stroke-dashoffset: 500; }
+      }
+      @keyframes metal-draw-reverse {
+        to { stroke-dashoffset: -500; }
+      }
+      @keyframes metal-outline-out {
+        to { opacity: 0; }
+      }
+      .metal-fill {
+        fill: #000;
+        opacity: 0;
+        animation: metal-fill-in 500ms ease-out 1s forwards;
+      }
+      @keyframes metal-fill-in {
+        to { opacity: 0.1; }
+      }
+      .metal-current {
+        fill: none;
+        stroke: #1674ad;
+        stroke-width: 3;
+        stroke-linejoin: round;
+        opacity: 0;
+        filter: drop-shadow(0 0 4px #71cfff);
+        animation: metal-current 8s linear 8s infinite;
+      }
+      .metal-current > use {
+        stroke-dasharray: 3.1 996.9;
+        stroke-dashoffset: calc(var(--metal-current-offset) + var(--trail-offset));
+      }
+      .metal-current--hover {
+        animation: none;
+      }
+      .metal-current--hover > use {
+        stroke-dashoffset: calc(var(--metal-current-offset) - var(--trail-offset));
+      }
+      .virtual-hero:is(:hover, :focus-within) .metal-current--hover {
+        animation: metal-current-hover 4s linear forwards;
+      }
+      @keyframes metal-current-hover {
+        0% {
+          --metal-current-offset: -65;
+          opacity: 0;
+        }
+        4% {
+          opacity: 0.25;
+        }
+        96% {
+          --metal-current-offset: 1000;
+          opacity: 0.25;
+        }
+        100% {
+          --metal-current-offset: 1000;
+          opacity: 0;
+        }
+      }
+      @keyframes metal-current {
+        0% {
+          --metal-current-offset: 65;
+          opacity: 0;
+        }
+        2% {
+          opacity: 0.5;
+        }
+        48% {
+          --metal-current-offset: -1000;
+          opacity: 0.5;
+        }
+        50%, 100% {
+          --metal-current-offset: -1000;
+          opacity: 0;
+        }
+      }
+      .level-design {
+        --ink: #edf3f8;
+        --muted: #a8b8c7;
+        --line: #293746;
+        --shadow: 0 8px 18px rgb(0 0 0 / 35%);
+        color-scheme: dark;
+        color: var(--ink);
+        background: #101923;
+      }
+      .level-design .studio-grid {
+        --gallery-columns: 4;
+        --gallery-mobile-columns: 2;
+        --gallery-mobile-gap: 1.5rem 0.8rem;
+      }
+      .level-design .map-preview {
+        overflow: hidden;
+      }
+      .level-design .map-preview > .map-preview-ai {
+        position: absolute;
+        inset: 0;
+        height: 100%;
+        object-fit: cover;
+        opacity: 1;
+        transition: opacity 1s linear 0s;
+      }
+      .level-design .map-preview:is(:hover, :focus-visible) > .map-preview-ai {
+        opacity: 0;
+      }
+    </style>
+
+    <link rel="canonical" href="https://metatronsw.github.io/realtime/">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Metatron Software">
+    <meta property="og:title" content="Real-time experiences — Metatron Software">
+    <meta property="og:description" content="Real-time 3D for virtual studios, interactive broadcasts, weather graphics, projection planning and previsualization.">
+    <meta property="og:url" content="https://metatronsw.github.io/realtime/">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Real-time experiences — Metatron Software">
+    <meta name="twitter:description" content="Real-time 3D for virtual studios, interactive broadcasts, weather graphics, projection planning and previsualization.">
+  </head>
+  
+  <body class="site-effects">
+    <header class="site-header menu-header">
+      <a class="brand" href="../index.html" aria-label="Metatron Software home">
+        <img class="brand-mark" src="../main/metatron.svg" alt="" aria-hidden="true" width="38" height="38">
+        <span>Metatron <strong>Software</strong></span>
+      </a>
+      <nav aria-label="Main navigation">
+        <a href="../app/index.html">Develop</a>
+        <a href="../about.html">About</a>
+        <a href="../realtime/index.html" aria-current="page">Realtime</a>
+        <a href="../design/index.html">Design</a>
+        <a href="../visual/index.html">Visual</a>
+        <a href="../contact.html">Contact</a>
+      </nav>
+      <a class="sitemap-menu" href="../sitemap.html" aria-label="Sitemap" title="Sitemap">
+        <img src="../main/menu.svg" alt="" width="24" height="24">
+      </a>
+    </header>
+    <main>
+
+      <section class="virtual-hero hero-with-art">
+        <div class="section-wrap">
+          <svg class="hero-background-art metal-art hero-parallax" width="720" height="583" viewBox="0 0 720 583" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" style="--hero-art-width: 600px; --hero-art-left: 110%; --hero-art-height: auto; --hero-art-top: -50%;">
+            <defs>
+              <path id="realtime-metal-outline" pathLength="1000" d="M 0 -0.058838 L 272.470581 333.117645 L 272.470581 88.882355 L 720 583 L 604.235291 583 L 362.823517 327.470581 L 360 583 L 90.352943 249.823517 L 90.352943 583 L 0 583 Z"/>
+            </defs>
+            <use class="metal-outline" href="#realtime-metal-outline"/>
+            <use class="metal-outline metal-outline--reverse" href="#realtime-metal-outline"/>
+            <use class="metal-fill" href="#realtime-metal-outline"/>
+            <!-- Short trail segments fade from a bright head to a transparent tail. -->
+            <g class="metal-current">
+              <use href="#realtime-metal-outline" style="--trail-offset: 0;" opacity="1.000"/>
+              <use href="#realtime-metal-outline" style="--trail-offset: 3;" opacity="0.957"/>
+              <use href="#realtime-metal-outline" style="--trail-offset: 6;" opacity="0.913"/>
+              <use href="#realtime-metal-outline" style="--trail-offset: 9;" opacity="0.870"/>
+              <use href="#realtime-metal-outline" style="--trail-offset: 12;" opacity="0.826"/>
+              <use href="#realtime-metal-outline" style="--trail-offset: 15;" opacity="0.783"/>
+              <use href="#realtime-metal-outline" style="--trail-offset: 18;" opacity="0.739"/>
+              <use href="#realtime-metal-outline" style="--trail-offset: 21;" opacity="0.696"/>
+              <use href="#realtime-metal-outline" style="--trail-offset: 24;" opacity="0.652"/>
+              <use href="#realtime-metal-outline" style="--trail-offset: 27;" opacity="0.609"/>
+              <use href="#realtime-metal-outline" style="--trail-offset: 30;" opacity="0.565"/>
+              <use href="#realtime-metal-outline" style="--trail-offset: 33;" opacity="0.522"/>
+              <use href="#realtime-metal-outline" style="--trail-offset: 36;" opacity="0.478"/>
+              <use href="#realtime-metal-outline" style="--trail-offset: 39;" opacity="0.435"/>
+              <use href="#realtime-metal-outline" style="--trail-offset: 42;" opacity="0.391"/>
+              <use href="#realtime-metal-outline" style="--trail-offset: 45;" opacity="0.348"/>
+              <use href="#realtime-metal-outline" style="--trail-offset: 48;" opacity="0.304"/>
+              <use href="#realtime-metal-outline" style="--trail-offset: 51;" opacity="0.261"/>
+              <use href="#realtime-metal-outline" style="--trail-offset: 54;" opacity="0.217"/>
+              <use href="#realtime-metal-outline" style="--trail-offset: 57;" opacity="0.174"/>
+              <use href="#realtime-metal-outline" style="--trail-offset: 60;" opacity="0.130"/>
+              <use href="#realtime-metal-outline" style="--trail-offset: 63;" opacity="0.087"/>
+              <use href="#realtime-metal-outline" style="--trail-offset: 66;" opacity="0.043"/>
+              <use href="#realtime-metal-outline" style="--trail-offset: 69;" opacity="0.000"/>
+            </g>
+            <g class="metal-current metal-current--hover">
+              <use href="#realtime-metal-outline" style="--trail-offset: 0;" opacity="1.000"/>
+              <use href="#realtime-metal-outline" style="--trail-offset: 3;" opacity="0.957"/>
+              <use href="#realtime-metal-outline" style="--trail-offset: 6;" opacity="0.913"/>
+              <use href="#realtime-metal-outline" style="--trail-offset: 9;" opacity="0.870"/>
+              <use href="#realtime-metal-outline" style="--trail-offset: 12;" opacity="0.826"/>
+              <use href="#realtime-metal-outline" style="--trail-offset: 15;" opacity="0.783"/>
+              <use href="#realtime-metal-outline" style="--trail-offset: 18;" opacity="0.739"/>
+              <use href="#realtime-metal-outline" style="--trail-offset: 21;" opacity="0.696"/>
+              <use href="#realtime-metal-outline" style="--trail-offset: 24;" opacity="0.652"/>
+              <use href="#realtime-metal-outline" style="--trail-offset: 27;" opacity="0.609"/>
+              <use href="#realtime-metal-outline" style="--trail-offset: 30;" opacity="0.565"/>
+              <use href="#realtime-metal-outline" style="--trail-offset: 33;" opacity="0.522"/>
+              <use href="#realtime-metal-outline" style="--trail-offset: 36;" opacity="0.478"/>
+              <use href="#realtime-metal-outline" style="--trail-offset: 39;" opacity="0.435"/>
+              <use href="#realtime-metal-outline" style="--trail-offset: 42;" opacity="0.391"/>
+              <use href="#realtime-metal-outline" style="--trail-offset: 45;" opacity="0.348"/>
+              <use href="#realtime-metal-outline" style="--trail-offset: 48;" opacity="0.304"/>
+              <use href="#realtime-metal-outline" style="--trail-offset: 51;" opacity="0.261"/>
+              <use href="#realtime-metal-outline" style="--trail-offset: 54;" opacity="0.217"/>
+              <use href="#realtime-metal-outline" style="--trail-offset: 57;" opacity="0.174"/>
+              <use href="#realtime-metal-outline" style="--trail-offset: 60;" opacity="0.130"/>
+              <use href="#realtime-metal-outline" style="--trail-offset: 63;" opacity="0.087"/>
+              <use href="#realtime-metal-outline" style="--trail-offset: 66;" opacity="0.043"/>
+              <use href="#realtime-metal-outline" style="--trail-offset: 69;" opacity="0.000"/>
+            </g>
+          </svg>
+          <p class="eyebrow">Design &amp; maintenance</p>
+          <h1>Realtime solutions</h1>
+          <p>Real-time 3D rendering and other responsive techniques let users adapt an experience on the spot as needs evolve. Changes can be made without reprogramming the entire system, re-editing footage or rendering it again.</p>
+        </div>
+      </section>
+
+      <nav class="section-wrap section-nav" aria-label="Realtime sections">
+        <a class="text-link" href="#studios">Virtual studios</a>
+        <a class="text-link" href="#interactive-installations">Interactive installations</a>
+        <a class="text-link" href="#visuals-projection">Visuals &amp; Projection</a>
+        <a class="text-link" href="#game-levels">Game maps</a>
+      </nav>
+
+
+      <div class="section-wrap intro-grid">
+
+        <section class="intro-card">
+          <p class="eyebrow">Visual quality</p>
+          <h2>Close to the final image</h2>
+          <p>Real-time computer graphics cannot always match the details and complated imagery produced by a render farm over thousands of hours. With the right techniques, though, the final result can come remarkably close.</p>
+        </section>
+
+        <section class="intro-card">
+          <p class="eyebrow">Fast iteration</p>
+          <h2>Ideas, brought to life</h2>
+          <p>This approach is hard to beat when you need to assemble a compelling visualisation quickly from existing modules and a simple blue print, or bring a creator’s spontaneous idea to life during theatre rehearsals.</p>
+        </section>
+
+        <section class="intro-card intro-card-wide">
+          <p class="eyebrow">Our experience</p>
+          <h2>Many formats, one creative toolkit</h2>
+          <p>Metatron Software has created a wide range of projects: virtual TV studios, theatre productions, interactive installations and art projects—from architectural projections to party visuals.</p>
+        </section>
+      </div>
+
+      <section class="section-wrap project-section project-section--compact-mobile" id="studios">
+        <header class="project-heading">
+          <p class="eyebrow">Broadcast &amp; interactive</p>
+          <h2>Virtual studios</h2>
+          <p>Real-time spaces and backgrounds for broadcast and interactive experiences. These environments can be dynamic, modular and easy to reconfigure, built in Unreal Engine, Unity, Aximmetry or a custom solution powered by a proprietary 3D engine.</p>
+          <p>We can create a complex show and camera control system tailored to your needs, with a simple custom control panel for operators. They can run the production without understanding the entire system in depth. More advanced users can even change a scene while it is running, without restarting it or waiting through a lengthy rebuild.</p>
+        </header>
+        <div class="project-content">
+
+          <div class="content-block content-block--images studio-grid">
+            <figure>
+              <button type="button" popovertarget="view-talk_show_1" aria-label="Enlarge Talk Show 1"><img src="thumb/thm_talk_show_1.webp" alt="Talk Show 1 virtual studio scene" width="380" height="214" decoding="async"></button>
+              <figcaption>Talk Show 1</figcaption>
+            </figure>
+            <figure>
+              <button type="button" popovertarget="view-talk_show_2" aria-label="Enlarge Talk Show 2"><img src="thumb/thm_talk_show_2.webp" alt="Talk Show 2 virtual studio scene" width="380" height="214" decoding="async"></button>
+              <figcaption>Talk Show 2</figcaption>
+            </figure>
+            <figure>
+              <button type="button" popovertarget="view-talk_show_3" aria-label="Enlarge Talk Show 3"><img src="thumb/thm_talk_show_3.webp" alt="Talk Show 3 virtual studio scene" width="380" height="214" decoding="async"></button>
+              <figcaption>Talk Show 3</figcaption>
+            </figure>
+            <figure>
+              <button type="button" popovertarget="view-news_room_1" aria-label="Enlarge News Room 1"><img src="thumb/thm_news_room_1.webp" alt="News Room 1 virtual studio scene" width="380" height="214" loading="lazy" decoding="async"></button>
+              <figcaption>News Room 1</figcaption>
+            </figure>
+            <figure>
+              <button type="button" popovertarget="view-news_room_2" aria-label="Enlarge News Room 2"><img src="thumb/thm_news_room_2.webp" alt="News Room 2 virtual studio scene" width="380" height="214" loading="lazy" decoding="async"></button>
+              <figcaption>News Room 2</figcaption>
+            </figure>
+            <figure>
+              <button type="button" popovertarget="view-news_room_3" aria-label="Enlarge News Room 3"><img src="thumb/thm_news_room_3.webp" alt="News Room 3 virtual studio scene" width="380" height="214" loading="lazy" decoding="async"></button>
+              <figcaption>News Room 3</figcaption>
+            </figure>
+            <figure>
+              <button type="button" popovertarget="view-sport_studio_1" aria-label="Enlarge Sport Studio 1"><img src="thumb/thm_sport_studio_1.webp" alt="Sport Studio 1 virtual studio scene" width="380" height="214" loading="lazy" decoding="async"></button>
+              <figcaption>Sport Studio 1</figcaption>
+            </figure>
+            <figure>
+              <button type="button" popovertarget="view-sport_studio_2" aria-label="Enlarge Sport Studio 2"><img src="thumb/thm_sport_studio_2.webp" alt="Sport Studio 2 virtual studio scene" width="380" height="214" loading="lazy" decoding="async"></button>
+              <figcaption>Sport Studio 2</figcaption>
+            </figure>
+            <figure>
+              <button type="button" popovertarget="view-sport_studio_3" aria-label="Enlarge Sport Studio 3"><img src="thumb/thm_sport_studio_3.webp" alt="Sport Studio 3 virtual studio scene" width="380" height="214" loading="lazy" decoding="async"></button>
+              <figcaption>Sport Studio 3</figcaption>
+            </figure>
+          </div>
+
+          <div class="content-block content-block--video">
+            <div class="showcase">
+              <div>
+                <div class="video-frame">
+                  <iframe src="https://www.youtube-nocookie.com/embed/SfnKHMiu8Ic" title="Aximmetry Software &amp; Scenes" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+               
+              </div>
+              <div class="section-heading">
+                <div>
+                  <h3>Showreel from the last few years</h3>
+                  <p>These virtual spaces use Aximmetry software for real-time rendering. They were created using 3ds Max and Lua scripting.</p>
+						<a class="video-link" href="https://www.youtube.com/watch?v=SfnKHMiu8Ic" target="_blank" rel="noopener">Watch on YouTube ↗</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="content-block content-block--images studio-grid" id="studio-gallery-previous">
+            <figure>
+              <button type="button" popovertarget="view-actual_news" aria-label="Enlarge Actual News"><img src="thumb/thm_actual_news.webp" alt="Actual News virtual studio scene" width="380" height="214" loading="lazy" decoding="async"></button>
+              <figcaption>Actual News</figcaption>
+            </figure>
+            <figure>
+              <button type="button" popovertarget="view-hirtv_azsia" aria-label="Enlarge HírTV Ázsia"><img src="thumb/thm_hirtv_azsia.webp" alt="HírTV Ázsia virtual studio scene" width="380" height="214" loading="lazy" decoding="async"></button>
+              <figcaption>HírTV Ázsia</figcaption>
+            </figure>
+            <figure>
+              <button type="button" popovertarget="view-hirtv_felfedezo" aria-label="Enlarge HírTV Felfedező"><img src="thumb/thm_hirtv_felfedezo.webp" alt="HírTV Felfedező virtual studio scene" width="380" height="214" loading="lazy" decoding="async"></button>
+              <figcaption>HírTV Felfedező</figcaption>
+            </figure>
+            <figure>
+              <button type="button" popovertarget="view-hirtv_hirvilag" aria-label="Enlarge HírTV Hírvilág"><img src="thumb/thm_hirtv_hirvilag.webp" alt="HírTV Hírvilág virtual studio scene" width="380" height="214" loading="lazy" decoding="async"></button>
+              <figcaption>HírTV Hírvilág</figcaption>
+            </figure>
+            <figure>
+              <button type="button" popovertarget="view-hirtv_naprol_napra" aria-label="Enlarge HírTV Napról Napra"><img src="thumb/thm_hirtv_naprol_napra.webp" alt="HírTV Napról Napra virtual studio scene" width="380" height="214" loading="lazy" decoding="async"></button>
+              <figcaption>HírTV Napról Napra</figcaption>
+            </figure>
+            <figure>
+              <button type="button" popovertarget="view-mtv_kekfeny_studio" aria-label="Enlarge MTV Kékfény Stúdió"><img src="thumb/thm_mtv_kekfeny_studio.webp" alt="MTV Kékfény Stúdió virtual studio scene" width="380" height="214" loading="lazy" decoding="async"></button>
+              <figcaption>MTV Kékfény Stúdió</figcaption>
+            </figure>
+            <figure>
+              <button type="button" popovertarget="view-telepaks_hirado" aria-label="Enlarge Telepaks Hiradó"><img src="thumb/thm_telepaks_hirado.webp" alt="Telepaks Hiradó virtual studio scene" width="380" height="214" loading="lazy" decoding="async"></button>
+              <figcaption>Telepaks Hiradó</figcaption>
+            </figure>
+            <figure>
+              <button type="button" popovertarget="view-telepaks_talk_room" aria-label="Enlarge Telepaks Talk Room"><img src="thumb/thm_telepaks_talk_room.webp" alt="Telepaks Talk Room virtual studio scene" width="380" height="214" loading="lazy" decoding="async"></button>
+              <figcaption>Telepaks Talk Room</figcaption>
+            </figure>
+            <figure>
+              <button type="button" popovertarget="view-telepaks_talk_room_2" aria-label="Enlarge Telepaks Talk Room 2"><img src="thumb/thm_telepaks_talk_room_2.webp" alt="Telepaks Talk Room 2 virtual studio scene" width="380" height="214" loading="lazy" decoding="async"></button>
+              <figcaption>Telepaks Talk Room 2</figcaption>
+            </figure>
+          </div>
+
+          <div class="content-block content-block--text gallery-intro">
+            <p class="eyebrow">INTERACTIVE SHOWS</p>
+            <h3>Call-in games and quiz shows</h3>
+            <p>In these formats, the host and contestants, alongside with the operator, actively take part in controlling how the show unfolds.</p>
+          </div>
+
+          <div class="content-block content-block--images studio-grid" id="scenes">
+            <figure>
+              <button type="button" popovertarget="view-telemedia_1" aria-label="Enlarge Telemédia 1"><img src="thumb/thm_telemedia_1.webp" alt="Telemédia 1" width="380" height="214" loading="lazy" decoding="async"></button>
+              <figcaption>Telemédia 1</figcaption>
+            </figure>
+            <figure>
+              <button type="button" popovertarget="view-telemedia_2" aria-label="Enlarge Telemédia 2"><img src="thumb/thm_telemedia_2.webp" alt="Telemédia 2" width="380" height="214" loading="lazy" decoding="async"></button>
+              <figcaption>Telemédia 2</figcaption>
+            </figure>
+            <figure>
+              <button type="button" popovertarget="view-torus_studio" aria-label="Enlarge Torus Studio"><img src="thumb/thm_torus_studio.webp" alt="Torus Studio" width="380" height="214" loading="lazy" decoding="async"></button>
+              <figcaption>Torus Studio</figcaption>
+            </figure>
+          </div>
+
+          <div class="content-block content-block--text gallery-intro">
+            <p class="eyebrow">WEATHER FORECAST</p>
+            <h3>Modular system for changing needs</h3>
+            <p>In addition to the core weather presentation modules, many small add-ons can be incorporated into the scenes. These require little advance preparation and custom settings can be configured just minutes before a broadcast.</p>
+          </div>
+
+          <div class="content-block content-block--images studio-grid" id="weather-images">
+            <figure>
+              <button type="button" popovertarget="view-weather_1" aria-label="Enlarge Weather 1"><img src="thumb/thm_weather_1.webp" alt="Weather 1" width="380" height="214" loading="lazy" decoding="async"></button>
+              <figcaption>Weather 1</figcaption>
+            </figure>
+            <figure>
+              <button type="button" popovertarget="view-weather_2" aria-label="Enlarge Weather 2"><img src="thumb/thm_weather_2.webp" alt="Weather 2" width="380" height="214" loading="lazy" decoding="async"></button>
+              <figcaption>Weather 2</figcaption>
+            </figure>
+            <figure>
+              <button type="button" popovertarget="view-weather_3" aria-label="Enlarge Weather 3"><img src="thumb/thm_weather_3.webp" alt="Weather 3" width="380" height="214" loading="lazy" decoding="async"></button>
+              <figcaption>Weather 3</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-wrap project-section project-section--compact-mobile" id="interactive-installations">
+        <header class="project-heading">
+          <p class="eyebrow">Interactive experiences</p>
+          <h2>Interactive installations</h2>
+          <p>The first Regional Digital Summit took place on 17–18 November 2016 at <a href="https://millenaris.hu/latogatoknak/" target="_blank" rel="noopener">Millenáris Park</a> in Budapest.</p>
+          <p>The event explored the challenges of the digital economy and society across the V4 countries, Austria and Germany, with a focus on autonomous vehicles, Industry 4.0, blockchain technology and fintech, and startup ecosystems.</p>
+          <p>Magyar Telekom and Ericsson Hungary demonstrated download speeds of 1,200 Mbps using 4G+ technology.</p>
+          <p>For this special occasion, <a href="https://www.t-systems.com/" target="_blank" rel="noopener">T-Systems</a> commissioned an interactive information desk with a three-screen panorama and an additional touchscreen. The presentation ran automatically, while visitors could use the controls at any time to switch topics or look freely around the virtual environment as the camera moved through it.</p>
+        </header>
+        <div class="project-content">
+
+          <div class="content-block content-block--images studio-grid" id="interactive-images">
+            <figure>
+              <button type="button" popovertarget="view-t-system_1" aria-label="Enlarge T-System 1"><img src="thumb/thm_t-system_1.webp" alt="T-System 1" width="380" height="214" loading="lazy" decoding="async"></button>
+              <figcaption>T-System 1</figcaption>
+            </figure>
+            <figure>
+              <button type="button" popovertarget="view-t-system_2" aria-label="Enlarge T-System 2"><img src="thumb/thm_t-system_2.webp" alt="T-System 2" width="380" height="214" loading="lazy" decoding="async"></button>
+              <figcaption>T-System 2</figcaption>
+            </figure>
+            <figure>
+              <button type="button" popovertarget="view-t-system_3" aria-label="Enlarge T-System 3"><img src="thumb/thm_t-system_3.webp" alt="T-System 3" width="380" height="214" loading="lazy" decoding="async"></button>
+              <figcaption>T-System 3</figcaption>
+            </figure>
+          </div>
+
+          <section class="content-block showcase" aria-labelledby="t-system-panorama-heading">
+            <div>
+              <div class="video-frame">
+                <iframe src="https://www.youtube-nocookie.com/embed/eZVi5YfPVOY" title="T-System touch-screen panorama installation" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              </div>
+            </div>
+            <div class="section-heading">
+              <div>
+                <h3 id="t-system-panorama-heading">Touch-screen panorama installation</h3>
+                <p>The installation introduced the then-emerging concept of the Internet of Things (IoT) and its potential applications through a detailed, visually engaging presentation. It was later exhibited at numerous locations across Hungary, where visitors could explore and try it for themselves.</p>
+					 <a class="video-link" href="https://www.youtube.com/watch?v=eZVi5YfPVOY" target="_blank" rel="noopener">Watch on YouTube ↗</a>
+              </div>
+            </div>
+          </section>
+        </div>
+      </section>
+
+		
+		<section class="about">
+			<div class="section-wrap about-inner">
+				<div>
+					<p class="eyebrow">Custom projects</p>
+					<h2>Bring your virtual space to life</h2>
+				</div>
+				<div class="about-copy">
+					<p>Have an idea for a virtual studio, a real-time scene or an interactive installation? Contact us to discuss your requirements.</p>
+					<a class="text-link" href="mailto:softwaremetatron@gmail.com">Get in touch →</a>
+				</div>
+			</div>
+		</section>
+		
+		
+      <section class="section-wrap project-section project-section--compact-mobile" id="visuals-projection">
+        <header class="project-heading">
+          <p class="eyebrow">Art &amp; events</p>
+          <h2>Visuals &amp; Projection</h2>
+        </header>
+        <div class="project-content">
+
+          <div class="content-block content-block--text">
+            <p>Once a building projection site or event venue has been selected, a 3D model can be created quickly. This lets us check how the projected content will fit the target surfaces and appear from the intended viewing distance before expensive equipment is deployed. The technique makes the director’s or artist’s work much easier, allowing them to see their ideas take shape in a form close to the final result.</p>
+          </div>
+
+          <div class="content-block content-block--images studio-grid" id="visuals-images">
+            <figure>
+              <button type="button" popovertarget="view-pesti_vigado_1" aria-label="Enlarge Pesti Vígadó 1"><img src="thumb/thm_pesti_vigado_1.webp" alt="Pesti Vígadó 1" width="380" height="214" loading="lazy" decoding="async"></button>
+              <figcaption>Pesti Vígadó 1</figcaption>
+            </figure>
+            <figure>
+              <button type="button" popovertarget="view-pesti_vigado_2" aria-label="Enlarge Pesti Vígadó 2"><img src="thumb/thm_pesti_vigado_2.webp" alt="Pesti Vígadó 2" width="380" height="214" loading="lazy" decoding="async"></button>
+              <figcaption>Pesti Vígadó 2</figcaption>
+            </figure>
+            <figure>
+              <button type="button" popovertarget="view-pesti_vigado_3" aria-label="Enlarge Pesti Vígadó 3"><img src="thumb/thm_pesti_vigado_3.webp" alt="Pesti Vígadó 3" width="380" height="214" loading="lazy" decoding="async"></button>
+              <figcaption>Pesti Vígadó 3</figcaption>
+            </figure>
+            <figure>
+              <button type="button" popovertarget="view-operahaz_1" aria-label="Enlarge Operaház 1"><img src="thumb/thm_operahaz_1.webp" alt="Operaház 1" width="380" height="214" loading="lazy" decoding="async"></button>
+              <figcaption>Operaház 1</figcaption>
+            </figure>
+            <figure>
+              <button type="button" popovertarget="view-operahaz_2" aria-label="Enlarge Operaház 2"><img src="thumb/thm_operahaz_2.webp" alt="Operaház 2" width="380" height="214" loading="lazy" decoding="async"></button>
+              <figcaption>Operaház 2</figcaption>
+            </figure>
+            <figure>
+              <button type="button" popovertarget="view-operahaz_3" aria-label="Enlarge Operaház 3"><img src="thumb/thm_operahaz_3.webp" alt="Operaház 3" width="380" height="214" loading="lazy" decoding="async"></button>
+              <figcaption>Operaház 3</figcaption>
+            </figure>
+          </div>
+
+			 
+			 
+			 <section class="content-block showcase" aria-labelledby="ozora-dome-heading">
+				 <button type="button" class="video-frame image-preview" popovertarget="view-ozora-dome" aria-label="Enlarge O.Z.O.R.A. Festival - Chill Dome">
+					 <img src="thumb/thm_ozora-dome-previsual.webp" alt="Previsualisation of the O.Z.O.R.A. Festival Chill Dome interior with wooden beams, hanging decorations and colourful lighting" width="760" height="428" loading="lazy" decoding="async">
+				 </button>
+				 <div class="section-heading">
+					 <div>
+						 <h3 id="ozora-dome-heading">O.Z.O.R.A. Festival - Chill Dome</h3>
+						 <p>For complex, large-budget productions, we provided more than carefully composed still images: clients could explore the envisioned space in real time, complete with the proposed design elements. This allowed production teams, artists and clients to share suggestions and feedback together on the spot, with changes often implemented immediately, taking the presentation to a new level.</p>
+						 <a class="text-link" href="../visual/index.html">Explore our other projections <span aria-hidden="true">↗</span></a>
+					 </div>
+				 </div>
+			 </section>
+			 
+
+			 
+			 <div class="content-block content-block--text gallery-intro">
+				 <p class="eyebrow">PREVISUAL</p>
+				 <h3>Animated visualisations and concepts</h3>
+				 <p>Before committing to an expensive offline render, it can be useful to assemble a quick, low-cost scene to review ideas, camera movements and lighting angles with the performers. This can reduce the workload and avoid problems in post-production. With camera tracking and either background projection or an LED wall, footage can even be captured immediately, without a green screen or unreliable chroma keying.</p>
+			 </div>
+			 
+			 
+          <div class="content-block content-block--images studio-grid" id="previsual-images">
+            <figure>
+              <button type="button" popovertarget="view-aximmetry_studio" aria-label="Enlarge Aximmetry Studio"><img src="thumb/thm_aximmetry_studio.webp" alt="Aximmetry Studio" width="380" height="214" loading="lazy" decoding="async"></button>
+              <figcaption>Aximmetry Studio</figcaption>
+            </figure>
+				
+          
+				
+				<figure>
+					<button type="button" popovertarget="view-mtv-12-hero" aria-label="Enlarge MTV Tizenkét hős behind the scenes"><img src="thumb/thm_mtv-12-hero.webp" alt="MTV Tizenkét hős blue-screen studio with a presenter, tracked camera and monitor showing the virtual scene" width="760" height="428" loading="lazy" decoding="async"></button>
+					<figcaption>MTV Tizenkét hős — behind the scenes</figcaption>
+				</figure>
+				
+            <figure>
+              <button type="button" popovertarget="view-mtv_tizenket_hos" aria-label="Enlarge MTV Tizenkét hős"><img src="thumb/thm_mtv_tizenket_hos.webp" alt="MTV Tizenkét hős" width="380" height="214" loading="lazy" decoding="async"></button>
+              <figcaption>MTV Tizenkét hős</figcaption>
+            </figure>
+          
+            <figure>
+              <button type="button" popovertarget="view-zlense-promotion" aria-label="Enlarge zLense promotion"><img src="thumb/thm_zlense-promotion.webp" alt="zLense green-screen production with a performer and workstation showing the real-time composite" width="760" height="507" loading="lazy" decoding="async"></button>
+              <figcaption>zLense — promotion</figcaption>
+            </figure>
+            <figure>
+              <button type="button" popovertarget="view-zlense-promotion-2" aria-label="Enlarge zLense promotion 2"><img src="thumb/thm_zlense-promotion-2.webp" alt="zLense green-screen filming with a camera crane and a large projection showing the composited virtual set" width="760" height="507" loading="lazy" decoding="async"></button>
+              <figcaption>zLense — promotion 2</figcaption>
+            </figure>
+            <figure>
+              <button type="button" popovertarget="view-postedison-promo" aria-label="Enlarge Postedison promo 2015"><img src="thumb/thm_2015-postedison-promo.webp" alt="Postedison promotional shoot in 2015 with a green-screen backdrop, studio lighting and camera equipment" width="760" height="507" loading="lazy" decoding="async"></button>
+              <figcaption>Postedison — promo, 2015</figcaption>
+            </figure>
+			
+				
+				
+          </div>
+
+
+          <section class="content-block project-content" aria-labelledby="honfoglalo-heading">
+            <div class="content-block content-block--text gallery-intro">
+					<p class="eyebrow">TRIVIADOR</p>
+              <h3 id="honfoglalo-heading">Filming a live-action game show</h3>
+              <p>This pilot explored a live-action adaptation of <a href="https://honfoglalo.online" target="_blank" rel="noopener">Honfoglaló</a>, a game popular in Hungary and around the world.</p>
+              <p>Contestants followed the action on a green game map on the central table. In the camera feed, this surface was replaced with a detailed 3D landscape, with towers and other elements rising above the tabletop. Green-screen compositing combined the physical set with the virtual environment, while a real-time preview allowed the camera operator to frame each shot with the digital elements in view.</p>
+              <p>Unfortunately, the technical limitations of that time, particularly the early camera-tracking systems, prevented the project from progressing beyond the pilot.</p>
+            </div>
+
+
+            <div class="content-block content-block--images studio-grid">
+              <figure>
+                <button type="button" popovertarget="view-triviador-1" aria-label="Enlarge Honfoglaló virtual game table"><img src="thumb/thm_triviador-1.webp" alt="Honfoglaló contestants around a virtual 3D world map with towers rising above the table" width="760" height="428" loading="lazy" decoding="async"></button>
+                <figcaption>Honfoglaló — virtual game table</figcaption>
+              </figure>
+              <figure>
+                <button type="button" popovertarget="view-triviador-2" aria-label="Enlarge Honfoglaló virtual studio"><img src="thumb/thm_triviador-2.webp" alt="Honfoglaló contestants and host composited into a virtual studio with a 3D game table and armoured figures" width="760" height="428" loading="lazy" decoding="async"></button>
+                <figcaption>Honfoglaló — virtual studio</figcaption>
+              </figure>
+              <figure>
+                <button type="button" popovertarget="view-triviador-3" aria-label="Enlarge Honfoglaló green-screen filming"><img src="thumb/thm_triviador-3.webp" alt="Honfoglaló green-screen set with tracked cameras and a monitor showing the real-time composite" width="760" height="428" loading="lazy" decoding="async"></button>
+                <figcaption>Honfoglaló — green-screen filming</figcaption>
+              </figure>
+            </div>
+          </section>
+
+	 
+	 
+          <section class="content-block project-content" aria-labelledby="archive-spaces-heading">
+            <div class="content-block content-block--text gallery-intro">
+              <p class="eyebrow">OTHER</p>
+              <h3 id="archive-spaces-heading">3D spaces for TV and commercials</h3>
+              <p>A selection of earlier virtual sets and 3D environments from our archive, created for television programmes and advertising films.</p>
+		 </div>
+		 
+		 
+		 <div class="content-block content-block--images studio-grid">
+		 <figure>
+			 <button type="button" popovertarget="view-otp_reklam" aria-label="Enlarge OTP Reklám"><img src="thumb/thm_otp_reklam.webp" alt="OTP Reklám" width="380" height="214" loading="lazy" decoding="async"></button>
+			 <figcaption>OTP Reklám</figcaption>
+		 </figure>
+		 
+		 <figure>
+			 <button type="button" popovertarget="view-t-system_karacsony" aria-label="Enlarge T-System Karácsony"><img src="thumb/thm_t-system_karacsony.webp" alt="T-System Karácsony" width="380" height="214" loading="lazy" decoding="async"></button>
+			 <figcaption>T-System Karácsony</figcaption>
+		 </figure>
+		 
+		 
+		 <figure>
+			 <button type="button" popovertarget="view-blue_light" aria-label="Enlarge Blue Light"><img src="thumb/thm_blue_light.webp" alt="Blue Light" width="380" height="214" loading="lazy" decoding="async"></button>
+			 <figcaption>Blue Light</figcaption>
+		 </figure>
+	 </div>
+	 </section>
+        </div>
+
+      </section>
+
+      
+
+
+      <section class="level-design" aria-labelledby="level-design-title" id="game-levels">
+        <div class="section-wrap project-section">
+          <div class="project-heading">
+				 <p class="eyebrow">Level Design</p>
+            <h2 id="level-design-title">Echoes of Forgotten Worlds</h2>
+            <p>They say time makes distant memories more beautiful, especially when we enhance the photos with AI.</p>
+				<p>Game design and creating maps are my favourite hobbies. Please forgive me this little joke: the images appear like this at first, but they have been extended using AI. If I were to create these levels today, this is probably what they would look like. But everyone knows, even if they sometimes forget: the joy of gaming doesn't come from the visuals.</p>
+          </div>
+
+          <div class="studio-grid">
+            <figure>
+              <button type="button" class="map-preview" popovertarget="view-quake-2-contest" aria-label="Enlarge Quake II — Contest, original image">
+                <img src="maps/thumb/quake-2-contest.webp" alt="A Quake II arena with industrial structures and a rocky landscape" width="600" height="450" loading="lazy" decoding="async">
+                <img class="map-preview-ai" src="maps/thumb/quake-2-contest-ai.webp" alt="" aria-hidden="true" width="600" height="450" loading="lazy" decoding="async">
+              </button>
+              <figcaption>Quake II — Contest</figcaption>
+            </figure>
+
+            <figure>
+              <button type="button" class="map-preview" popovertarget="view-quake-2-splax" aria-label="Enlarge Quake II — Splax, original image">
+                <img src="maps/thumb/quake-2-splax.webp" alt="A Quake II level with stone architecture and raised walkways" width="600" height="450" loading="lazy" decoding="async">
+                <img class="map-preview-ai" src="maps/thumb/quake-2-splax-ai.webp" alt="" aria-hidden="true" width="600" height="450" loading="lazy" decoding="async">
+              </button>
+              <figcaption>Quake II — Splax</figcaption>
+            </figure>
+
+            <figure>
+              <button type="button" class="map-preview" popovertarget="view-quake-2-splax-2" aria-label="Enlarge Quake II — Splax 2, original image">
+                <img src="maps/thumb/quake-2-splax-2.webp" alt="Another view of the Quake II Splax level" width="600" height="450" loading="lazy" decoding="async">
+                <img class="map-preview-ai" src="maps/thumb/quake-2-splax-2-ai.webp" alt="" aria-hidden="true" width="600" height="450" loading="lazy" decoding="async">
+              </button>
+              <figcaption>Quake II — Splax 2</figcaption>
+            </figure>
+
+            <figure>
+              <button type="button" class="map-preview" popovertarget="view-quake-2-splax-3" aria-label="Enlarge Quake II — Splax 3, original image">
+                <img src="maps/thumb/quake-2-splax-3.webp" alt="A third view of the Quake II Splax level" width="600" height="450" loading="lazy" decoding="async">
+                <img class="map-preview-ai" src="maps/thumb/quake-2-splax-3-ai.webp" alt="" aria-hidden="true" width="600" height="450" loading="lazy" decoding="async">
+              </button>
+              <figcaption>Quake II — Splax 3</figcaption>
+            </figure>
+
+            <figure>
+              <button type="button" class="map-preview" popovertarget="view-doom-2-reactor" aria-label="Enlarge Doom II — Reactor, original image">
+                <img src="maps/thumb/doom-2-reactor.webp" alt="Doom II Reactor level with a UAC door, metal corridors and a staircase" width="600" height="338" loading="lazy" decoding="async">
+                <img class="map-preview-ai" src="maps/thumb/doom-2-reactor-ai.webp" alt="" aria-hidden="true" width="600" height="338" loading="lazy" decoding="async">
+              </button>
+              <figcaption>Doom II — Reactor</figcaption>
+            </figure>
+
+            <figure>
+              <button type="button" class="map-preview" popovertarget="view-doom-2-bad-place" aria-label="Enlarge Doom II — Bad Place, original image">
+                <img src="maps/thumb/doom-2-bad-place.webp" alt="Doom II Bad Place arena with green industrial walls and an open skylight" width="300" height="169" loading="lazy" decoding="async">
+                <img class="map-preview-ai" src="maps/thumb/doom-2-bad-place-ai.webp" alt="" aria-hidden="true" width="300" height="169" loading="lazy" decoding="async">
+              </button>
+              <figcaption>Doom II — Bad Place</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <div class="section-wrap footer-inner footer-standard">
+        <a class="brand footer-brand" href="../index.html" aria-label="Metatron Software home">
+          <img class="brand-mark" src="../main/metatron.svg" alt="" aria-hidden="true" width="38" height="38">
+          <span>Metatron <strong>Software</strong></span>
+        </a>
+        <p class="footer-description">Independent software development from Budapest, Hungary.</p>
+        <p class="footer-years">2018-2026</p>
+      </div>
+    </footer>
+
+    <div class="lightbox" id="view-mtv-12-hero" popover role="dialog" aria-label="MTV Tizenkét hős — behind the scenes">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-mtv-12-hero" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-mtv-12-hero" popovertargetaction="hide" aria-label="Close enlarged image"><img src="mtv-12-hero.webp" alt="MTV Tizenkét hős blue-screen studio with a presenter, tracked camera and monitor showing the virtual scene" width="1672" height="941" loading="lazy"></button>
+        <div class="lightbox-caption">
+          <a href="mtv-12-hero.webp">MTV Tizenkét hős — behind the scenes</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-mtv-12-hero" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="lightbox" id="view-zlense-promotion" popover role="dialog" aria-label="zLense — promotion">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-zlense-promotion" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-zlense-promotion" popovertargetaction="hide" aria-label="Close enlarged image"><img src="zlense-promotion.webp" alt="zLense green-screen production with a performer and workstation showing the real-time composite" width="2400" height="1600" loading="lazy"></button>
+        <div class="lightbox-caption">
+          <a href="zlense-promotion.webp">zLense — promotion</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-zlense-promotion" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="lightbox" id="view-zlense-promotion-2" popover role="dialog" aria-label="zLense — promotion 2">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-zlense-promotion-2" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-zlense-promotion-2" popovertargetaction="hide" aria-label="Close enlarged image"><img src="zlense-promotion-2.webp" alt="zLense green-screen filming with a camera crane and a large projection showing the composited virtual set" width="2400" height="1600" loading="lazy"></button>
+        <div class="lightbox-caption">
+          <a href="zlense-promotion-2.webp">zLense — promotion 2</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-zlense-promotion-2" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="lightbox" id="view-postedison-promo" popover role="dialog" aria-label="Postedison — promo, 2015">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-postedison-promo" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-postedison-promo" popovertargetaction="hide" aria-label="Close enlarged image"><img src="2015-postedison-promo.webp" alt="Postedison promotional shoot in 2015 with a green-screen backdrop, studio lighting and camera equipment" width="1920" height="1280" loading="lazy"></button>
+        <div class="lightbox-caption">
+          <a href="2015-postedison-promo.webp">Postedison — promo, 2015</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-postedison-promo" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="lightbox" id="view-triviador-1" popover role="dialog" aria-label="Honfoglaló — virtual game table">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-triviador-1" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-triviador-1" popovertargetaction="hide" aria-label="Close enlarged image"><img src="triviador-1.webp" alt="Honfoglaló contestants around a virtual 3D world map with towers rising above the table" width="1672" height="941" loading="lazy"></button>
+        <div class="lightbox-caption">
+          <a href="triviador-1.webp">Honfoglaló — virtual game table</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-triviador-1" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="lightbox" id="view-triviador-2" popover role="dialog" aria-label="Honfoglaló — virtual studio">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-triviador-2" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-triviador-2" popovertargetaction="hide" aria-label="Close enlarged image"><img src="triviador-2.webp" alt="Honfoglaló contestants and host composited into a virtual studio with a 3D game table and armoured figures" width="1672" height="941" loading="lazy"></button>
+        <div class="lightbox-caption">
+          <a href="triviador-2.webp">Honfoglaló — virtual studio</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-triviador-2" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="lightbox" id="view-triviador-3" popover role="dialog" aria-label="Honfoglaló — green-screen filming">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-triviador-3" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-triviador-3" popovertargetaction="hide" aria-label="Close enlarged image"><img src="triviador-3.webp" alt="Honfoglaló green-screen set with tracked cameras and a monitor showing the real-time composite" width="2400" height="1350" loading="lazy"></button>
+        <div class="lightbox-caption">
+          <a href="triviador-3.webp">Honfoglaló — green-screen filming</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-triviador-3" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="lightbox" id="view-ozora-dome" popover role="dialog" aria-label="O.Z.O.R.A. Festival - Chill Dome">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-ozora-dome" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-ozora-dome" popovertargetaction="hide" aria-label="Close enlarged image"><img src="ozora-dome-previsual.webp" alt="Previsualisation of the O.Z.O.R.A. Festival Chill Dome interior with wooden beams, hanging decorations and colourful lighting" width="2400" height="1351" loading="lazy"></button>
+        <div class="lightbox-caption">
+          <a href="ozora-dome-previsual.webp">O.Z.O.R.A. Festival - Chill Dome</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-ozora-dome" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="lightbox" id="view-actual_news" popover role="dialog" aria-label="Actual News">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-actual_news" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-actual_news" popovertargetaction="hide" aria-label="Close enlarged image"><img src="actual_news.webp" alt="Actual News" loading="lazy"></button>
+        <div class="lightbox-caption">
+          <a href="actual_news.webp">Actual News</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-actual_news" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="lightbox" id="view-hirtv_azsia" popover role="dialog" aria-label="HírTV Ázsia">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-hirtv_azsia" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-hirtv_azsia" popovertargetaction="hide" aria-label="Close enlarged image"><img src="hirtv_azsia.webp" alt="HírTV Ázsia" loading="lazy"></button>
+        <div class="lightbox-caption">
+          <a href="hirtv_azsia.webp">HírTV Ázsia</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-hirtv_azsia" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="lightbox" id="view-hirtv_felfedezo" popover role="dialog" aria-label="HírTV Felfedező">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-hirtv_felfedezo" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-hirtv_felfedezo" popovertargetaction="hide" aria-label="Close enlarged image"><img src="hirtv_felfedezo.webp" alt="HírTV Felfedező" loading="lazy"></button>
+        <div class="lightbox-caption">
+          <a href="hirtv_felfedezo.webp">HírTV Felfedező</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-hirtv_felfedezo" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="lightbox" id="view-hirtv_hirvilag" popover role="dialog" aria-label="HírTV Hírvilág">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-hirtv_hirvilag" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-hirtv_hirvilag" popovertargetaction="hide" aria-label="Close enlarged image"><img src="hirtv_hirvilag.webp" alt="HírTV Hírvilág" loading="lazy"></button>
+        <div class="lightbox-caption">
+          <a href="hirtv_hirvilag.webp">HírTV Hírvilág</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-hirtv_hirvilag" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="lightbox" id="view-hirtv_naprol_napra" popover role="dialog" aria-label="HírTV Napról Napra">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-hirtv_naprol_napra" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-hirtv_naprol_napra" popovertargetaction="hide" aria-label="Close enlarged image"><img src="hirtv_naprol_napra.webp" alt="HírTV Napról Napra" loading="lazy"></button>
+        <div class="lightbox-caption">
+          <a href="hirtv_naprol_napra.webp">HírTV Napról Napra</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-hirtv_naprol_napra" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="lightbox" id="view-mtv_kekfeny_studio" popover role="dialog" aria-label="MTV Kékfény Stúdió">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-mtv_kekfeny_studio" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-mtv_kekfeny_studio" popovertargetaction="hide" aria-label="Close enlarged image"><img src="mtv_kekfeny_studio.webp" alt="MTV Kékfény Stúdió" loading="lazy"></button>
+        <div class="lightbox-caption">
+          <a href="mtv_kekfeny_studio.webp">MTV Kékfény Stúdió</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-mtv_kekfeny_studio" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="lightbox" id="view-telepaks_hirado" popover role="dialog" aria-label="Telepaks Hiradó">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-telepaks_hirado" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-telepaks_hirado" popovertargetaction="hide" aria-label="Close enlarged image"><img src="telepaks_hirado.webp" alt="Telepaks Hiradó" loading="lazy"></button>
+        <div class="lightbox-caption">
+          <a href="telepaks_hirado.webp">Telepaks Hiradó</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-telepaks_hirado" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="lightbox" id="view-telepaks_talk_room" popover role="dialog" aria-label="Telepaks Talk Room">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-telepaks_talk_room" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-telepaks_talk_room" popovertargetaction="hide" aria-label="Close enlarged image"><img src="telepaks_talk_room.webp" alt="Telepaks Talk Room" loading="lazy"></button>
+        <div class="lightbox-caption">
+          <a href="telepaks_talk_room.webp">Telepaks Talk Room</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-telepaks_talk_room" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="lightbox" id="view-telepaks_talk_room_2" popover role="dialog" aria-label="Telepaks Talk Room 2">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-telepaks_talk_room_2" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-telepaks_talk_room_2" popovertargetaction="hide" aria-label="Close enlarged image"><img src="telepaks_talk_room_2.webp" alt="Telepaks Talk Room 2" loading="lazy"></button>
+        <div class="lightbox-caption">
+          <a href="telepaks_talk_room_2.webp">Telepaks Talk Room 2</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-telepaks_talk_room_2" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="lightbox" id="view-telemedia_1" popover role="dialog" aria-label="Telemédia 1">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-telemedia_1" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-telemedia_1" popovertargetaction="hide" aria-label="Close enlarged image"><img src="telemedia_1.webp" alt="Telemédia 1" loading="lazy"></button>
+        <div class="lightbox-caption">
+          <a href="telemedia_1.webp">Telemédia 1</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-telemedia_1" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="lightbox" id="view-telemedia_2" popover role="dialog" aria-label="Telemédia 2">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-telemedia_2" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-telemedia_2" popovertargetaction="hide" aria-label="Close enlarged image"><img src="telemedia_2.webp" alt="Telemédia 2" loading="lazy"></button>
+        <div class="lightbox-caption">
+          <a href="telemedia_2.webp">Telemédia 2</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-telemedia_2" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="lightbox" id="view-torus_studio" popover role="dialog" aria-label="Torus Studio">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-torus_studio" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-torus_studio" popovertargetaction="hide" aria-label="Close enlarged image"><img src="torus_studio.webp" alt="Torus Studio" loading="lazy"></button>
+        <div class="lightbox-caption">
+          <a href="torus_studio.webp">Torus Studio</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-torus_studio" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="lightbox" id="view-aximmetry_studio" popover role="dialog" aria-label="Aximmetry Studio">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-aximmetry_studio" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-aximmetry_studio" popovertargetaction="hide" aria-label="Close enlarged image"><img src="aximmetry_studio.webp" alt="Aximmetry Studio" loading="lazy"></button>
+        <div class="lightbox-caption">
+          <a href="aximmetry_studio.webp">Aximmetry Studio</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-aximmetry_studio" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="lightbox" id="view-blue_light" popover role="dialog" aria-label="Blue Light">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-blue_light" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-blue_light" popovertargetaction="hide" aria-label="Close enlarged image"><img src="blue_light.webp" alt="Blue Light" loading="lazy"></button>
+        <div class="lightbox-caption">
+          <a href="blue_light.webp">Blue Light</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-blue_light" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="lightbox" id="view-mtv_tizenket_hos" popover role="dialog" aria-label="MTV Tizenkét hős">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-mtv_tizenket_hos" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-mtv_tizenket_hos" popovertargetaction="hide" aria-label="Close enlarged image"><img src="mtv_tizenket_hos.webp" alt="MTV Tizenkét hős" loading="lazy"></button>
+        <div class="lightbox-caption">
+          <a href="mtv_tizenket_hos.webp">MTV Tizenkét hős</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-mtv_tizenket_hos" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="lightbox" id="view-otp_reklam" popover role="dialog" aria-label="OTP Reklám">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-otp_reklam" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-otp_reklam" popovertargetaction="hide" aria-label="Close enlarged image"><img src="otp_reklam.webp" alt="OTP Reklám" loading="lazy"></button>
+        <div class="lightbox-caption">
+          <a href="otp_reklam.webp">OTP Reklám</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-otp_reklam" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="lightbox" id="view-t-system_karacsony" popover role="dialog" aria-label="T-System Karácsony">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-t-system_karacsony" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-t-system_karacsony" popovertargetaction="hide" aria-label="Close enlarged image"><img src="t-system_karacsony.webp" alt="T-System Karácsony" loading="lazy"></button>
+        <div class="lightbox-caption">
+          <a href="t-system_karacsony.webp">T-System Karácsony</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-t-system_karacsony" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="lightbox" id="view-pesti_vigado_1" popover role="dialog" aria-label="Pesti Vígadó 1">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-pesti_vigado_1" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-pesti_vigado_1" popovertargetaction="hide" aria-label="Close enlarged image"><img src="pesti_vigado_1.webp" alt="Pesti Vígadó 1" loading="lazy"></button>
+        <div class="lightbox-caption">
+          <a href="pesti_vigado_1.webp">Pesti Vígadó 1</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-pesti_vigado_1" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="lightbox" id="view-pesti_vigado_2" popover role="dialog" aria-label="Pesti Vígadó 2">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-pesti_vigado_2" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-pesti_vigado_2" popovertargetaction="hide" aria-label="Close enlarged image"><img src="pesti_vigado_2.webp" alt="Pesti Vígadó 2" loading="lazy"></button>
+        <div class="lightbox-caption">
+          <a href="pesti_vigado_2.webp">Pesti Vígadó 2</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-pesti_vigado_2" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="lightbox" id="view-pesti_vigado_3" popover role="dialog" aria-label="Pesti Vígadó 3">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-pesti_vigado_3" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-pesti_vigado_3" popovertargetaction="hide" aria-label="Close enlarged image"><img src="pesti_vigado_3.webp" alt="Pesti Vígadó 3" loading="lazy"></button>
+        <div class="lightbox-caption">
+          <a href="pesti_vigado_3.webp">Pesti Vígadó 3</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-pesti_vigado_3" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="lightbox" id="view-operahaz_1" popover role="dialog" aria-label="Operaház 1">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-operahaz_1" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-operahaz_1" popovertargetaction="hide" aria-label="Close enlarged image"><img src="operahaz_1.webp" alt="Operaház 1" loading="lazy"></button>
+        <div class="lightbox-caption">
+          <a href="operahaz_1.webp">Operaház 1</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-operahaz_1" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="lightbox" id="view-operahaz_2" popover role="dialog" aria-label="Operaház 2">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-operahaz_2" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-operahaz_2" popovertargetaction="hide" aria-label="Close enlarged image"><img src="operahaz_2.webp" alt="Operaház 2" loading="lazy"></button>
+        <div class="lightbox-caption">
+          <a href="operahaz_2.webp">Operaház 2</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-operahaz_2" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="lightbox" id="view-operahaz_3" popover role="dialog" aria-label="Operaház 3">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-operahaz_3" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-operahaz_3" popovertargetaction="hide" aria-label="Close enlarged image"><img src="operahaz_3.webp" alt="Operaház 3" loading="lazy"></button>
+        <div class="lightbox-caption">
+          <a href="operahaz_3.webp">Operaház 3</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-operahaz_3" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="lightbox" id="view-weather_1" popover role="dialog" aria-label="Weather 1">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-weather_1" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-weather_1" popovertargetaction="hide" aria-label="Close enlarged image"><img src="weather_1.webp" alt="Weather 1" loading="lazy"></button>
+        <div class="lightbox-caption">
+          <a href="weather_1.webp">Weather 1</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-weather_1" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="lightbox" id="view-weather_2" popover role="dialog" aria-label="Weather 2">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-weather_2" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-weather_2" popovertargetaction="hide" aria-label="Close enlarged image"><img src="weather_2.webp" alt="Weather 2" loading="lazy"></button>
+        <div class="lightbox-caption">
+          <a href="weather_2.webp">Weather 2</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-weather_2" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="lightbox" id="view-weather_3" popover role="dialog" aria-label="Weather 3">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-weather_3" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-weather_3" popovertargetaction="hide" aria-label="Close enlarged image"><img src="weather_3.webp" alt="Weather 3" loading="lazy"></button>
+        <div class="lightbox-caption">
+          <a href="weather_3.webp">Weather 3</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-weather_3" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="lightbox" id="view-talk_show_3" popover role="dialog" aria-label="Talk Show 3">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-talk_show_3" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-talk_show_3" popovertargetaction="hide" aria-label="Close enlarged image"><img src="talk_show_3.webp" alt="Talk Show 3" loading="lazy"></button>
+        <div class="lightbox-caption">
+          <a href="talk_show_3.webp">Talk Show 3</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-talk_show_3" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="lightbox" id="view-news_room_3" popover role="dialog" aria-label="News Room 3">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-news_room_3" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-news_room_3" popovertargetaction="hide" aria-label="Close enlarged image"><img src="news_room_3.webp" alt="News Room 3" loading="lazy"></button>
+        <div class="lightbox-caption">
+          <a href="news_room_3.webp">News Room 3</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-news_room_3" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="lightbox" id="view-talk_show_1" popover role="dialog" aria-label="Talk Show 1">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-talk_show_1" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-talk_show_1" popovertargetaction="hide" aria-label="Close enlarged image"><img src="talk_show_1.webp" alt="Talk Show 1" loading="lazy"></button>
+        <div class="lightbox-caption">
+          <a href="talk_show_1.webp">Talk Show 1</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-talk_show_1" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="lightbox" id="view-talk_show_2" popover role="dialog" aria-label="Talk Show 2">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-talk_show_2" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-talk_show_2" popovertargetaction="hide" aria-label="Close enlarged image"><img src="talk_show_2.webp" alt="Talk Show 2" loading="lazy"></button>
+        <div class="lightbox-caption">
+          <a href="talk_show_2.webp">Talk Show 2</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-talk_show_2" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="lightbox" id="view-sport_studio_1" popover role="dialog" aria-label="Sport Studio 1">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-sport_studio_1" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-sport_studio_1" popovertargetaction="hide" aria-label="Close enlarged image"><img src="sport_studio_1.webp" alt="Sport Studio 1" loading="lazy"></button>
+        <div class="lightbox-caption">
+          <a href="sport_studio_1.webp">Sport Studio 1</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-sport_studio_1" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="lightbox" id="view-sport_studio_2" popover role="dialog" aria-label="Sport Studio 2">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-sport_studio_2" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-sport_studio_2" popovertargetaction="hide" aria-label="Close enlarged image"><img src="sport_studio_2.webp" alt="Sport Studio 2" loading="lazy"></button>
+        <div class="lightbox-caption">
+          <a href="sport_studio_2.webp">Sport Studio 2</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-sport_studio_2" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="lightbox" id="view-sport_studio_3" popover role="dialog" aria-label="Sport Studio 3">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-sport_studio_3" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-sport_studio_3" popovertargetaction="hide" aria-label="Close enlarged image"><img src="sport_studio_3.webp" alt="Sport Studio 3" loading="lazy"></button>
+        <div class="lightbox-caption">
+          <a href="sport_studio_3.webp">Sport Studio 3</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-sport_studio_3" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="lightbox" id="view-news_room_1" popover role="dialog" aria-label="News Room 1">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-news_room_1" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-news_room_1" popovertargetaction="hide" aria-label="Close enlarged image"><img src="news_room_1.webp" alt="News Room 1" loading="lazy"></button>
+        <div class="lightbox-caption">
+          <a href="news_room_1.webp">News Room 1</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-news_room_1" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="lightbox" id="view-news_room_2" popover role="dialog" aria-label="News Room 2">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-news_room_2" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-news_room_2" popovertargetaction="hide" aria-label="Close enlarged image"><img src="news_room_2.webp" alt="News Room 2" loading="lazy"></button>
+        <div class="lightbox-caption">
+          <a href="news_room_2.webp">News Room 2</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-news_room_2" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="lightbox" id="view-t-system_1" popover role="dialog" aria-label="T-System 1">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-t-system_1" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-t-system_1" popovertargetaction="hide" aria-label="Close enlarged image"><img src="t-system_1.webp" alt="T-System 1" loading="lazy"></button>
+        <div class="lightbox-caption">
+          <a href="t-system_1.webp">T-System 1</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-t-system_1" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="lightbox" id="view-t-system_2" popover role="dialog" aria-label="T-System 2">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-t-system_2" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-t-system_2" popovertargetaction="hide" aria-label="Close enlarged image"><img src="t-system_2.webp" alt="T-System 2" loading="lazy"></button>
+        <div class="lightbox-caption">
+          <a href="t-system_2.webp">T-System 2</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-t-system_2" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="lightbox" id="view-t-system_3" popover role="dialog" aria-label="T-System 3">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-t-system_3" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-t-system_3" popovertargetaction="hide" aria-label="Close enlarged image"><img src="t-system_3.webp" alt="T-System 3" loading="lazy"></button>
+        <div class="lightbox-caption">
+          <a href="t-system_3.webp">T-System 3</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-t-system_3" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="lightbox" id="view-quake-2-contest" popover role="dialog" aria-label="Quake II — Contest, original image">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-quake-2-contest" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-quake-2-contest" popovertargetaction="hide" aria-label="Close enlarged image"><img src="maps/quake-2-contest.webp" alt="A Quake II arena with industrial structures and a rocky landscape" width="2400" height="1800" loading="lazy" decoding="async"></button>
+        <div class="lightbox-caption">
+          <a href="maps/quake-2-contest.webp">Quake II — Contest</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-quake-2-contest" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="lightbox" id="view-quake-2-splax" popover role="dialog" aria-label="Quake II — Splax, original image">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-quake-2-splax" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-quake-2-splax" popovertargetaction="hide" aria-label="Close enlarged image"><img src="maps/quake-2-splax.webp" alt="A Quake II level with stone architecture and raised walkways" width="2400" height="1800" loading="lazy" decoding="async"></button>
+        <div class="lightbox-caption">
+          <a href="maps/quake-2-splax.webp">Quake II — Splax</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-quake-2-splax" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="lightbox" id="view-quake-2-splax-2" popover role="dialog" aria-label="Quake II — Splax 2, original image">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-quake-2-splax-2" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-quake-2-splax-2" popovertargetaction="hide" aria-label="Close enlarged image"><img src="maps/quake-2-splax-2.webp" alt="Another view of the Quake II Splax level" width="2400" height="1800" loading="lazy" decoding="async"></button>
+        <div class="lightbox-caption">
+          <a href="maps/quake-2-splax-2.webp">Quake II — Splax 2</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-quake-2-splax-2" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="lightbox" id="view-quake-2-splax-3" popover role="dialog" aria-label="Quake II — Splax 3, original image">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-quake-2-splax-3" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-quake-2-splax-3" popovertargetaction="hide" aria-label="Close enlarged image"><img src="maps/quake-2-splax-3.webp" alt="A third view of the Quake II Splax level" width="2400" height="1800" loading="lazy" decoding="async"></button>
+        <div class="lightbox-caption">
+          <a href="maps/quake-2-splax-3.webp">Quake II — Splax 3</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-quake-2-splax-3" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="lightbox" id="view-doom-2-reactor" popover role="dialog" aria-label="Doom II — Reactor, original image">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-doom-2-reactor" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-doom-2-reactor" popovertargetaction="hide" aria-label="Close enlarged image"><img src="maps/doom-2-reactor.webp" alt="Doom II Reactor level with a UAC door, metal corridors and a staircase" width="2400" height="1350" loading="lazy" decoding="async"></button>
+        <div class="lightbox-caption">
+          <a href="maps/doom-2-reactor.webp">Doom II — Reactor</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-doom-2-reactor" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="lightbox" id="view-doom-2-bad-place" popover role="dialog" aria-label="Doom II — Bad Place, original image">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-doom-2-bad-place" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-doom-2-bad-place" popovertargetaction="hide" aria-label="Close enlarged image"><img src="maps/doom-2-bad-place.webp" alt="Doom II Bad Place arena with green industrial walls and an open skylight" width="1920" height="1080" loading="lazy" decoding="async"></button>
+        <div class="lightbox-caption">
+          <a href="maps/doom-2-bad-place.webp">Doom II — Bad Place</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-doom-2-bad-place" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

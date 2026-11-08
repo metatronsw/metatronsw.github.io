@@ -1,0 +1,1194 @@
+<!doctype html>
+<html lang="en" class="site-page">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Stage visuals, event projections and selected visual experiments from the Metatron Software archive.">
+    <title>Visuals &amp; projections — Metatron Software</title>
+    <link rel="icon" type="image/svg+xml" href="../main/favicon.svg">
+    <link rel="stylesheet" href="../style.css">
+    <style>
+      @property --ink {
+        syntax: "<color>";
+        inherits: true;
+        initial-value: #172b3b;
+      }
+      @property --muted {
+        syntax: "<color>";
+        inherits: true;
+        initial-value: #5f7180;
+      }
+      @property --blue {
+        syntax: "<color>";
+        inherits: true;
+        initial-value: #1674ad;
+      }
+      @property --visual-hero-start {
+        syntax: "<color>";
+        inherits: true;
+        initial-value: #18222c;
+      }
+      @property --visual-hero-end {
+        syntax: "<color>";
+        inherits: true;
+        initial-value: #203242;
+      }
+      /* Hold the dark opening for one second, then bring up the lights. */
+      .virtual-hero {
+        --ink: #e5edf5;
+        --muted: #acbbc9;
+        --blue: #71bcea;
+        color: var(--ink);
+        --hero-background: linear-gradient(120deg, var(--visual-hero-start), var(--visual-hero-end));
+        transition: --lamp-proximity 100ms ease-in-out;
+        transition-duration: 100ms !important;
+        animation: visual-lights-on 500ms ease-out 1s forwards;
+      }
+      @keyframes visual-lights-on {
+        to {
+          --ink: #172b3b;
+          --muted: #5f7180;
+          --blue: #1674ad;
+          --visual-hero-start: #f5f8fb;
+          --visual-hero-end: #e6f1f7;
+        }
+      }
+      @property --lamp-proximity {
+        syntax: "<number>";
+        inherits: true;
+        initial-value: 0;
+      }
+      .virtual-hero .hero-background-art {
+        --hero-art-width: clamp(184.96px, 24.48vw, 337.28px);
+        --hero-art-height: auto;
+        --hero-art-left: 85%;
+        --hero-art-top: 50%;
+        max-width: calc(100% - 32px);
+        max-height: calc(100% - 32px);
+        transform: translate(-50%, -20%) scale(calc(1 + var(--lamp-proximity) * 0.15));
+        transform-origin: center;
+        overflow: visible;
+        color: #000;
+        opacity: clamp(0.5, calc(0.5 + var(--lamp-proximity) * 0.5), 1);
+        z-index: 1;
+        animation: visual-lamp-rise 500ms ease-out 1s forwards,
+          visual-lamp-on 500ms ease-out 1s forwards;
+      }
+      .virtual-hero > .section-wrap {
+        opacity: clamp(0.5, calc(1 - var(--lamp-proximity) * 0.5), 1);
+      }
+      /* Concentric hit areas approximate pointer distance without scripts. */
+      .lamp-proximity {
+        fill: transparent;
+        pointer-events: all;
+      }
+      .virtual-hero:has(.lamp-proximity--1:hover) { --lamp-proximity: 0.166667; }
+      .virtual-hero:has(.lamp-proximity--2:hover) { --lamp-proximity: 0.333333; }
+      .virtual-hero:has(.lamp-proximity--3:hover) { --lamp-proximity: 0.500000; }
+      .virtual-hero:has(.lamp-proximity--4:hover) { --lamp-proximity: 0.666667; }
+      .virtual-hero:has(.lamp-proximity--5:hover) { --lamp-proximity: 0.833333; }
+      .virtual-hero:has(.lamp-proximity--6:hover) { --lamp-proximity: 1.000000; }
+      @keyframes visual-lamp-rise {
+        to {
+          transform: translate(-50%, -50%) scale(calc(1 + var(--lamp-proximity) * 0.15));
+        }
+      }
+      @keyframes visual-lamp-on {
+        to {
+          color: #fff;
+        }
+      }
+      .virtual-hero .hero-background-art path:not(#FILAMENT) {
+        fill: currentColor;
+      }
+      .virtual-hero #FILAMENT {
+        fill: none;
+        stroke: currentColor;
+      }
+      .virtual-hero .hero-background-art path:is(#L1, #L2, #L3, #L4, #L5, #L6, #L7) {
+        opacity: 0;
+        transform-box: view-box;
+        transform: rotate(var(--ray-angle, 0deg)) scaleX(0) rotate(calc(0deg - var(--ray-angle, 0deg)));
+        animation: visual-rays-on 500ms ease-out 1s forwards;
+      }
+      .lamp-ray-tip {
+        stop-opacity: clamp(0, calc(1 - var(--lamp-proximity)), 1);
+      }
+      /* Each ray grows outward from its inner edge without widening. */
+      .virtual-hero .hero-background-art path#L1 {
+        fill: url(#lamp-ray-fade-1);
+        --ray-angle: -45deg;
+        transform-origin: 284px 660px;
+      }
+      .virtual-hero .hero-background-art path#L2 {
+        fill: url(#lamp-ray-fade-2);
+        transform-origin: 216px 438px;
+      }
+      .virtual-hero .hero-background-art path#L3 {
+        fill: url(#lamp-ray-fade-3);
+        --ray-angle: 45deg;
+        transform-origin: 301px 233px;
+      }
+      .virtual-hero .hero-background-art path#L4 {
+        fill: url(#lamp-ray-fade-4);
+        --ray-angle: 90deg;
+        transform-origin: 506px 143px;
+      }
+      .virtual-hero .hero-background-art path#L5 {
+        fill: url(#lamp-ray-fade-5);
+        --ray-angle: -45deg;
+        transform-origin: 711px 233px;
+      }
+      .virtual-hero .hero-background-art path#L6 {
+        fill: url(#lamp-ray-fade-6);
+        transform-origin: 796px 438px;
+      }
+      .virtual-hero .hero-background-art path#L7 {
+        fill: url(#lamp-ray-fade-7);
+        --ray-angle: 45deg;
+        transform-origin: 728px 660px;
+      }
+      @keyframes visual-rays-on {
+        to {
+          opacity: 1;
+          transform: rotate(var(--ray-angle, 0deg)) scaleX(calc(1 + var(--lamp-proximity) * 2.4)) rotate(calc(0deg - var(--ray-angle, 0deg)));
+        }
+      }
+    </style>
+
+    <link rel="canonical" href="https://metatronsw.github.io/visual/">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Metatron Software">
+    <meta property="og:title" content="Visuals &amp; projections — Metatron Software">
+    <meta property="og:description" content="Stage visuals, event projections and selected visual experiments from the Metatron Software archive.">
+    <meta property="og:url" content="https://metatronsw.github.io/visual/">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Visuals &amp; projections — Metatron Software">
+    <meta name="twitter:description" content="Stage visuals, event projections and selected visual experiments from the Metatron Software archive.">
+  </head>
+  
+  
+  <body class="site-effects">
+    <header class="site-header menu-header">
+      <a class="brand" href="../index.html" aria-label="Metatron Software home">
+        <img class="brand-mark" src="../main/metatron.svg" alt="" aria-hidden="true" width="38" height="38">
+        <span>Metatron <strong>Software</strong></span>
+      </a>
+      <nav aria-label="Main navigation">
+        <a href="../app/index.html">Develop</a>
+        <a href="../about.html">About</a>
+        <a href="../realtime/index.html">Realtime</a>
+        <a href="../design/index.html">Design</a>
+        <a href="index.html" aria-current="page">Visual</a>
+        <a href="../contact.html">Contact</a>
+      </nav>
+      <a class="sitemap-menu" href="../sitemap.html" aria-label="Sitemap" title="Sitemap">
+        <img src="../main/menu.svg" alt="" width="24" height="24">
+      </a>
+    </header>
+    <main>
+
+      <section class="virtual-hero hero-with-art" aria-labelledby="visual-title">
+        <svg class="hero-background-art" aria-hidden="true" focusable="false" width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="lamp-ray-fade-1" x1="100%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0" stop-color="currentColor"/>
+              <stop offset="0.55" stop-color="currentColor"/>
+              <stop class="lamp-ray-tip" offset="1" stop-color="currentColor"/>
+            </linearGradient>
+            <linearGradient id="lamp-ray-fade-2" x1="100%" y1="50%" x2="0%" y2="50%">
+              <stop offset="0" stop-color="currentColor"/>
+              <stop offset="0.55" stop-color="currentColor"/>
+              <stop class="lamp-ray-tip" offset="1" stop-color="currentColor"/>
+            </linearGradient>
+            <linearGradient id="lamp-ray-fade-3" x1="100%" y1="100%" x2="0%" y2="0%">
+              <stop offset="0" stop-color="currentColor"/>
+              <stop offset="0.55" stop-color="currentColor"/>
+              <stop class="lamp-ray-tip" offset="1" stop-color="currentColor"/>
+            </linearGradient>
+            <linearGradient id="lamp-ray-fade-4" x1="50%" y1="100%" x2="50%" y2="0%">
+              <stop offset="0" stop-color="currentColor"/>
+              <stop offset="0.55" stop-color="currentColor"/>
+              <stop class="lamp-ray-tip" offset="1" stop-color="currentColor"/>
+            </linearGradient>
+            <linearGradient id="lamp-ray-fade-5" x1="0%" y1="100%" x2="100%" y2="0%">
+              <stop offset="0" stop-color="currentColor"/>
+              <stop offset="0.55" stop-color="currentColor"/>
+              <stop class="lamp-ray-tip" offset="1" stop-color="currentColor"/>
+            </linearGradient>
+            <linearGradient id="lamp-ray-fade-6" x1="0%" y1="50%" x2="100%" y2="50%">
+              <stop offset="0" stop-color="currentColor"/>
+              <stop offset="0.55" stop-color="currentColor"/>
+              <stop class="lamp-ray-tip" offset="1" stop-color="currentColor"/>
+            </linearGradient>
+            <linearGradient id="lamp-ray-fade-7" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0" stop-color="currentColor"/>
+              <stop offset="0.55" stop-color="currentColor"/>
+              <stop class="lamp-ray-tip" offset="1" stop-color="currentColor"/>
+            </linearGradient>
+          </defs>
+            <path id="BULB" fill="#000000" stroke="none" d="M 760.039001 450.224976 C 760.075989 392.669006 740.901001 339.440002 708.601013 296.811035 C 680.270996 259.369019 641.794983 230.009033 597.221985 212.775024 L 597.450989 211.552979 L 578.424988 205.96698 C 563.627014 201.677002 548.374023 198.702026 532.820007 197.099976 L 530.609009 196.854004 L 530.533997 196.854004 L 530.455017 196.835022 C 522.83197 196.110962 514.89801 195.55603 506.624969 195.55603 L 505.406982 195.55603 C 497.130981 195.55603 489.199982 196.113037 481.573975 196.835022 L 481.458984 196.854004 L 479.172974 197.099976 C 463.63797 198.700012 448.381989 201.674988 433.623993 205.96698 L 415.208008 211.341003 L 415.39801 212.562988 C 370.596008 229.776978 331.893005 259.213989 303.40799 296.807007 C 271.149994 339.434998 251.970001 392.661011 251.970001 450.221008 C 251.970001 491.494995 259.10199 525.427979 270.196991 553.510986 C 286.858002 595.625 312.290985 624.070007 332.730011 645.648987 C 342.950012 656.403015 351.950012 665.590027 358.046997 673.44397 C 364.300995 681.335999 367.312012 687.439026 368.187988 692.281006 C 372.647003 715.846008 373.105011 745.586975 373.105011 753.13501 L 373.105011 755.309021 C 373.105011 789.393982 400.713989 816.926025 434.764008 816.963989 L 577.273987 816.963989 C 611.366028 816.927002 638.932983 789.35498 638.932983 755.309021 L 638.932983 753.211975 C 638.895996 745.737976 639.390991 715.921021 643.85199 692.31897 C 644.460022 689.041016 645.909973 685.302002 648.768982 680.728027 C 653.648987 672.757996 662.879028 662.844971 674.317017 650.908997 C 691.400024 632.950012 713.132019 610.304993 730.40802 578.104004 C 747.719971 545.942993 760.111023 504.39801 760.033997 450.221985 Z M 701.812988 537.676025 C 688.198975 572.012024 667.76001 595.250977 648.049988 616.067017 C 638.208984 626.478027 628.562988 636.161987 620.138977 646.879028 C 611.828003 657.440979 604.393982 669.528992 601.53302 684.359985 C 596.156006 713.299988 595.926025 744.338013 595.89502 753.221985 C 595.89502 754.403015 595.89502 755.049988 595.89502 755.317993 C 595.857971 765.612976 587.580994 773.924011 577.286987 773.924011 L 434.777008 773.924011 C 429.553986 773.924011 425.015991 771.86499 421.583008 768.473999 C 418.191986 765.039978 416.17099 760.539978 416.17099 755.320007 C 416.17099 755.052002 416.17099 754.367004 416.17099 753.14801 C 416.134003 744.190979 415.86499 713.22699 410.489014 684.36499 C 408.661011 674.567993 404.654999 665.794006 399.815002 658.017029 C 391.235992 644.405029 380.256012 633.197998 368.925995 621.184998 C 351.809998 603.343018 333.694 584.065979 319.584991 557.775024 C 305.515015 531.466003 295.067993 498.030029 295.028015 450.234985 C 295.065002 402.287964 310.890015 358.285034 337.734009 322.807983 C 364.57901 287.365967 402.32901 260.598999 445.908997 247.562012 L 451.286011 245.924011 C 461.809967 243.216003 472.600983 241.062988 483.714966 239.89801 L 483.789978 239.89801 L 485.849976 239.669006 C 492.368958 239.041992 498.69696 238.639038 504.952972 238.603027 L 506.057983 238.718018 L 507.163971 238.641968 C 513.375977 238.641968 519.742981 239.062012 526.22699 239.671997 L 526.14801 239.671997 L 528.284973 239.901001 L 528.322021 239.901001 C 539.414978 241.063965 550.208984 243.177979 560.69397 245.927002 L 566.14502 247.565002 C 609.72699 260.60199 647.473999 287.372009 674.320007 322.811035 C 701.120972 358.289001 716.986023 402.292969 716.986023 450.238037 C 716.989014 486.646973 710.892029 514.749023 701.817017 537.684021 Z M 532.781982 197.106995 L 532.861023 197.106995 Z M 479.169983 197.106995 L 479.169983 197.106995 C 479.169983 197.106995 479.20697 197.106995 479.244965 197.106995 Z M 576.705994 833.825012 L 435.337006 833.825012 C 420.733002 833.825012 408.838013 845.646973 408.838013 860.364014 C 408.838013 874.927979 420.737 886.828979 435.337006 886.828979 L 576.705994 886.828979 C 591.309998 886.828979 603.205017 874.929993 603.205017 860.364014 C 603.205017 845.643005 591.30603 833.825012 576.705994 833.825012 Z M 576.705994 900.703979 L 435.337006 900.703979 C 420.733002 900.703979 408.838013 912.560974 408.838013 927.16803 C 408.838013 941.846008 420.737 953.70697 435.337006 953.70697 L 576.705994 953.70697 C 591.309998 953.70697 603.205017 941.849976 603.205017 927.16803 C 603.205017 912.562988 591.30603 900.703979 576.705994 900.703979 Z M 518.406006 968.116028 L 445.601013 968.116028 C 445.601013 968.916992 445.446991 969.677002 445.446991 970.52002 C 445.446991 985.163025 467.944977 997.018982 488.743958 997.018982 L 523.289978 997.018982 C 544.107971 997.018982 566.567017 985.161987 566.567017 970.52002 C 566.567017 969.682983 566.452026 968.919983 566.452026 968.116028 L 518.40802 968.116028 Z"/>
+            <path id="FILAMENT" fill="none" stroke="#000000" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" d="M 478 795 C 478 795 500.899994 389.744019 435 417 C 377.386292 440.828796 364.79895 517.015869 437 529 C 509.20105 540.984131 581.144287 528.424072 611 517 C 652.595154 501.083862 617.061157 390.211914 560 420 C 510.57489 445.801758 528 790 528 790"/>
+            <path id="L1" fill="#000000" stroke="none" d="M 211.626999 693.585022 C 200.796005 704.452026 200.796005 721.989014 211.626999 732.859985 C 222.494995 743.690979 240.074997 743.690979 250.901993 732.859985 L 301.731995 681.997009 C 290.256989 669.107971 278.320007 654.775024 267.03299 638.265991 L 211.630005 693.590027 Z"/>
+            <path id="L2" fill="#000000" stroke="none" d="M 213.494003 450.224976 C 213.494003 436.822021 214.563995 423.705994 216.126999 410.742004 L 117.445 410.742004 C 102.155998 410.742004 89.723 423.174011 89.723 438.499023 C 89.723 453.827026 102.156998 466.255981 117.445 466.255981 L 213.837997 466.255981 C 213.608994 460.976013 213.492996 455.674988 213.492996 450.223022 Z"/>
+            <path id="L3" fill="#000000" stroke="none" d="M 281.674011 253.424011 C 293.22699 238.838989 305.962006 225.283997 319.881989 213.156982 L 250.904007 144.143982 C 240.076004 133.276978 222.5 133.276978 211.628998 144.143982 C 200.798004 154.974976 200.798004 172.547974 211.628998 183.379028 L 281.674988 253.421997 Z"/>
+            <path id="L4" fill="#000000" stroke="none" d="M 506.01297 142.468994 C 506.280975 142.468994 506.506958 142.468994 506.814972 142.468994 C 515.924011 142.468994 524.924011 143.039978 533.77002 143.955994 L 533.77002 49.969971 C 533.77002 34.643005 521.338013 22.213013 506.009979 22.213013 C 490.681976 22.213013 478.288971 34.641968 478.288971 49.969971 L 478.288971 143.937988 C 487.134979 143.042969 496.130981 142.468994 505.244965 142.468994 C 505.514984 142.468994 505.778961 142.468994 506.006958 142.468994 Z"/>
+            <path id="L5" fill="#000000" stroke="none" d="M 730.414001 253.388 L 800.385071 183.380981 C 811.251038 172.549988 811.251038 154.97699 800.385071 144.145996 C 789.591064 133.278992 771.980042 133.278992 761.107971 144.145996 L 692.090027 213.158997 C 706.047974 225.281982 718.784973 238.822998 730.414001 253.385986 Z"/>
+            <path id="L6" fill="#000000" stroke="none" d="M 894.563049 410.744995 L 795.920044 410.744995 C 797.520081 423.708984 798.55304 436.827026 798.55304 450.228027 C 798.55304 455.677979 798.438049 460.980957 798.248047 466.260986 L 894.563049 466.260986 C 909.895081 466.260986 922.285034 453.832031 922.285034 438.504028 C 922.285034 423.176025 909.895081 410.747009 894.563049 410.747009 Z"/>
+            <path id="L7" fill="#000000" stroke="none" d="M 745.017029 638.262024 C 733.731018 654.809021 721.799011 669.10498 710.322021 682.031982 L 761.109009 732.861023 C 771.977051 743.692017 789.592041 743.692017 800.386047 732.861023 C 811.252075 721.994019 811.252075 704.45697 800.386047 693.585999 L 745.015991 638.262024 Z"/>
+          <circle class="lamp-proximity lamp-proximity--1" cx="506" cy="450" r="960"/>
+          <circle class="lamp-proximity lamp-proximity--2" cx="506" cy="450" r="800"/>
+          <circle class="lamp-proximity lamp-proximity--3" cx="506" cy="450" r="640"/>
+          <circle class="lamp-proximity lamp-proximity--4" cx="506" cy="450" r="480"/>
+          <circle class="lamp-proximity lamp-proximity--5" cx="506" cy="450" r="320"/>
+          <circle class="lamp-proximity lamp-proximity--6" cx="506" cy="450" r="160"/>
+        </svg>
+        <div class="section-wrap">
+          <p class="eyebrow">Light, space &amp; moving images</p>
+          <h1 id="visual-title">Visuals &amp; projections</h1>
+          <p>Images that transform spaces, accompany music and create a shared atmosphere. Explore a selection of stage visuals, event projections and experiments from our archive.</p>
+        </div>
+      </section>
+
+      <nav class="section-wrap section-nav" aria-label="Visual collections">
+        <a class="text-link" href="#collection-mupa">MÜPA Syrius</a>
+        <a class="text-link" href="#collection-event">Events &amp; exhibitions</a>
+        <a class="text-link" href="#collection-2005-2012">Party projections</a>
+        <a class="text-link" href="#collection-2012-1018">Aximmetry</a>
+      </nav>
+
+
+      <section class="section-wrap project-section project-section--compact-mobile" id="collection-mupa" aria-labelledby="title-mupa">
+        <header class="project-heading">
+          <p class="eyebrow">Theatre &amp; music</p>
+          <h2 id="title-mupa">MÜPA Syrius — Staged concert</h2>
+          <p>In <em><a href="https://mupa.hu/program/tanc-ujcirkusz/szegedi-kortars-balett-magyar-frank-zappa-emlekzenekar-szettort-almok-2012-05-25_19-00-fesztivalszinhaz" target="_blank" rel="noopener noreferrer">Shattered Dreams</a></em> (<em>Széttört álmok</em>), the now-classic music of the legendary band <a href="https://hu.wikipedia.org/wiki/Syrius" target="_blank" rel="noopener noreferrer">Syrius</a> is reimagined in 21st-century arrangements by the <a href="https://mupa.hu/program/tanc-ujcirkusz/szegedi-kortars-balett-magyar-frank-zappa-emlekzenekar-szettort-almok-2012-05-25_19-00-fesztivalszinhaz" target="_blank" rel="noopener noreferrer" title="Hungarian Frank Zappa Memorial Band — official Müpa programme">Hungarian Frank Zappa Memorial Band</a>, joined by outstanding musicians including <a href="https://hu.wikipedia.org/wiki/T%C3%B6r%C3%B6k_%C3%81d%C3%A1m_(zen%C3%A9sz)" target="_blank" rel="noopener noreferrer">Ádám Török</a>, <a href="https://en.wikipedia.org/wiki/B%C3%A9la_Szakcsi_Lakatos" target="_blank" rel="noopener noreferrer">Béla Szakcsi Lakatos</a>, <a href="https://hu.wikipedia.org/wiki/T%C3%A1trai_Tibor" target="_blank" rel="noopener noreferrer">Tibor Tátrai</a> and former <a href="https://hu.wikipedia.org/wiki/Syrius" target="_blank" rel="noopener noreferrer">Syrius</a> keyboardist <a href="https://mupa.hu/program/tanc-ujcirkusz/szegedi-kortars-balett-magyar-frank-zappa-emlekzenekar-szettort-almok-2012-05-25_19-00-fesztivalszinhaz" target="_blank" rel="noopener noreferrer" title="László Pataki — official Müpa programme">László Pataki</a>. <a href="https://hu.wikipedia.org/wiki/Charlie" target="_blank" rel="noopener noreferrer">Horváth Charlie</a> also appeared as a surprise guest. The production premiered at the <a href="https://mupa.hu/en" target="_blank" rel="noopener noreferrer">Palace of Arts (Müpa Budapest)</a> on 25 May 2012. Dance by the <a href="https://szegedikortarsbalett.hu/en/start/" target="_blank" rel="noopener noreferrer">Szeged Contemporary Dance Company</a> and <a href="https://aximmetry.com/" target="_blank" rel="noopener noreferrer">Aximmetry</a>’s visuals open up new dimensions in translating music into images.</p>
+
+          <p>The production brings <a href="https://hu.wikipedia.org/wiki/Syrius" target="_blank" rel="noopener noreferrer">Syrius</a>’s compositions to the stage in a form that combines a traditional concert, a visual theatre show and a contemporary dance performance. A distinctive feature is <a href="https://aximmetry.com/" target="_blank" rel="noopener noreferrer">Aximmetry</a>’s real-time projection, which gives the musicians and dancers freedom in their performance and choreography, unlike conventional video projections tied to a fixed timeline.</p>
+
+          <p>Alongside the band, the artist controlling the projections is an integral part of the onstage ensemble. A large, transparent, futuristic touchscreen makes this creative process visible to the audience, offering a glimpse behind the scenes.</p>
+        </header>
+        <div class="project-content">
+          <div class="content-block content-block--images studio-grid studio-grid--archive">
+            <figure id="image-mupa-2012-mupa-syrius-shattered-dreams-1">
+              <button type="button" popovertarget="view-mupa-2012-mupa-syrius-shattered-dreams-1" aria-label="Enlarge 2012 Mupa - Syrius - Shattered Dreams 1"><img src="mupa/thumb/2012-mupa-syrius-shattered-dreams-1.webp" alt="2012 Mupa - Syrius - Shattered Dreams 1" width="600" height="400" decoding="async"></button>
+              <figcaption>2012 Bakelit - Syrius 1</figcaption>
+            </figure>
+            <figure id="image-mupa-2012-mupa-syrius-shattered-dreams-2">
+              <button type="button" popovertarget="view-mupa-2012-mupa-syrius-shattered-dreams-2" aria-label="Enlarge 2012 Mupa - Syrius - Shattered Dreams 2"><img src="mupa/thumb/2012-mupa-syrius-shattered-dreams-2.webp" alt="2012 Mupa - Syrius - Shattered Dreams 2" width="600" height="400" decoding="async"></button>
+              <figcaption>2012 Mupa - Syrius 2</figcaption>
+            </figure>
+            <figure id="image-mupa-2012-mupa-syrius-shattered-dreams-3">
+              <button type="button" popovertarget="view-mupa-2012-mupa-syrius-shattered-dreams-3" aria-label="Enlarge 2012 Mupa - Syrius - Shattered Dreams 3"><img src="mupa/thumb/2012-mupa-syrius-shattered-dreams-3.webp" alt="2012 Mupa - Syrius - Shattered Dreams 3" width="600" height="400" decoding="async"></button>
+              <figcaption>2012 Mupa - Syrius 3</figcaption>
+            </figure>
+            <figure id="image-mupa-2012-mupa-syrius-shattered-dreams-4">
+              <button type="button" popovertarget="view-mupa-2012-mupa-syrius-shattered-dreams-4" aria-label="Enlarge 2012 Mupa - Syrius - Shattered Dreams 4"><img src="mupa/thumb/2012-mupa-syrius-shattered-dreams-4.webp" alt="2012 Mupa - Syrius - Shattered Dreams 4" width="600" height="400" loading="lazy" decoding="async"></button>
+              <figcaption>2012 Mupa - Syrius 4</figcaption>
+            </figure>
+            <figure id="image-mupa-2012-mupa-syrius-shattered-dreams-5">
+              <button type="button" popovertarget="view-mupa-2012-mupa-syrius-shattered-dreams-5" aria-label="Enlarge 2012 Mupa - Syrius - Shattered Dreams 5"><img src="mupa/thumb/2012-mupa-syrius-shattered-dreams-5.webp" alt="2012 Mupa - Syrius - Shattered Dreams 5" width="600" height="400" loading="lazy" decoding="async"></button>
+              <figcaption>2012 Mupa - Syrius 5</figcaption>
+            </figure>
+            <figure id="image-mupa-2012-mupa-syrius-shattered-dreams-6">
+              <button type="button" popovertarget="view-mupa-2012-mupa-syrius-shattered-dreams-6" aria-label="Enlarge 2012 Mupa - Syrius - Shattered Dreams 6"><img src="mupa/thumb/2012-mupa-syrius-shattered-dreams-6.webp" alt="2012 Mupa - Syrius - Shattered Dreams 6" width="600" height="400" loading="lazy" decoding="async"></button>
+              <figcaption>2012 Mupa - Syrius 6</figcaption>
+            </figure>
+            <figure id="image-mupa-2012-mupa-syrius-shattered-dreams-7">
+              <button type="button" popovertarget="view-mupa-2012-mupa-syrius-shattered-dreams-7" aria-label="Enlarge 2012 Mupa - Syrius - Shattered Dreams 7"><img src="mupa/thumb/2012-mupa-syrius-shattered-dreams-7.webp" alt="2012 Mupa - Syrius - Shattered Dreams 7" width="600" height="400" loading="lazy" decoding="async"></button>
+              <figcaption>2012 Mupa - Syrius 7</figcaption>
+            </figure>
+            <figure id="image-mupa-2012-mupa-syrius-shattered-dreams-8">
+              <button type="button" popovertarget="view-mupa-2012-mupa-syrius-shattered-dreams-8" aria-label="Enlarge 2012 Mupa - Syrius - Shattered Dreams 8"><img src="mupa/thumb/2012-mupa-syrius-shattered-dreams-8.webp" alt="2012 Mupa - Syrius - Shattered Dreams 8" width="600" height="400" loading="lazy" decoding="async"></button>
+              <figcaption>2012 Mupa - Syrius 8</figcaption>
+            </figure>
+          </div>
+
+          <div class="content-block content-block--text gallery-intro">
+            <p class="eyebrow">Interactive projection</p>
+            <h3 id="interactive-projection-title">Images from the interactive projection</h3>
+            <p>The dancers interacted with the visual elements that formed the scenery. They played with a glowing sphere, and opening a suitcase sent red beetles swarming across the screen. Each scene began at precisely the right moment and unfolded in step with the musicians’ performance and the dancers’ choreography.</p>
+          </div>
+
+          <div class="content-block content-block--images studio-grid studio-grid--archive">
+            <figure id="image-mupa-city">
+              <button type="button" popovertarget="view-mupa-city" aria-label="Enlarge Night city"><img src="mupa/thumb/city.webp" alt="Night city" width="600" height="338" loading="lazy" decoding="async"></button>
+              <figcaption>Night city</figcaption>
+            </figure>
+            <figure id="image-mupa-doors">
+              <button type="button" popovertarget="view-mupa-doors" aria-label="Enlarge Opening doors"><img src="mupa/thumb/doors.webp" alt="Opening doors" width="600" height="338" loading="lazy" decoding="async"></button>
+              <figcaption>Opening doors</figcaption>
+            </figure>
+            <figure id="image-mupa-room">
+              <button type="button" popovertarget="view-mupa-room" aria-label="Enlarge Perfect room"><img src="mupa/thumb/room.webp" alt="Perfect room" width="600" height="338" loading="lazy" decoding="async"></button>
+              <figcaption>Perfect room</figcaption>
+            </figure>
+            <figure id="image-mupa-water">
+              <button type="button" popovertarget="view-mupa-water" aria-label="Enlarge Falling water"><img src="mupa/thumb/water.webp" alt="Falling water" width="600" height="338" loading="lazy" decoding="async"></button>
+              <figcaption>Falling water</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+
+		
+      <section class="section-wrap project-section project-section--compact-mobile" id="collection-event" aria-labelledby="title-event">
+        <header class="project-heading">
+          <p class="eyebrow">Spaces &amp; occasions</p>
+          <h2 id="title-event">Events &amp; exhibitions</h2>
+          <p>At exhibition openings for <a href="https://hu.wikipedia.org/wiki/Konok_Tam%C3%A1s" target="_blank" rel="noopener noreferrer">Tamás Konok</a>, a Kossuth Prize laureate, internationally recognised Constructivist artist and leading figure in Hungarian contemporary art, slowly evolving geometric projections complemented his modern paintings. Visual elements appeared in rhythmic harmony with transcendent background music, echoing the character of his work.</p>
+
+          <p>At weddings and corporate events, a diverse visual palette created a distinctive atmosphere, with imagery projected directly onto the dance floor and performing artists.</p>
+
+          <p>For business events, the work typically involved panoramic projection using multiple projectors, video splitting and media server operation, ensuring seamless presentation of other artists’ work.</p>
+        </header>
+		  
+        <div class="studio-grid studio-grid--archive">
+			  
+          <figure id="image-event-2009-kiscell-museum-konok">
+            <button type="button" popovertarget="view-event-2009-kiscell-museum-konok" aria-label="Enlarge 2009 Kiscell Museum - Konok"><img src="event/thumb/2009-kiscell-museum-konok.webp" alt="2009 Kiscell Museum - Konok" width="600" height="400" loading="lazy" decoding="async"></button>
+            <figcaption>2009 Kiscell Museum - Konok</figcaption>
+          </figure>
+			 
+          <figure id="image-event-2012-gallery-of-pecs-konok-1">
+            <button type="button" popovertarget="view-event-2012-gallery-of-pecs-konok-1" aria-label="Enlarge 2012 Gallery of Pécs - Konok 1"><img src="event/thumb/2012-gallery-of-pecs-konok-1.webp" alt="2012 Gallery of Pécs - Konok 1" width="600" height="399" loading="lazy" decoding="async"></button>
+            <figcaption>2012 Gallery of Pécs - Konok 1</figcaption>
+          </figure>
+			 
+          <figure id="image-event-2012-gallery-of-pecs-konok-2">
+            <button type="button" popovertarget="view-event-2012-gallery-of-pecs-konok-2" aria-label="Enlarge 2012 Gallery of Pécs - Konok 2"><img src="event/thumb/2012-gallery-of-pecs-konok-2.webp" alt="2012 Gallery of Pécs - Konok 2" width="600" height="398" loading="lazy" decoding="async"></button>
+            <figcaption>2012 Gallery of Pécs - Konok 2</figcaption>
+          </figure>
+			 
+			 <figure id="image-event-complet-kone">
+				 <button type="button" popovertarget="view-event-complet-kone" aria-label="Enlarge Complet - Kone"><img src="event/thumb/complet-kone.webp" alt="Complet - Kone" width="600" height="399" loading="lazy" decoding="async"></button>
+				 <figcaption>2009 Complet - Kone</figcaption>
+			 </figure>
+			 
+        
+			 
+          <figure id="image-event-2014-sacellary-castle-wedding-1">
+            <button type="button" popovertarget="view-event-2014-sacellary-castle-wedding-1" aria-label="Enlarge 2014 Sacelláry-castle - Wedding 1"><img src="event/thumb/2014-sacellary-castle-wedding-1.webp" alt="2014 Sacelláry-castle - Wedding 1" width="600" height="841" loading="lazy" decoding="async"></button>
+            <figcaption>2014 Sacelláry-castle - Wedding 1</figcaption>
+          </figure>
+			 
+          <figure id="image-event-2014-sacellary-castle-wedding-2">
+            <button type="button" popovertarget="view-event-2014-sacellary-castle-wedding-2" aria-label="Enlarge 2014 Sacelláry-castle - Wedding 2"><img src="event/thumb/2014-sacellary-castle-wedding-2.webp" alt="2014 Sacelláry-castle - Wedding 2" width="600" height="841" loading="lazy" decoding="async"></button>
+            <figcaption>2014 Sacelláry-castle - Wedding 2</figcaption>
+          </figure>
+			
+			
+			<figure id="image-event-2014-sacellary-castle-wedding-3">
+				<button type="button" popovertarget="view-event-2014-sacellary-castle-wedding-3" aria-label="Enlarge 2014 Sacelláry-castle - Wedding 3"><img src="event/thumb/2014-sacellary-castle-wedding-3.webp" alt="2014 Sacelláry-castle - Wedding 3" width="600" height="841" loading="lazy" decoding="async"></button>
+				<figcaption>2014 Sacelláry-castle - Wedding 3</figcaption>
+			</figure>
+			
+			 
+          <figure id="image-event-bank-center-decoration">
+            <button type="button" popovertarget="view-event-bank-center-decoration" aria-label="Enlarge Bank Center - Decoration"><img src="event/thumb/bank-center-decoration.webp" alt="Bank Center - Decoration" width="600" height="800" loading="lazy" decoding="async"></button>
+            <figcaption>Bank Center - Decoration</figcaption>
+          </figure>
+			 
+			 
+			 <figure id="image-event-bank-center-fnd">
+				 <button type="button" popovertarget="view-event-bank-center-fnd" aria-label="Enlarge Bank Center - Fnd"><img src="event/thumb/bank-center-fnd.webp" alt="Bank Center - Fnd" width="600" height="450" loading="lazy" decoding="async"></button>
+				 <figcaption>Bank Center - Fnd</figcaption>
+			 </figure>
+			 
+			 <figure id="image-event-2014-debrecen-bmw-salon-3">
+				 <button type="button" popovertarget="view-event-2014-debrecen-bmw-salon-3" aria-label="Enlarge 2014 Debrecen - BMW Salon 3"><img src="event/thumb/2014-debrecen-bmw-salon-3.webp" alt="2014 Debrecen - BMW Salon 3" width="600" height="400" loading="lazy" decoding="async"></button>
+				 <figcaption>2014 Debrecen - BMW Salon 3</figcaption>
+			 </figure>
+			 
+			 <figure id="image-event-2014-debrecen-bmw-salon-1">
+				 <button type="button" popovertarget="view-event-2014-debrecen-bmw-salon-1" aria-label="Enlarge 2014 Debrecen - BMW Salon 1"><img src="event/thumb/2014-debrecen-bmw-salon-1.webp" alt="2014 Debrecen - BMW Salon 1" width="600" height="232" loading="lazy" decoding="async"></button>
+				 <figcaption>2014 Debrecen - BMW Salon 1</figcaption>
+			 </figure>
+			
+			 
+			 <figure id="image-event-2014-debrecen-bmw-salon-5">
+				 <button type="button" popovertarget="view-event-2014-debrecen-bmw-salon-5" aria-label="Enlarge 2014 Debrecen - BMW Salon 5"><img src="event/thumb/2014-debrecen-bmw-salon-5.webp" alt="2014 Debrecen - BMW Salon 5" width="600" height="232" loading="lazy" decoding="async"></button>
+				 <figcaption>2014 Debrecen - BMW Salon 5</figcaption>
+			 </figure>
+		
+			 
+       
+			 
+        </div>
+      </section>
+
+
+      <section class="section-wrap project-section project-section--compact-mobile" id="collection-2005-2012" aria-labelledby="title-2005-2012">
+        <header class="project-heading">
+          <p class="eyebrow">Archive / 2005–2012</p>
+          <h2 id="title-2005-2012">Party projections — The early years</h2>
+          <p>Party visuals remain an integral part of the underground music scene and have evolved enormously over the years. Early setups relied on analogue equipment and video synthesizers; as PCs became more powerful, new approaches made greater interactivity possible. AVImpulse was one of the collectives experimenting with these possibilities. Reactive, minimalist Flash animations and a custom-built, MIDI-enabled DJ audio mixer defined this period, with sharp visual cuts keeping the projections in sync with the rhythm of the music.</p>
+
+          <p>Another distinctive experiment involved projecting dense, textural visuals directly onto the audience. The crowd became an organic surface, bringing the imagery to life together with the music and the movement of the participants.</p>
+        </header>
+        <div class="studio-grid studio-grid--archive">
+          <figure id="image-2005-2012-2008-katlan-minimalheadz-1">
+            <button type="button" popovertarget="view-2005-2012-2008-katlan-minimalheadz-1" aria-label="Enlarge 2008 Katlan - Minimalheadz 1"><img src="2005-2012/thumb/2008-katlan-minimalheadz-1.webp" alt="2008 Katlan - Minimalheadz 1" width="600" height="400" loading="lazy" decoding="async"></button>
+            <figcaption>2008 Katlan - Minimalheadz 1</figcaption>
+          </figure>
+          <figure id="image-2005-2012-2008-katlan-minimalheadz-2">
+            <button type="button" popovertarget="view-2005-2012-2008-katlan-minimalheadz-2" aria-label="Enlarge 2008 Katlan - Minimalheadz 2"><img src="2005-2012/thumb/2008-katlan-minimalheadz-2.webp" alt="2008 Katlan - Minimalheadz 2" width="600" height="400" loading="lazy" decoding="async"></button>
+            <figcaption>2008 Katlan - Minimalheadz 2</figcaption>
+          </figure>
+          <figure id="image-2005-2012-2008-katlan-minimalheadz-3">
+            <button type="button" popovertarget="view-2005-2012-2008-katlan-minimalheadz-3" aria-label="Enlarge 2008 Katlan - Minimalheadz 3"><img src="2005-2012/thumb/2008-katlan-minimalheadz-3.webp" alt="2008 Katlan - Minimalheadz 3" width="600" height="400" loading="lazy" decoding="async"></button>
+            <figcaption>2008 Katlan - Minimalheadz 3</figcaption>
+          </figure>
+          <figure id="image-2005-2012-2009-hadititok-party-avimpulse-3">
+            <button type="button" popovertarget="view-2005-2012-2009-hadititok-party-avimpulse-3" aria-label="Enlarge 2009 Hadititok Party - AVImpulse 3"><img src="2005-2012/thumb/2009-hadititok-party-avimpulse-3.webp" alt="2009 Hadititok Party - AVImpulse 3" width="600" height="400" loading="lazy" decoding="async"></button>
+            <figcaption>2009 Hadititok Party - AVImpulse 3</figcaption>
+          </figure>
+          <figure id="image-2005-2012-2009-hadititok-party-avimpulse-4">
+            <button type="button" popovertarget="view-2005-2012-2009-hadititok-party-avimpulse-4" aria-label="Enlarge 2009 Hadititok Party - AVImpulse 4"><img src="2005-2012/thumb/2009-hadititok-party-avimpulse-4.webp" alt="2009 Hadititok Party - AVImpulse 4" width="600" height="403" loading="lazy" decoding="async"></button>
+            <figcaption>2009 Hadititok Party - AVImpulse 4</figcaption>
+          </figure>
+          <figure id="image-2005-2012-2009-hadititok-party-avimpulse-5">
+            <button type="button" popovertarget="view-2005-2012-2009-hadititok-party-avimpulse-5" aria-label="Enlarge 2009 Hadititok Party - AVImpulse 5"><img src="2005-2012/thumb/2009-hadititok-party-avimpulse-5.webp" alt="2009 Hadititok Party - AVImpulse 5" width="600" height="403" loading="lazy" decoding="async"></button>
+            <figcaption>2009 Hadititok Party - AVImpulse 5</figcaption>
+          </figure>
+          <figure id="image-2005-2012-2009-hadititok-party-avimpulse-6">
+            <button type="button" popovertarget="view-2005-2012-2009-hadititok-party-avimpulse-6" aria-label="Enlarge 2009 Hadititok Party - AVImpulse 6"><img src="2005-2012/thumb/2009-hadititok-party-avimpulse-6.webp" alt="2009 Hadititok Party - AVImpulse 6" width="600" height="400" loading="lazy" decoding="async"></button>
+            <figcaption>2009 Hadititok Party - AVImpulse 6</figcaption>
+          </figure>
+          <figure id="image-2005-2012-2009-hadititok-party-previs-1">
+            <button type="button" popovertarget="view-2005-2012-2009-hadititok-party-previs-1" aria-label="Enlarge 2009 Hadititok Party - Previs 1"><img src="2005-2012/thumb/2009-hadititok-party-previs-1.webp" alt="2009 Hadititok Party - Previs 1" width="600" height="412" loading="lazy" decoding="async"></button>
+            <figcaption>2009 Hadititok Party - Previs 1</figcaption>
+          </figure>
+          <figure id="image-2005-2012-2009-hadititok-party-previs-2">
+            <button type="button" popovertarget="view-2005-2012-2009-hadititok-party-previs-2" aria-label="Enlarge 2009 Hadititok Party - Previs 2"><img src="2005-2012/thumb/2009-hadititok-party-previs-2.webp" alt="2009 Hadititok Party - Previs 2" width="600" height="398" loading="lazy" decoding="async"></button>
+            <figcaption>2009 Hadititok Party - Previs 2</figcaption>
+          </figure>
+          <figure id="image-2005-2012-2010-merlin-clark-1">
+            <button type="button" popovertarget="view-2005-2012-2010-merlin-clark-1" aria-label="Enlarge 2010 Merlin - Clark 1"><img src="2005-2012/thumb/2010-merlin-clark-1.webp" alt="2010 Merlin - Clark 1" width="600" height="400" loading="lazy" decoding="async"></button>
+            <figcaption>2010 Merlin - Clark 1</figcaption>
+          </figure>
+          <figure id="image-2005-2012-2010-merlin-clark-2">
+            <button type="button" popovertarget="view-2005-2012-2010-merlin-clark-2" aria-label="Enlarge 2010 Merlin - Clark 2"><img src="2005-2012/thumb/2010-merlin-clark-2.webp" alt="2010 Merlin - Clark 2" width="600" height="400" loading="lazy" decoding="async"></button>
+            <figcaption>2010 Merlin - Clark 2</figcaption>
+          </figure>
+          <figure id="image-2005-2012-2011-a38-surgeon">
+            <button type="button" popovertarget="view-2005-2012-2011-a38-surgeon" aria-label="Enlarge 2011 A38 - Surgeon"><img src="2005-2012/thumb/2011-a38-surgeon.webp" alt="2011 A38 - Surgeon" width="600" height="400" loading="lazy" decoding="async"></button>
+            <figcaption>2011 A38 - Surgeon</figcaption>
+          </figure>
+        </div>
+      </section>
+
+
+      <section class="section-wrap project-section project-section--compact-mobile" id="collection-2012-1018" aria-labelledby="title-2012-1018">
+        <header class="project-heading">
+          <p class="eyebrow">Archive / 2012–1018</p>
+          <h2 id="title-2012-1018">Aximmetry — Generative visuals</h2>
+          <p>A collaborative development effort led to Performer, a dedicated branch of Aximmetry’s node-based visual synthesizer and 3D engine, designed for expressive, virtuoso improvisation through touchscreen and gesture control. A large, semi-transparent “holographic” control panel added a striking visual dimension: positioned on stage facing the audience, the performer appeared to be operating a science-fiction console.</p>
+
+          <p>Its significance went beyond the spectacular interface. It offered a compelling alternative to the complex, cumbersome node-based systems that dominated the field at the time. Elaborate multi-projector setups, projection mapping and seamlessly aligned panoramic projections combined with never-repeating live generative visuals to create a grand spectacle, all running efficiently on a single computer.</p>
+        </header>
+		  
+        <div class="studio-grid studio-grid--archive">
+          <figure id="image-2012-1018-2012-alkototabor-1">
+            <button type="button" popovertarget="view-2012-1018-2012-alkototabor-1" aria-label="Enlarge 2012 Alkotótábor 1"><img src="2012-1018/thumb/2012-alkototabor-1.webp" alt="2012 Alkotótábor 1" width="600" height="400" loading="lazy" decoding="async"></button>
+            <figcaption>2012 Alkotótábor 1</figcaption>
+          </figure>
+          <figure id="image-2012-1018-2012-alkototabor-2">
+            <button type="button" popovertarget="view-2012-1018-2012-alkototabor-2" aria-label="Enlarge 2012 Alkotótábor 2"><img src="2012-1018/thumb/2012-alkototabor-2.webp" alt="2012 Alkotótábor 2" width="600" height="400" loading="lazy" decoding="async"></button>
+            <figcaption>2012 Alkotótábor 2</figcaption>
+          </figure>
+			 <figure id="image-2012-1018-2013-alkototabor-1">
+				 <button type="button" popovertarget="view-2012-1018-2013-alkototabor-1" aria-label="Enlarge 2013 Alkotótábor 1"><img src="2012-1018/thumb/2013-alkototabor-1.webp" alt="2013 Alkotótábor 1" width="600" height="400" loading="lazy" decoding="async"></button>
+				 <figcaption>2013 Alkotótábor 1</figcaption>
+			 </figure>
+			 <figure id="image-2012-1018-2013-alkototabor-2">
+				 <button type="button" popovertarget="view-2012-1018-2013-alkototabor-2" aria-label="Enlarge 2013 Alkotótábor 2"><img src="2012-1018/thumb/2013-alkototabor-2.webp" alt="2013 Alkotótábor 2" width="600" height="400" loading="lazy" decoding="async"></button>
+				 <figcaption>2013 Alkotótábor 2</figcaption>
+			 </figure>
+          <figure id="image-2012-1018-2012-ozora-festival-1">
+            <button type="button" popovertarget="view-2012-1018-2012-ozora-festival-1" aria-label="Enlarge 2012 OZORA Festival 1"><img src="2012-1018/thumb/2012-ozora-festival-1.webp" alt="2012 OZORA Festival 1" width="600" height="398" loading="lazy" decoding="async"></button>
+            <figcaption>2012 OZORA Festival 1</figcaption>
+          </figure>
+          <figure id="image-2012-1018-2012-ozora-festival-2">
+            <button type="button" popovertarget="view-2012-1018-2012-ozora-festival-2" aria-label="Enlarge 2012 OZORA Festival 2"><img src="2012-1018/thumb/2012-ozora-festival-2.webp" alt="2012 OZORA Festival 2" width="600" height="399" loading="lazy" decoding="async"></button>
+            <figcaption>2012 OZORA Festival 2</figcaption>
+          </figure>
+          
+          <figure id="image-2012-1018-2013-ozora-festival-chillout">
+            <button type="button" popovertarget="view-2012-1018-2013-ozora-festival-chillout" aria-label="Enlarge 2013 OZORA Festival - Chillout"><img src="2012-1018/thumb/2013-ozora-festival-chillout.webp" alt="2013 OZORA Festival - Chillout" width="600" height="399" loading="lazy" decoding="async"></button>
+            <figcaption>2013 OZORA Festival - Chillout</figcaption>
+          </figure>
+			 <figure id="image-2012-1018-2014-r33-club">
+				 <button type="button" popovertarget="view-2012-1018-2014-r33-club" aria-label="Enlarge 2014 R33 Club"><img src="2012-1018/thumb/2014-r33-club.webp" alt="2014 R33 Club" width="600" height="400" loading="lazy" decoding="async"></button>
+				 <figcaption>2014 R33 Club</figcaption>
+			 </figure>
+			 <figure id="image-2012-1018-2014-goa-farsang-1">
+				 <button type="button" popovertarget="view-2012-1018-2014-goa-farsang-1" aria-label="Enlarge 2014 GOA Farsang 1"><img src="2012-1018/thumb/2014-goa-farsang-1.webp" alt="2014 GOA Farsang 1" width="600" height="400" loading="lazy" decoding="async"></button>
+				 <figcaption>2014 GOA Farsang 1</figcaption>
+			 </figure>
+			 <figure id="image-2012-1018-2014-goa-farsang-2">
+				 <button type="button" popovertarget="view-2012-1018-2014-goa-farsang-2" aria-label="Enlarge 2014 GOA Farsang 2"><img src="2012-1018/thumb/2014-goa-farsang-2.webp" alt="2014 GOA Farsang 2" width="600" height="400" loading="lazy" decoding="async"></button>
+				 <figcaption>2014 GOA Farsang 2</figcaption>
+			 </figure>
+          <figure id="image-2012-1018-2014-dabas-city-center-1">
+            <button type="button" popovertarget="view-2012-1018-2014-dabas-city-center-1" aria-label="Enlarge 2014 Dabas - City Center 1"><img src="2012-1018/thumb/2014-dabas-city-center-1.webp" alt="2014 Dabas - City Center 1" width="600" height="338" loading="lazy" decoding="async"></button>
+            <figcaption>2014 Dabas - City Center 1</figcaption>
+          </figure>
+          <figure id="image-2012-1018-2014-dabas-city-center-2">
+            <button type="button" popovertarget="view-2012-1018-2014-dabas-city-center-2" aria-label="Enlarge 2014 Dabas - City Center 2"><img src="2012-1018/thumb/2014-dabas-city-center-2.webp" alt="2014 Dabas - City Center 2" width="600" height="338" loading="lazy" decoding="async"></button>
+            <figcaption>2014 Dabas - City Center 2</figcaption>
+          </figure>
+         
+          
+        </div>
+      </section>
+
+
+      <section class="about" aria-labelledby="contact-title">
+        <div class="section-wrap about-inner">
+          <div>
+            <p class="eyebrow">Let’s create together</p>
+            <h2 id="contact-title">Give your space a new perspective</h2>
+          </div>
+          <div class="about-copy">
+            <p>Have an idea for a performance, projection or visual installation? Tell us about the space and the experience you would like to create.</p>
+            <a class="text-link" href="../contact.html">Get in touch →</a>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <div class="section-wrap footer-inner footer-standard">
+        <a class="brand footer-brand" href="../index.html" aria-label="Metatron Software home">
+          <img class="brand-mark" src="../main/metatron.svg" alt="" aria-hidden="true" width="38" height="38">
+          <span>Metatron <strong>Software</strong></span>
+        </a>
+        <p class="footer-description">Independent software development from Budapest, Hungary.</p>
+        <p class="footer-years">2018-2026</p>
+      </div>
+    </footer>
+
+
+    <div class="lightbox" id="view-mupa-2012-mupa-syrius-shattered-dreams-1" popover role="dialog" aria-label="2012 Mupa - Syrius - Shattered Dreams 1">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-mupa-2012-mupa-syrius-shattered-dreams-1" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-mupa-2012-mupa-syrius-shattered-dreams-1" popovertargetaction="hide" aria-label="Close enlarged image"><img src="mupa/2012-mupa-syrius-shattered-dreams-1.webp" alt="2012 Mupa - Syrius - Shattered Dreams 1" width="1734" height="1156" loading="lazy" decoding="async"></button>
+        <div class="lightbox-caption">
+          <a href="mupa/2012-mupa-syrius-shattered-dreams-1.webp">2012 Bakelit - Syrius - Shattered Dreams 1</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-mupa-2012-mupa-syrius-shattered-dreams-1" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="lightbox" id="view-mupa-2012-mupa-syrius-shattered-dreams-2" popover role="dialog" aria-label="2012 Mupa - Syrius - Shattered Dreams 2">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-mupa-2012-mupa-syrius-shattered-dreams-2" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-mupa-2012-mupa-syrius-shattered-dreams-2" popovertargetaction="hide" aria-label="Close enlarged image"><img src="mupa/2012-mupa-syrius-shattered-dreams-2.webp" alt="2012 Mupa - Syrius - Shattered Dreams 2" width="1920" height="1280" loading="lazy" decoding="async"></button>
+        <div class="lightbox-caption">
+          <a href="mupa/2012-mupa-syrius-shattered-dreams-2.webp">2012 Mupa - Syrius - Shattered Dreams 2</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-mupa-2012-mupa-syrius-shattered-dreams-2" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="lightbox" id="view-mupa-2012-mupa-syrius-shattered-dreams-3" popover role="dialog" aria-label="2012 Mupa - Syrius - Shattered Dreams 3">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-mupa-2012-mupa-syrius-shattered-dreams-3" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-mupa-2012-mupa-syrius-shattered-dreams-3" popovertargetaction="hide" aria-label="Close enlarged image"><img src="mupa/2012-mupa-syrius-shattered-dreams-3.webp" alt="2012 Mupa - Syrius - Shattered Dreams 3" width="3200" height="2133" loading="lazy" decoding="async"></button>
+        <div class="lightbox-caption">
+          <a href="mupa/2012-mupa-syrius-shattered-dreams-3.webp">2012 Mupa - Syrius - Shattered Dreams 3</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-mupa-2012-mupa-syrius-shattered-dreams-3" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="lightbox" id="view-mupa-2012-mupa-syrius-shattered-dreams-4" popover role="dialog" aria-label="2012 Mupa - Syrius - Shattered Dreams 4">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-mupa-2012-mupa-syrius-shattered-dreams-4" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-mupa-2012-mupa-syrius-shattered-dreams-4" popovertargetaction="hide" aria-label="Close enlarged image"><img src="mupa/2012-mupa-syrius-shattered-dreams-4.webp" alt="2012 Mupa - Syrius - Shattered Dreams 4" width="3200" height="2133" loading="lazy" decoding="async"></button>
+        <div class="lightbox-caption">
+          <a href="mupa/2012-mupa-syrius-shattered-dreams-4.webp">2012 Mupa - Syrius - Shattered Dreams 4</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-mupa-2012-mupa-syrius-shattered-dreams-4" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="lightbox" id="view-mupa-2012-mupa-syrius-shattered-dreams-5" popover role="dialog" aria-label="2012 Mupa - Syrius - Shattered Dreams 5">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-mupa-2012-mupa-syrius-shattered-dreams-5" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-mupa-2012-mupa-syrius-shattered-dreams-5" popovertargetaction="hide" aria-label="Close enlarged image"><img src="mupa/2012-mupa-syrius-shattered-dreams-5.webp" alt="2012 Mupa - Syrius - Shattered Dreams 5" width="3200" height="2133" loading="lazy" decoding="async"></button>
+        <div class="lightbox-caption">
+          <a href="mupa/2012-mupa-syrius-shattered-dreams-5.webp">2012 Mupa - Syrius - Shattered Dreams 5</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-mupa-2012-mupa-syrius-shattered-dreams-5" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="lightbox" id="view-mupa-2012-mupa-syrius-shattered-dreams-6" popover role="dialog" aria-label="2012 Mupa - Syrius - Shattered Dreams 6">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-mupa-2012-mupa-syrius-shattered-dreams-6" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-mupa-2012-mupa-syrius-shattered-dreams-6" popovertargetaction="hide" aria-label="Close enlarged image"><img src="mupa/2012-mupa-syrius-shattered-dreams-6.webp" alt="2012 Mupa - Syrius - Shattered Dreams 6" width="3200" height="2133" loading="lazy" decoding="async"></button>
+        <div class="lightbox-caption">
+          <a href="mupa/2012-mupa-syrius-shattered-dreams-6.webp">2012 Mupa - Syrius - Shattered Dreams 6</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-mupa-2012-mupa-syrius-shattered-dreams-6" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="lightbox" id="view-mupa-2012-mupa-syrius-shattered-dreams-7" popover role="dialog" aria-label="2012 Mupa - Syrius - Shattered Dreams 7">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-mupa-2012-mupa-syrius-shattered-dreams-7" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-mupa-2012-mupa-syrius-shattered-dreams-7" popovertargetaction="hide" aria-label="Close enlarged image"><img src="mupa/2012-mupa-syrius-shattered-dreams-7.webp" alt="2012 Mupa - Syrius - Shattered Dreams 7" width="3200" height="2133" loading="lazy" decoding="async"></button>
+        <div class="lightbox-caption">
+          <a href="mupa/2012-mupa-syrius-shattered-dreams-7.webp">2012 Mupa - Syrius - Shattered Dreams 7</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-mupa-2012-mupa-syrius-shattered-dreams-7" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="lightbox" id="view-mupa-2012-mupa-syrius-shattered-dreams-8" popover role="dialog" aria-label="2012 Mupa - Syrius - Shattered Dreams 8">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-mupa-2012-mupa-syrius-shattered-dreams-8" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-mupa-2012-mupa-syrius-shattered-dreams-8" popovertargetaction="hide" aria-label="Close enlarged image"><img src="mupa/2012-mupa-syrius-shattered-dreams-8.webp" alt="2012 Mupa - Syrius - Shattered Dreams 8" width="3200" height="2133" loading="lazy" decoding="async"></button>
+        <div class="lightbox-caption">
+          <a href="mupa/2012-mupa-syrius-shattered-dreams-8.webp">2012 Mupa - Syrius - Shattered Dreams 8</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-mupa-2012-mupa-syrius-shattered-dreams-8" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="lightbox" id="view-event-2009-kiscell-museum-konok" popover role="dialog" aria-label="2009 Kiscell Museum - Konok">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-event-2009-kiscell-museum-konok" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-event-2009-kiscell-museum-konok" popovertargetaction="hide" aria-label="Close enlarged image"><img src="event/2009-kiscell-museum-konok.webp" alt="2009 Kiscell Museum - Konok" width="1536" height="1024" loading="lazy" decoding="async"></button>
+        <div class="lightbox-caption">
+          <a href="event/2009-kiscell-museum-konok.webp">2009 Kiscell Museum - Konok</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-event-2009-kiscell-museum-konok" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="lightbox" id="view-event-2012-gallery-of-pecs-konok-1" popover role="dialog" aria-label="2012 Gallery of Pécs - Konok 1">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-event-2012-gallery-of-pecs-konok-1" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-event-2012-gallery-of-pecs-konok-1" popovertargetaction="hide" aria-label="Close enlarged image"><img src="event/2012-gallery-of-pecs-konok-1.webp" alt="2012 Gallery of Pécs - Konok 1" width="2048" height="1361" loading="lazy" decoding="async"></button>
+        <div class="lightbox-caption">
+          <a href="event/2012-gallery-of-pecs-konok-1.webp">2012 Gallery of Pécs - Konok 1</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-event-2012-gallery-of-pecs-konok-1" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="lightbox" id="view-event-2012-gallery-of-pecs-konok-2" popover role="dialog" aria-label="2012 Gallery of Pécs - Konok 2">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-event-2012-gallery-of-pecs-konok-2" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-event-2012-gallery-of-pecs-konok-2" popovertargetaction="hide" aria-label="Close enlarged image"><img src="event/2012-gallery-of-pecs-konok-2.webp" alt="2012 Gallery of Pécs - Konok 2" width="2048" height="1360" loading="lazy" decoding="async"></button>
+        <div class="lightbox-caption">
+          <a href="event/2012-gallery-of-pecs-konok-2.webp">2012 Gallery of Pécs - Konok 2</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-event-2012-gallery-of-pecs-konok-2" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="lightbox" id="view-event-2014-debrecen-bmw-salon-1" popover role="dialog" aria-label="2014 Debrecen - BMW Salon 1">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-event-2014-debrecen-bmw-salon-1" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-event-2014-debrecen-bmw-salon-1" popovertargetaction="hide" aria-label="Close enlarged image"><img src="event/2014-debrecen-bmw-salon-1.webp" alt="2014 Debrecen - BMW Salon 1" width="2016" height="780" loading="lazy" decoding="async"></button>
+        <div class="lightbox-caption">
+          <a href="event/2014-debrecen-bmw-salon-1.webp">2014 Debrecen - BMW Salon 1</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-event-2014-debrecen-bmw-salon-1" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="lightbox" id="view-event-2014-debrecen-bmw-salon-3" popover role="dialog" aria-label="2014 Debrecen - BMW Salon 3">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-event-2014-debrecen-bmw-salon-3" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-event-2014-debrecen-bmw-salon-3" popovertargetaction="hide" aria-label="Close enlarged image"><img src="event/2014-debrecen-bmw-salon-3.webp" alt="2014 Debrecen - BMW Salon 3" width="2244" height="1496" loading="lazy" decoding="async"></button>
+        <div class="lightbox-caption">
+          <a href="event/2014-debrecen-bmw-salon-3.webp">2014 Debrecen - BMW Salon 3</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-event-2014-debrecen-bmw-salon-3" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="lightbox" id="view-event-2014-debrecen-bmw-salon-5" popover role="dialog" aria-label="2014 Debrecen - BMW Salon 5">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-event-2014-debrecen-bmw-salon-5" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-event-2014-debrecen-bmw-salon-5" popovertargetaction="hide" aria-label="Close enlarged image"><img src="event/2014-debrecen-bmw-salon-5.webp" alt="2014 Debrecen - BMW Salon 5" width="2016" height="780" loading="lazy" decoding="async"></button>
+        <div class="lightbox-caption">
+          <a href="event/2014-debrecen-bmw-salon-5.webp">2014 Debrecen - BMW Salon 5</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-event-2014-debrecen-bmw-salon-5" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="lightbox" id="view-event-2014-sacellary-castle-wedding-1" popover role="dialog" aria-label="2014 Sacelláry-castle - Wedding 1">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-event-2014-sacellary-castle-wedding-1" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-event-2014-sacellary-castle-wedding-1" popovertargetaction="hide" aria-label="Close enlarged image"><img src="event/2014-sacellary-castle-wedding-1.webp" alt="2014 Sacelláry-castle - Wedding 1" width="1059" height="1485" loading="lazy" decoding="async"></button>
+        <div class="lightbox-caption">
+          <a href="event/2014-sacellary-castle-wedding-1.webp">2014 Sacelláry-castle - Wedding 1</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-event-2014-sacellary-castle-wedding-1" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="lightbox" id="view-event-2014-sacellary-castle-wedding-2" popover role="dialog" aria-label="2014 Sacelláry-castle - Wedding 2">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-event-2014-sacellary-castle-wedding-2" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-event-2014-sacellary-castle-wedding-2" popovertargetaction="hide" aria-label="Close enlarged image"><img src="event/2014-sacellary-castle-wedding-2.webp" alt="2014 Sacelláry-castle - Wedding 2" width="1059" height="1485" loading="lazy" decoding="async"></button>
+        <div class="lightbox-caption">
+          <a href="event/2014-sacellary-castle-wedding-2.webp">2014 Sacelláry-castle - Wedding 2</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-event-2014-sacellary-castle-wedding-2" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="lightbox" id="view-event-2014-sacellary-castle-wedding-3" popover role="dialog" aria-label="2014 Sacelláry-castle - Wedding 3">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-event-2014-sacellary-castle-wedding-3" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-event-2014-sacellary-castle-wedding-3" popovertargetaction="hide" aria-label="Close enlarged image"><img src="event/2014-sacellary-castle-wedding-3.webp" alt="2014 Sacelláry-castle - Wedding 3" width="1059" height="1485" loading="lazy" decoding="async"></button>
+        <div class="lightbox-caption">
+          <a href="event/2014-sacellary-castle-wedding-3.webp">2014 Sacelláry-castle - Wedding 3</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-event-2014-sacellary-castle-wedding-3" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="lightbox" id="view-event-bank-center-decoration" popover role="dialog" aria-label="Bank Center - Decoration">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-event-bank-center-decoration" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-event-bank-center-decoration" popovertargetaction="hide" aria-label="Close enlarged image"><img src="event/bank-center-decoration.webp" alt="Bank Center - Decoration" width="1086" height="1448" loading="lazy" decoding="async"></button>
+        <div class="lightbox-caption">
+          <a href="event/bank-center-decoration.webp">Bank Center - Decoration</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-event-bank-center-decoration" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="lightbox" id="view-event-bank-center-fnd" popover role="dialog" aria-label="Bank Center - Fnd">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-event-bank-center-fnd" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-event-bank-center-fnd" popovertargetaction="hide" aria-label="Close enlarged image"><img src="event/bank-center-fnd.webp" alt="Bank Center - Fnd" width="1448" height="1086" loading="lazy" decoding="async"></button>
+        <div class="lightbox-caption">
+          <a href="event/bank-center-fnd.webp">Bank Center - Fnd</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-event-bank-center-fnd" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="lightbox" id="view-event-complet-kone" popover role="dialog" aria-label="Complet - Kone">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-event-complet-kone" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-event-complet-kone" popovertargetaction="hide" aria-label="Close enlarged image"><img src="event/complet-kone.webp" alt="Complet - Kone" width="3200" height="2130" loading="lazy" decoding="async"></button>
+        <div class="lightbox-caption">
+          <a href="event/complet-kone.webp">Complet - Kone</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-event-complet-kone" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="lightbox" id="view-2005-2012-2008-katlan-minimalheadz-1" popover role="dialog" aria-label="2008 Katlan - Minimalheadz 1">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-2005-2012-2008-katlan-minimalheadz-1" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-2005-2012-2008-katlan-minimalheadz-1" popovertargetaction="hide" aria-label="Close enlarged image"><img src="2005-2012/2008-katlan-minimalheadz-1.webp" alt="2008 Katlan - Minimalheadz 1" width="1920" height="1280" loading="lazy" decoding="async"></button>
+        <div class="lightbox-caption">
+          <a href="2005-2012/2008-katlan-minimalheadz-1.webp">2008 Katlan - Minimalheadz 1</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-2005-2012-2008-katlan-minimalheadz-1" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="lightbox" id="view-2005-2012-2008-katlan-minimalheadz-2" popover role="dialog" aria-label="2008 Katlan - Minimalheadz 2">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-2005-2012-2008-katlan-minimalheadz-2" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-2005-2012-2008-katlan-minimalheadz-2" popovertargetaction="hide" aria-label="Close enlarged image"><img src="2005-2012/2008-katlan-minimalheadz-2.webp" alt="2008 Katlan - Minimalheadz 2" width="1920" height="1280" loading="lazy" decoding="async"></button>
+        <div class="lightbox-caption">
+          <a href="2005-2012/2008-katlan-minimalheadz-2.webp">2008 Katlan - Minimalheadz 2</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-2005-2012-2008-katlan-minimalheadz-2" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="lightbox" id="view-2005-2012-2008-katlan-minimalheadz-3" popover role="dialog" aria-label="2008 Katlan - Minimalheadz 3">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-2005-2012-2008-katlan-minimalheadz-3" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-2005-2012-2008-katlan-minimalheadz-3" popovertargetaction="hide" aria-label="Close enlarged image"><img src="2005-2012/2008-katlan-minimalheadz-3.webp" alt="2008 Katlan - Minimalheadz 3" width="1920" height="1280" loading="lazy" decoding="async"></button>
+        <div class="lightbox-caption">
+          <a href="2005-2012/2008-katlan-minimalheadz-3.webp">2008 Katlan - Minimalheadz 3</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-2005-2012-2008-katlan-minimalheadz-3" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="lightbox" id="view-2005-2012-2009-hadititok-party-avimpulse-3" popover role="dialog" aria-label="2009 Hadititok Party - AVImpulse 3">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-2005-2012-2009-hadititok-party-avimpulse-3" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-2005-2012-2009-hadititok-party-avimpulse-3" popovertargetaction="hide" aria-label="Close enlarged image"><img src="2005-2012/2009-hadititok-party-avimpulse-3.webp" alt="2009 Hadititok Party - AVImpulse 3" width="2400" height="1600" loading="lazy" decoding="async"></button>
+        <div class="lightbox-caption">
+          <a href="2005-2012/2009-hadititok-party-avimpulse-3.webp">2009 Hadititok Party - AVImpulse 3</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-2005-2012-2009-hadititok-party-avimpulse-3" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="lightbox" id="view-2005-2012-2009-hadititok-party-avimpulse-4" popover role="dialog" aria-label="2009 Hadititok Party - AVImpulse 4">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-2005-2012-2009-hadititok-party-avimpulse-4" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-2005-2012-2009-hadititok-party-avimpulse-4" popovertargetaction="hide" aria-label="Close enlarged image"><img src="2005-2012/2009-hadititok-party-avimpulse-4.webp" alt="2009 Hadititok Party - AVImpulse 4" width="1920" height="1290" loading="lazy" decoding="async"></button>
+        <div class="lightbox-caption">
+          <a href="2005-2012/2009-hadititok-party-avimpulse-4.webp">2009 Hadititok Party - AVImpulse 4</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-2005-2012-2009-hadititok-party-avimpulse-4" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="lightbox" id="view-2005-2012-2009-hadititok-party-avimpulse-5" popover role="dialog" aria-label="2009 Hadititok Party - AVImpulse 5">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-2005-2012-2009-hadititok-party-avimpulse-5" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-2005-2012-2009-hadititok-party-avimpulse-5" popovertargetaction="hide" aria-label="Close enlarged image"><img src="2005-2012/2009-hadititok-party-avimpulse-5.webp" alt="2009 Hadititok Party - AVImpulse 5" width="2400" height="1613" loading="lazy" decoding="async"></button>
+        <div class="lightbox-caption">
+          <a href="2005-2012/2009-hadititok-party-avimpulse-5.webp">2009 Hadititok Party - AVImpulse 5</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-2005-2012-2009-hadititok-party-avimpulse-5" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="lightbox" id="view-2005-2012-2009-hadititok-party-avimpulse-6" popover role="dialog" aria-label="2009 Hadititok Party - AVImpulse 6">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-2005-2012-2009-hadititok-party-avimpulse-6" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-2005-2012-2009-hadititok-party-avimpulse-6" popovertargetaction="hide" aria-label="Close enlarged image"><img src="2005-2012/2009-hadititok-party-avimpulse-6.webp" alt="2009 Hadititok Party - AVImpulse 6" width="2400" height="1600" loading="lazy" decoding="async"></button>
+        <div class="lightbox-caption">
+          <a href="2005-2012/2009-hadititok-party-avimpulse-6.webp">2009 Hadititok Party - AVImpulse 6</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-2005-2012-2009-hadititok-party-avimpulse-6" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="lightbox" id="view-2005-2012-2009-hadititok-party-previs-1" popover role="dialog" aria-label="2009 Hadititok Party - Previs 1">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-2005-2012-2009-hadititok-party-previs-1" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-2005-2012-2009-hadititok-party-previs-1" popovertargetaction="hide" aria-label="Close enlarged image"><img src="2005-2012/2009-hadititok-party-previs-1.webp" alt="2009 Hadititok Party - Previs 1" width="2400" height="1650" loading="lazy" decoding="async"></button>
+        <div class="lightbox-caption">
+          <a href="2005-2012/2009-hadititok-party-previs-1.webp">2009 Hadititok Party - Previs 1</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-2005-2012-2009-hadititok-party-previs-1" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="lightbox" id="view-2005-2012-2009-hadititok-party-previs-2" popover role="dialog" aria-label="2009 Hadititok Party - Previs 2">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-2005-2012-2009-hadititok-party-previs-2" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-2005-2012-2009-hadititok-party-previs-2" popovertargetaction="hide" aria-label="Close enlarged image"><img src="2005-2012/2009-hadititok-party-previs-2.webp" alt="2009 Hadititok Party - Previs 2" width="2400" height="1594" loading="lazy" decoding="async"></button>
+        <div class="lightbox-caption">
+          <a href="2005-2012/2009-hadititok-party-previs-2.webp">2009 Hadititok Party - Previs 2</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-2005-2012-2009-hadititok-party-previs-2" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="lightbox" id="view-2005-2012-2010-merlin-clark-1" popover role="dialog" aria-label="2010 Merlin - Clark 1">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-2005-2012-2010-merlin-clark-1" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-2005-2012-2010-merlin-clark-1" popovertargetaction="hide" aria-label="Close enlarged image"><img src="2005-2012/2010-merlin-clark-1.webp" alt="2010 Merlin - Clark 1" width="1920" height="1280" loading="lazy" decoding="async"></button>
+        <div class="lightbox-caption">
+          <a href="2005-2012/2010-merlin-clark-1.webp">2010 Merlin - Clark 1</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-2005-2012-2010-merlin-clark-1" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="lightbox" id="view-2005-2012-2010-merlin-clark-2" popover role="dialog" aria-label="2010 Merlin - Clark 2">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-2005-2012-2010-merlin-clark-2" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-2005-2012-2010-merlin-clark-2" popovertargetaction="hide" aria-label="Close enlarged image"><img src="2005-2012/2010-merlin-clark-2.webp" alt="2010 Merlin - Clark 2" width="2400" height="1600" loading="lazy" decoding="async"></button>
+        <div class="lightbox-caption">
+          <a href="2005-2012/2010-merlin-clark-2.webp">2010 Merlin - Clark 2</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-2005-2012-2010-merlin-clark-2" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="lightbox" id="view-2005-2012-2011-a38-surgeon" popover role="dialog" aria-label="2011 A38 - Surgeon">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-2005-2012-2011-a38-surgeon" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-2005-2012-2011-a38-surgeon" popovertargetaction="hide" aria-label="Close enlarged image"><img src="2005-2012/2011-a38-surgeon.webp" alt="2011 A38 - Surgeon" width="1920" height="1280" loading="lazy" decoding="async"></button>
+        <div class="lightbox-caption">
+          <a href="2005-2012/2011-a38-surgeon.webp">2011 A38 - Surgeon</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-2005-2012-2011-a38-surgeon" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="lightbox" id="view-2012-1018-2012-alkototabor-1" popover role="dialog" aria-label="2012 Alkotótábor 1">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-2012-1018-2012-alkototabor-1" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-2012-1018-2012-alkototabor-1" popovertargetaction="hide" aria-label="Close enlarged image"><img src="2012-1018/2012-alkototabor-1.webp" alt="2012 Alkotótábor 1" width="1920" height="1280" loading="lazy" decoding="async"></button>
+        <div class="lightbox-caption">
+          <a href="2012-1018/2012-alkototabor-1.webp">2012 Alkotótábor 1</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-2012-1018-2012-alkototabor-1" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="lightbox" id="view-2012-1018-2012-alkototabor-2" popover role="dialog" aria-label="2012 Alkotótábor 2">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-2012-1018-2012-alkototabor-2" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-2012-1018-2012-alkototabor-2" popovertargetaction="hide" aria-label="Close enlarged image"><img src="2012-1018/2012-alkototabor-2.webp" alt="2012 Alkotótábor 2" width="2800" height="1867" loading="lazy" decoding="async"></button>
+        <div class="lightbox-caption">
+          <a href="2012-1018/2012-alkototabor-2.webp">2012 Alkotótábor 2</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-2012-1018-2012-alkototabor-2" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="lightbox" id="view-2012-1018-2012-ozora-festival-1" popover role="dialog" aria-label="2012 OZORA Festival 1">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-2012-1018-2012-ozora-festival-1" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-2012-1018-2012-ozora-festival-1" popovertargetaction="hide" aria-label="Close enlarged image"><img src="2012-1018/2012-ozora-festival-1.webp" alt="2012 OZORA Festival 1" width="1920" height="1275" loading="lazy" decoding="async"></button>
+        <div class="lightbox-caption">
+          <a href="2012-1018/2012-ozora-festival-1.webp">2012 OZORA Festival 1</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-2012-1018-2012-ozora-festival-1" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="lightbox" id="view-2012-1018-2012-ozora-festival-2" popover role="dialog" aria-label="2012 OZORA Festival 2">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-2012-1018-2012-ozora-festival-2" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-2012-1018-2012-ozora-festival-2" popovertargetaction="hide" aria-label="Close enlarged image"><img src="2012-1018/2012-ozora-festival-2.webp" alt="2012 OZORA Festival 2" width="2800" height="1860" loading="lazy" decoding="async"></button>
+        <div class="lightbox-caption">
+          <a href="2012-1018/2012-ozora-festival-2.webp">2012 OZORA Festival 2</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-2012-1018-2012-ozora-festival-2" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="lightbox" id="view-2012-1018-2013-alkototabor-1" popover role="dialog" aria-label="2013 Alkotótábor 1">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-2012-1018-2013-alkototabor-1" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-2012-1018-2013-alkototabor-1" popovertargetaction="hide" aria-label="Close enlarged image"><img src="2012-1018/2013-alkototabor-1.webp" alt="2013 Alkotótábor 1" width="1920" height="1280" loading="lazy" decoding="async"></button>
+        <div class="lightbox-caption">
+          <a href="2012-1018/2013-alkototabor-1.webp">2013 Alkotótábor 1</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-2012-1018-2013-alkototabor-1" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="lightbox" id="view-2012-1018-2013-alkototabor-2" popover role="dialog" aria-label="2013 Alkotótábor 2">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-2012-1018-2013-alkototabor-2" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-2012-1018-2013-alkototabor-2" popovertargetaction="hide" aria-label="Close enlarged image"><img src="2012-1018/2013-alkototabor-2.webp" alt="2013 Alkotótábor 2" width="2025" height="1350" loading="lazy" decoding="async"></button>
+        <div class="lightbox-caption">
+          <a href="2012-1018/2013-alkototabor-2.webp">2013 Alkotótábor 2</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-2012-1018-2013-alkototabor-2" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="lightbox" id="view-2012-1018-2013-ozora-festival-chillout" popover role="dialog" aria-label="2013 OZORA Festival - Chillout">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-2012-1018-2013-ozora-festival-chillout" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-2012-1018-2013-ozora-festival-chillout" popovertargetaction="hide" aria-label="Close enlarged image"><img src="2012-1018/2013-ozora-festival-chillout.webp" alt="2013 OZORA Festival - Chillout" width="3200" height="2130" loading="lazy" decoding="async"></button>
+        <div class="lightbox-caption">
+          <a href="2012-1018/2013-ozora-festival-chillout.webp">2013 OZORA Festival - Chillout</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-2012-1018-2013-ozora-festival-chillout" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="lightbox" id="view-2012-1018-2014-dabas-city-center-1" popover role="dialog" aria-label="2014 Dabas - City Center 1">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-2012-1018-2014-dabas-city-center-1" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-2012-1018-2014-dabas-city-center-1" popovertargetaction="hide" aria-label="Close enlarged image"><img src="2012-1018/2014-dabas-city-center-1.webp" alt="2014 Dabas - City Center 1" width="3200" height="1800" loading="lazy" decoding="async"></button>
+        <div class="lightbox-caption">
+          <a href="2012-1018/2014-dabas-city-center-1.webp">2014 Dabas - City Center 1</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-2012-1018-2014-dabas-city-center-1" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="lightbox" id="view-2012-1018-2014-dabas-city-center-2" popover role="dialog" aria-label="2014 Dabas - City Center 2">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-2012-1018-2014-dabas-city-center-2" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-2012-1018-2014-dabas-city-center-2" popovertargetaction="hide" aria-label="Close enlarged image"><img src="2012-1018/2014-dabas-city-center-2.webp" alt="2014 Dabas - City Center 2" width="3200" height="1800" loading="lazy" decoding="async"></button>
+        <div class="lightbox-caption">
+          <a href="2012-1018/2014-dabas-city-center-2.webp">2014 Dabas - City Center 2</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-2012-1018-2014-dabas-city-center-2" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="lightbox" id="view-2012-1018-2014-goa-farsang-1" popover role="dialog" aria-label="2014 GOA Farsang 1">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-2012-1018-2014-goa-farsang-1" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-2012-1018-2014-goa-farsang-1" popovertargetaction="hide" aria-label="Close enlarged image"><img src="2012-1018/2014-goa-farsang-1.webp" alt="2014 GOA Farsang 1" width="2400" height="1600" loading="lazy" decoding="async"></button>
+        <div class="lightbox-caption">
+          <a href="2012-1018/2014-goa-farsang-1.webp">2014 GOA Farsang 1</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-2012-1018-2014-goa-farsang-1" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="lightbox" id="view-2012-1018-2014-goa-farsang-2" popover role="dialog" aria-label="2014 GOA Farsang 2">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-2012-1018-2014-goa-farsang-2" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-2012-1018-2014-goa-farsang-2" popovertargetaction="hide" aria-label="Close enlarged image"><img src="2012-1018/2014-goa-farsang-2.webp" alt="2014 GOA Farsang 2" width="2800" height="1866" loading="lazy" decoding="async"></button>
+        <div class="lightbox-caption">
+          <a href="2012-1018/2014-goa-farsang-2.webp">2014 GOA Farsang 2</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-2012-1018-2014-goa-farsang-2" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="lightbox" id="view-2012-1018-2014-r33-club" popover role="dialog" aria-label="2014 R33 Club">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-2012-1018-2014-r33-club" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-2012-1018-2014-r33-club" popovertargetaction="hide" aria-label="Close enlarged image"><img src="2012-1018/2014-r33-club.webp" alt="2014 R33 Club" width="2400" height="1600" loading="lazy" decoding="async"></button>
+        <div class="lightbox-caption">
+          <a href="2012-1018/2014-r33-club.webp">2014 R33 Club</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-2012-1018-2014-r33-club" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="lightbox" id="view-mupa-city" popover role="dialog" aria-label="Night city">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-mupa-city" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-mupa-city" popovertargetaction="hide" aria-label="Close enlarged image"><img src="mupa/city.webp" alt="Night city" width="1920" height="1080" loading="lazy" decoding="async"></button>
+        <div class="lightbox-caption">
+          <a href="mupa/city.webp">Night city</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-mupa-city" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="lightbox" id="view-mupa-doors" popover role="dialog" aria-label="Opening doors">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-mupa-doors" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-mupa-doors" popovertargetaction="hide" aria-label="Close enlarged image"><img src="mupa/doors.webp" alt="Opening doors" width="1920" height="1080" loading="lazy" decoding="async"></button>
+        <div class="lightbox-caption">
+          <a href="mupa/doors.webp">Opening doors</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-mupa-doors" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="lightbox" id="view-mupa-room" popover role="dialog" aria-label="Perfect room">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-mupa-room" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-mupa-room" popovertargetaction="hide" aria-label="Close enlarged image"><img src="mupa/room.webp" alt="Perfect room" width="1920" height="1080" loading="lazy" decoding="async"></button>
+        <div class="lightbox-caption">
+          <a href="mupa/room.webp">Perfect room</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-mupa-room" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="lightbox" id="view-mupa-water" popover role="dialog" aria-label="Falling water">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-mupa-water" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-mupa-water" popovertargetaction="hide" aria-label="Close enlarged image"><img src="mupa/water.webp" alt="Falling water" width="1920" height="1080" loading="lazy" decoding="async"></button>
+        <div class="lightbox-caption">
+          <a href="mupa/water.webp">Falling water</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-mupa-water" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

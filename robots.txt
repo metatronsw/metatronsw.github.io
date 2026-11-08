@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://metatronsw.github.io/sitemap.xml

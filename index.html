@@ -1,0 +1,457 @@
+<!doctype html>
+<html lang="en" class="site-page">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Metatron Software creates useful applications for iPhone, iPad and Mac, and builds custom software for creative projects.">
+    <meta name="theme-color" content="#f5f8fb">
+    <title>Metatron Software — Apps &amp; custom development</title>
+    <link rel="icon" type="image/svg+xml" href="main/favicon.svg">
+    <link rel="stylesheet" href="style.css">
+    <style>
+      .visual-showcase {
+        padding-top: 5.5rem;
+      }
+
+
+      .visual-image-stack {
+        display: grid;
+        align-self: center;
+      }
+
+
+      .visual-image-stack figure {
+        grid-area: 1 / 1;
+        align-self: start;
+        width: 85%;
+        min-width: 0;
+        margin: 0;
+      }
+
+
+      .visual-image-stack figure:last-child {
+        justify-self: end;
+        margin-top: 35%;
+      }
+
+
+      .visual-image-stack a {
+        display: block;
+        border-radius: 7px;
+        box-shadow: var(--shadow);
+      }
+
+
+      .visual-image-stack img {
+        width: 100%;
+        border-radius: inherit;
+      }
+
+
+      /* Keep the tree at its original size while its SVG lines extend outside the frame. */
+      .tree-frame {
+        display: block;
+        position: relative;
+        width: 84.5%;
+        max-width: min(100%, 2048px);
+        aspect-ratio: 1;
+        justify-self: center;
+        align-self: center;
+      }
+
+
+      .tree-frame > object {
+        position: absolute;
+        left: -235.15625%;
+        top: -14.0625%;
+        width: 535.15625%;
+        max-width: none;
+        height: auto;
+        pointer-events: none;
+        user-select: none;
+      }
+
+
+      @keyframes home-swift-parallax {
+        from {
+          translate: 0 0;
+          scale: 1;
+        }
+
+        to {
+          translate: 20vw 40vh;
+          scale: 1.4;
+        }
+      }
+
+
+      @supports (animation-timeline: scroll(root block)) and (animation-range: 0px 100vh) {
+        @media (prefers-reduced-motion: no-preference) {
+          .hero .swift-parallax {
+            animation-name: home-swift-parallax;
+          }
+        }
+      }
+
+
+      @media (max-width: 760px) {
+        .home-footer .footer-inner > p {
+          display: none;
+        }
+
+        .home-footer .social-links {
+          align-self: flex-end;
+          justify-content: flex-end;
+          margin-left: auto;
+        }
+
+        .visual-showcase {
+          padding-top: 4rem;
+        }
+      }
+    </style>
+
+    <link rel="canonical" href="https://metatronsw.github.io/">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Metatron Software">
+    <meta property="og:title" content="Metatron Software — Apps &amp; custom development">
+    <meta property="og:description" content="Metatron Software creates useful applications for iPhone, iPad and Mac, and builds custom software for creative projects.">
+    <meta property="og:url" content="https://metatronsw.github.io/">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Metatron Software — Apps &amp; custom development">
+    <meta name="twitter:description" content="Metatron Software creates useful applications for iPhone, iPad and Mac, and builds custom software for creative projects.">
+  </head>
+  <body class="site-effects app-grid-effects-only">
+    <header class="site-header menu-header">
+      <a class="brand" href="index.html" aria-label="Metatron Software home">
+        <img class="brand-mark" src="main/metatron.svg" alt="" aria-hidden="true" width="38" height="38">
+        <span>Metatron <strong>Software</strong></span>
+      </a>
+      <nav aria-label="Main navigation">
+        <a href="app/index.html">Develop</a>
+        <a href="about.html">About</a>
+        <a href="realtime/index.html">Realtime</a>
+        <a href="design/index.html">Design</a>
+        <a href="visual/index.html">Visual</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <a class="sitemap-menu" href="sitemap.html" aria-label="Sitemap" title="Sitemap">
+        <img src="main/menu.svg" alt="" width="24" height="24">
+      </a>
+    </header>
+    <main>
+      <section class="hero hero-with-art" aria-labelledby="hero-title">
+        <img class="hero-background-art hero-parallax swift-parallax" src="main/swifticon.svg" alt="" aria-hidden="true">
+        <div class="hero-copy">
+          <p class="eyebrow">Independent software studio</p>
+          <h1 id="hero-title">Thoughtful software for work and play.</h1>
+          <p class="hero-text">We create useful applications for iPhone, iPad and Mac — from precise timers and creative tools to custom software experiences.</p>
+          <a class="button" href="about.html">Meet Metatron <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="hero-art" aria-label="Featured apps">
+          <a class="hero-icon hero-icon-signee" href="app/signee/index.html" aria-label="Signee Timer"> <img class="app-artwork" src="app/signee/appicon.svg" alt="" width="512" height="512"> </a>
+          <a class="hero-icon hero-icon-split" href="app/splitclock/index.html" aria-label="Split Clock"> <img class="app-artwork" src="app/splitclock/appicon.svg" alt="" width="512" height="512"> </a>
+          <a class="hero-icon hero-icon-convert" href="app/imgconverter/index.html" aria-label="Image Auto Convert"> <img class="app-artwork" src="app/imgconverter/appicon.svg" alt="" width="512" height="512"> </a>
+        </div>
+      </section>
+
+      <section class="apps section-wrap" id="apps" aria-labelledby="apps-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Made for everyday ideas</p>
+            <h2 id="apps-title">Our apps</h2>
+          </div>
+          <a class="text-link" href="app/index.html">Explore our all iOS and macOS projects. <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="app-grid">
+          <article class="app-card">
+            <a class="card-image" style="background-color: #f2f7fb;" href="app/signee/index.html" aria-label="Open Signee Timer page">
+              <object class="app-artwork" data="app/signee/infocard.svg" type="image/svg+xml" width="1024" height="1024" aria-label="Signee Timer" style="display: block; width: 100%; height: 100%; pointer-events: none; border-radius: inherit;">
+                Signee Timer
+              </object>
+            </a>
+            <div class="card-copy">
+              <p class="card-label">Time &amp; productivity</p>
+              <h3><a href="app/signee/index.html">Signee Timer</a></h3>
+              <p>An advanced stopwatch and event logger for routines, sports, cooking and creative work.</p>
+            </div>
+          </article>
+          <article class="app-card">
+            <a class="card-image" style="background-color: #e6f3fb;" href="app/splitclock/index.html" aria-label="Open Split Clock page">
+              <object class="app-artwork" data="app/splitclock/infocard.svg" type="image/svg+xml" width="1024" height="1024" aria-label="Split Clock" style="display: block; width: 100%; height: 100%; pointer-events: none; border-radius: inherit;">
+                Split Clock
+              </object>
+            </a>
+            <div class="card-copy">
+              <p class="card-label">Games &amp; focus</p>
+              <h3><a href="app/splitclock/index.html">Split Clock</a></h3>
+              <p>A flexible chess and board-game clock, with precise timing and a wide range of game modes.</p>
+            </div>
+          </article>
+          <article class="app-card">
+            <a class="card-image" style="background-color: #ded3b8;" href="app/unichars/index.html" aria-label="Open uniCHaRs page"> <img class="app-artwork" src="app/unichars/infocard.svg" alt="uniCHaRs" width="512" height="512" loading="lazy"> </a>
+            <div class="card-copy">
+              <p class="card-label">Fonts &amp; characters</p>
+              <h3><a href="app/unichars/index.html">uniCHaRs</a></h3>
+              <p>A handy font tool to browse, test and compare typefaces and explore special characters.</p>
+            </div>
+          </article>
+          <article class="app-card">
+            <a class="card-image" style="background-color: #fff0e5;" href="app/imgconverter/index.html" aria-label="Open Image Auto Convert page"> <img class="app-artwork" style="width: 50%; height: 50%;" src="app/imgconverter/appicon.svg" alt="Image Auto Convert app icon" width="512" height="512" loading="lazy"> </a>
+            <div class="card-copy">
+              <p class="card-label">Images &amp; utilities</p>
+              <h3><a href="app/imgconverter/index.html">Image Auto Convert</a></h3>
+              <p>Drop an image, convert it locally, and keep your original. No cloud uploads or watermarks.</p>
+            </div>
+          </article>
+          <article class="app-card">
+            <a href="app/calculio/index.html" aria-label="Open Calculio page" class="card-image" style="background-color: #fff2df;"> <img class="app-artwork" style="width: 50%; height: 50%;" src="app/calculio/appicon.svg" alt="Calculio app icon" width="512" height="512" loading="lazy"> </a>
+            <div class="card-copy">
+              <p class="card-label">Math &amp; productivity</p>
+              <h3><a href="app/calculio/index.html">Calculio</a></h3>
+              <p>An infinite-precision calculator with a fresh, block-based way to build and edit equations.</p>
+            </div>
+          </article>
+          <article class="app-card">
+            <a href="app/memmory/index.html" aria-label="Open Memmory page" class="card-image" style="background-color: #e3f6ff;"> <img class="app-artwork" style="width: 50%; height: 50%;" src="app/memmory/appicon.svg" alt="Memmory app icon" width="512" height="512" loading="lazy"> </a>
+            <div class="card-copy">
+              <p class="card-label">Nature &amp; games</p>
+              <h3><a href="app/memmory/index.html">Memmory</a></h3>
+              <p>A playful memory game that introduces edible plants and the natural world.</p>
+            </div>
+          </article>
+			 
+			 
+<!--          <article class="app-card">-->
+<!--            <div class="card-image" style="background-color: #f5f8fb;" aria-label="Verbose app icon">-->
+<!--              <img class="app-artwork" style="width: 50%; height: 50%;" src="app/verbose/appicon.webp" alt="Verbose app icon" width="512" height="512" loading="lazy">-->
+<!--            </div>-->
+<!--            <div class="card-copy">-->
+<!--              <p class="card-label">Coming soon</p>-->
+<!--              <h3>Verbose</h3>-->
+<!--              <p>A learning companion with a personal dictionary you can fill with every new word you discover.</p>-->
+<!--            </div>-->
+<!--          </article>-->
+<!--          <article class="app-card">-->
+<!--            <div class="card-image" style="background-color: #f5f8fb;" aria-label="SaveUs app icon">-->
+<!--              <img class="app-artwork" style="width: 50%; height: 50%;" src="app/saveus/appicon.svg" alt="SaveUs app icon" width="512" height="512" loading="lazy">-->
+<!--            </div>-->
+<!--            <div class="card-copy">-->
+<!--              <p class="card-label">Coming soon</p>-->
+<!--              <h3>SaveUs</h3>-->
+<!--              <p>Use your iOS device as a backup destination, or back up your data to a Linux PC.</p>-->
+<!--            </div>-->
+<!--          </article>-->
+<!--          <article class="app-card">-->
+<!--            <div class="card-image" style="background-color: #f5f8fb;" aria-label="Outlays app icon">-->
+<!--              <img class="app-artwork" style="width: 50%; height: 50%;" src="app/outlays/appicon.svg" alt="Outlays app icon" width="512" height="512" loading="lazy">-->
+<!--            </div>-->
+<!--            <div class="card-copy">-->
+<!--              <p class="card-label">Coming soon</p>-->
+<!--              <h3>Outlays</h3>-->
+<!--              <p>Keep track of how much money you have spent and where the rest has gone.</p>-->
+<!--            </div>-->
+<!--          </article>-->
+<!--          <article class="app-card">-->
+<!--            <div class="card-image" style="background-color: #f5f8fb;" aria-label="Counting app icon">-->
+<!--              <img class="app-artwork" style="width: 50%; height: 50%;" src="app/counting/appicon.svg" alt="Counting app icon" width="512" height="512" loading="lazy">-->
+<!--            </div>-->
+<!--            <div class="card-copy">-->
+<!--              <p class="card-label">Coming soon</p>-->
+<!--              <h3>Counting</h3>-->
+<!--              <p>There is hardly anything you cannot count with this handy tool.</p>-->
+<!--            </div>-->
+<!--          </article>-->
+<!--          <article class="app-card">-->
+<!--            <div class="card-image" style="background-color: #f5f8fb;" aria-label="CaseMaster app icon">-->
+<!--              <img class="app-artwork" style="width: 50%; height: 50%;" src="app/casemaster/appicon.svg" alt="CaseMaster app icon" width="512" height="512" loading="lazy">-->
+<!--            </div>-->
+<!--            <div class="card-copy">-->
+<!--              <p class="card-label">Coming soon</p>-->
+<!--              <h3>CaseMaster</h3>-->
+<!--              <p>A trusted assistant for building managers and housekeepers, with the tools you need to take care of a property.</p>-->
+<!--            </div>-->
+<!--          </article>-->
+<!--          <article class="app-card">-->
+<!--            <div class="card-image" style="background-color: #f5f8fb;" aria-label="DemoZone app icon">-->
+<!--              <img class="app-artwork" style="width: 50%; height: 50%;" src="app/demozone/appicon.webp" alt="DemoZone app icon" width="512" height="512" loading="lazy">-->
+<!--            </div>-->
+<!--            <div class="card-copy">-->
+<!--              <p class="card-label">Coming soon</p>-->
+<!--              <h3>DemoZone</h3>-->
+<!--              <p>Search for and discover fantastic demos, from the early days to the present.</p>-->
+<!--            </div>-->
+<!--          </article>-->
+			 
+			 
+			 
+        </div>
+      </section>
+
+      <section class="github section-wrap" aria-labelledby="github-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Open source</p>
+            <h2 id="github-title">Selected GitHub projects</h2>
+          </div>
+          <a class="text-link" href="https://github.com/metatronsw" target="_blank" rel="noopener noreferrer">More on GitHub <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="github-grid">
+			  
+          <article class="github-box">
+            <img src="main/github.svg" alt="" width="32" height="32" loading="lazy">
+            <h3><a href="https://github.com/metatronsw/Kolor" target="_blank" rel="noopener noreferrer">Kolor <span class="github-arrow" aria-hidden="true">↗</span></a></h3>
+            <p>Kolor is a Swift library for working with color spaces and converting them. It also provides palette generation, color-distance calculations, quantization, histograms, and image-analysis helpers.</p>
+          </article>
+			 
+          <article class="github-box">
+            <img src="main/github.svg" alt="" width="32" height="32" loading="lazy">
+            <h3><a href="https://github.com/metatronsw/Arbit" target="_blank" rel="noopener noreferrer">Arbit <span class="github-arrow" aria-hidden="true">↗</span></a></h3>
+            <p>Arbit is a Swift math project, it enables arbitrary-precision arithmetic calculations and also gives developers many useful utilities, such as hexadecimal conversion and square-root functions. It is particularly fast when working with medium-sized numbers and string processing.</p>
+          </article>
+			 
+          <article class="github-box">
+            <img src="main/github.svg" alt="" width="32" height="32" loading="lazy">
+            <h3><a href="https://github.com/metatronsw/DateX" target="_blank" rel="noopener noreferrer">DateX <span class="github-arrow" aria-hidden="true">↗</span></a></h3>
+            <p>DateX is an integer-based date and time type for Swift, designed to avoid the precision limits of floating-point time values. It uses a two-part 32-bit integer representation for precise time measurement.</p>
+          </article>
+			 
+        </div>
+      </section>
+
+      <section class="work section-wrap" aria-labelledby="work-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Selected creative work</p>
+            <h2 id="work-title">More ways to make ideas tangible</h2>
+          </div>
+          <p>We create adaptable real-time 3D experiences for broadcasts, interactive shows, installations, projections and events.</p>
+        </div>
+        <div class="work-grid">
+			  
+          <article class="work-card">
+            <h3>Virtual studios &amp; broadcast graphics</h3>
+            <p>Modular broadcast spaces built with Aximmetry, Unreal Engine, Unity or a custom 3D solution.</p>
+            <div class="video-frame">
+              <iframe src="https://www.youtube-nocookie.com/embed/SfnKHMiu8Ic" title="Aximmetry Software &amp; Scenes showreel" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+            <a class="video-link" href="https://www.youtube.com/watch?v=SfnKHMiu8Ic" target="_blank" rel="noopener noreferrer">Open showreel on YouTube <span aria-hidden="true">↗</span></a>
+          </article>
+			 
+          <article class="work-card">
+            <h3>Installations, games &amp; weather graphics</h3>
+            <p>From touch-screen installations to call-in games and weather graphics, hosts, operators and audiences can shape a live experience together.</p>
+            <div class="video-frame">
+              <iframe src="https://www.youtube-nocookie.com/embed/eZVi5YfPVOY" title="T-System touch-screen panorama installation" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+            <a class="video-link" href="https://www.youtube.com/watch?v=eZVi5YfPVOY" target="_blank" rel="noopener noreferrer">Open installation video on YouTube <span aria-hidden="true">↗</span></a>
+          </article>
+          <article class="work-card" style="grid-column: 1 / -1;">
+            <h3>Real-time spaces, shows &amp; projections</h3>
+            <div class="virtual-preview">
+              <a href="realtime/index.html"><img src="realtime/thumb/thm_talk_show_1.webp" alt="Talk Show 1 virtual studio" width="380" height="214" loading="lazy" decoding="async"></a>
+              <a href="realtime/index.html"><img src="realtime/thumb/thm_hirtv_azsia.webp" alt="HírTV Ázsia virtual studio" width="380" height="214" loading="lazy" decoding="async"></a>
+              <a href="realtime/index.html"><img src="realtime/thumb/thm_operahaz_1.webp" alt="Operaház projection previsualization" width="380" height="214" loading="lazy" decoding="async"></a>
+            </div>
+				
+            <p>Explore live studios, interactive broadcasts, projection planning and rapid previsualization for cameras, lighting and venues.</p>
+            <a class="text-link" href="realtime/index.html">Explore real-time works →</a>
+				
+          </article>
+        </div>
+      </section>
+
+      <section class="work section-wrap" aria-labelledby="design-title" style="overflow: hidden;">
+        <div class="about-inner">
+          <div>
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow">Design &amp; photography</p>
+                <h2 id="design-title">Print and graphic design</h2>
+              </div>
+            </div>
+            <div class="about-copy">
+              <p>We offer complete web solutions and print design, including book layouts, covers, logos and user interface design.</p>
+              <p>With 16 years of completed projects and broad experience across digital and print media, we bring both creative insight and practical expertise to every brief. We also undertake custom development, shaping each solution around your ideas, audience and specific requirements.</p>
+              <a class="text-link" href="design/index.html">Explore design projects <span aria-hidden="true">→</span></a>
+            </div>
+          </div>
+          <a class="tree-frame" href="design/index.html" aria-label="Explore design projects" draggable="false">
+            <object data="design/tree-vector.svg" type="image/svg+xml" width="10960" height="3504" aria-hidden="true" tabindex="-1"></object>
+          </a>
+        </div>
+      </section>
+
+		<section class="about" id="about" aria-labelledby="about-title">
+			<div class="section-wrap about-inner">
+				<div>
+					<p class="eyebrow">Beyond the App Store</p>
+					<h2 id="about-title">From a good idea to a finished experience</h2>
+				</div>
+				<div class="about-copy">
+					<p>We provide full development, testing and maintenance of custom applications. We also work on virtual studio design, event decoration, light painting and reproduction photography.</p>
+					<p>Have a project in mind? Tell us what you would like to achieve.</p>
+					<a class="text-link" href="contact.html">Get in touch <span aria-hidden="true">→</span></a>
+				</div>
+			</div>
+		</section>
+		
+		
+      <section class="work section-wrap visual-showcase" aria-labelledby="visual-title">
+        <div class="about-inner">
+          <div>
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow">Live visuals &amp; projection</p>
+                <h2 id="visual-title">Memories &amp; experience from the past</h2>
+              </div>
+            </div>
+            <div class="about-copy">
+              <p>From underground club nights and festivals to theatre, exhibitions and events, we turn music and spaces into living visual experiences.</p>
+              <p>Explore early experiments with reactive animation, panoramic projections and Aximmetry’s generative visuals, shaped live through touchscreen and gesture control.</p>
+              <a class="text-link" href="visual/index.html">Explore visual projects <span aria-hidden="true">→</span></a>
+            </div>
+          </div>
+          <div class="visual-image-stack">
+            <figure>
+              <a href="visual/index.html#image-2012-1018-2014-goa-farsang-2" aria-label="Explore 2014 GOA Farsang 2">
+                <img src="visual/2012-1018/2014-goa-farsang-2.webp" alt="2014 GOA Farsang 2" width="2800" height="1866" loading="lazy" decoding="async">
+              </a>
+            </figure>
+            <figure>
+              <a href="visual/index.html#image-2005-2012-2010-merlin-clark-2" aria-label="Explore 2010 Merlin - Clark 2">
+                <img src="visual/2005-2012/2010-merlin-clark-2.webp" alt="2010 Merlin - Clark 2" width="2400" height="1600" loading="lazy" decoding="async">
+              </a>
+            </figure>
+          </div>
+        </div>
+      </section>
+		
+		
+    </main>
+    <footer class="home-footer">
+      <div class="section-wrap footer-inner">
+        <a class="brand footer-brand" href="index.html"> <img class="brand-mark" src="main/metatron.svg" alt="" aria-hidden="true" width="38" height="38"> <span>Metatron <strong>Software</strong></span> </a>
+        <nav class="social-links" aria-label="Social media and email">
+          <a href="https://www.facebook.com/szerencses.gabor.1" aria-label="Facebook" title="Facebook" target="_blank" rel="noopener noreferrer">
+            <img src="main/facebook.svg" alt="" width="24" height="24" loading="lazy">
+          </a>
+          <a href="https://www.instagram.com/szerencsesg/" aria-label="Instagram" title="Instagram" target="_blank" rel="noopener noreferrer">
+            <img src="main/instagram.svg" alt="" width="24" height="24" loading="lazy">
+          </a>
+          <a href="https://www.youtube.com/@varju-bacsi" aria-label="YouTube" title="YouTube" target="_blank" rel="noopener noreferrer">
+            <img src="main/youtube.svg" alt="" width="24" height="24" loading="lazy">
+          </a>
+          <a href="https://www.linkedin.com/in/g%C3%A1bor-szerencs%C3%A9s-432a01233" aria-label="LinkedIn" title="LinkedIn" target="_blank" rel="noopener noreferrer">
+            <img src="main/linkedin.svg" alt="" width="24" height="24" loading="lazy">
+          </a>
+          <a href="mailto:softwaremetatron@gmail.com" aria-label="Mail" title="Mail">
+            <img src="main/mail-social.svg" alt="" width="24" height="24" loading="lazy">
+          </a>
+        </nav>
+        <p>© Metatron Software</p>
+      </div>
+    </footer>
+  </body>
+</html>

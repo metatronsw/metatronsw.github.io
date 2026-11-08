@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="10960" height="3504" viewBox="-4816 -288 10960 3504">
+    <defs>
+        <linearGradient id="tree-line-a-fade" gradientUnits="userSpaceOnUse" x1="3020.000244" y1="2808" x2="-1766.303589" y2="924.255615">
+            <stop offset="0" stop-color="#646464" stop-opacity="0"/>
+            <stop offset="0.3" stop-color="#646464" stop-opacity="1"/>
+            <stop offset="0.7" stop-color="#646464" stop-opacity="1"/>
+            <stop offset="1" stop-color="#646464" stop-opacity="0"/>
+        </linearGradient>
+        <linearGradient id="tree-line-b-fade" gradientUnits="userSpaceOnUse" x1="2482" y1="1544" x2="102.000778" y2="2293.002197">
+            <stop offset="0" stop-color="#646464" stop-opacity="0"/>
+            <stop offset="0.3" stop-color="#646464" stop-opacity="1"/>
+            <stop offset="0.7" stop-color="#646464" stop-opacity="1"/>
+            <stop offset="1" stop-color="#646464" stop-opacity="0"/>
+        </linearGradient>
+        <linearGradient id="tree-line-c-fade" gradientUnits="userSpaceOnUse" x1="6123.016602" y1="3184.940186" x2="-1568" y2="631">
+            <stop offset="0" stop-color="#646464" stop-opacity="0"/>
+            <stop offset="0.3" stop-color="#646464" stop-opacity="1"/>
+            <stop offset="0.7" stop-color="#646464" stop-opacity="1"/>
+            <stop offset="1" stop-color="#646464" stop-opacity="0"/>
+        </linearGradient>
+        <linearGradient id="tree-line-d-fade" gradientUnits="userSpaceOnUse" x1="3621.994141" y1="755.97998" x2="-863.203247" y2="2065.035645">
+            <stop offset="0" stop-color="#646464" stop-opacity="0"/>
+            <stop offset="0.3" stop-color="#646464" stop-opacity="1"/>
+            <stop offset="0.7" stop-color="#646464" stop-opacity="1"/>
+            <stop offset="1" stop-color="#646464" stop-opacity="0"/>
+        </linearGradient>
+    </defs>
+    <path id="line-a" pathLength="100" stroke-dasharray="100 100" stroke-dashoffset="100" opacity="0" fill="none" stroke="url(#tree-line-a-fade)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M 3020.000244 2808 L -1766.303589 924.255615">
+        <animate attributeName="stroke-dashoffset" values="100;0;0;100" keyTimes="0;0.75;0.95;1" begin="0s" dur="4.8s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;0.04;0.8;0.95;1" begin="0s" dur="4.8s" repeatCount="indefinite"/>
+    </path>
+    <path id="line-b" pathLength="100" stroke-dasharray="100 100" stroke-dashoffset="100" opacity="0" fill="none" stroke="url(#tree-line-b-fade)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M 2482 1544 L 102.000778 2293.002197">
+        <animate attributeName="stroke-dashoffset" values="100;0;0;100" keyTimes="0;0.75;0.95;1" begin="0.25s" dur="4.8s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;0.04;0.8;0.95;1" begin="0.25s" dur="4.8s" repeatCount="indefinite"/>
+    </path>
+    <path id="line-c" pathLength="100" stroke-dasharray="100 100" stroke-dashoffset="100" opacity="0" fill="none" stroke="url(#tree-line-c-fade)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M 6123.016602 3184.940186 L -1568 631">
+        <animate attributeName="stroke-dashoffset" values="100;0;0;100" keyTimes="0;0.75;0.95;1" begin="0.5s" dur="4.8s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;0.04;0.8;0.95;1" begin="0.5s" dur="4.8s" repeatCount="indefinite"/>
+    </path>
+    <path id="line-d" pathLength="100" stroke-dasharray="100 100" stroke-dashoffset="100" opacity="0" fill="none" stroke="url(#tree-line-d-fade)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M 3621.994141 755.97998 L -863.203247 2065.035645">
+        <animate attributeName="stroke-dashoffset" values="100;0;0;100" keyTimes="0;0.75;0.95;1" begin="0.75s" dur="4.8s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;0.04;0.8;0.95;1" begin="0.75s" dur="4.8s" repeatCount="indefinite"/>
+    </path>
+    <image id="tree" x="0" y="0" width="2048" height="2048" href="tree.webp" />
+</svg>

@@ -1,0 +1,639 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Counting keeps track of what you count. Use simple, up-and-down or timed counters, customize every card, and increase multiple counters together. Currently in development.">
+    <meta name="theme-color" content="#10151e">
+    <title>Counting — Big buttons. Clear numbers.</title>
+    <link rel="icon" type="image/svg+xml" href="../../main/favicon.svg">
+    <style>
+      :root {
+        color-scheme: dark;
+        --background: #10151e;
+        --surface: #17202c;
+        --text: #f4f8ff;
+        --muted: #a9b8cc;
+        --accent: #79b9ff;
+        --line: #2c3b4f;
+      }
+
+
+      * {
+        box-sizing: border-box;
+      }
+
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+
+      body {
+        min-height: 100vh;
+        min-height: 100svh;
+        display: flex;
+        flex-direction: column;
+        margin: 0;
+        background: var(--background);
+        color: var(--text);
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        line-height: 1.65;
+      }
+
+
+      body > * {
+        flex-shrink: 0;
+      }
+
+
+      a {
+        color: inherit;
+        text-underline-offset: 0.25em;
+      }
+
+
+      a:focus-visible {
+        outline: 3px solid var(--accent);
+        outline-offset: 6px;
+      }
+
+
+      img {
+        display: block;
+        max-width: 100%;
+        height: auto;
+      }
+
+
+      h1, h2, h3, p, figure {
+        margin: 0;
+      }
+
+
+      h1, h2, h3 {
+        line-height: 1.08;
+        letter-spacing: -0.045em;
+      }
+
+
+      h1 {
+        max-width: 11ch;
+        margin-block: 1.3rem;
+        font-size: clamp(3rem, 6.5vw, 5.5rem);
+        font-weight: 700;
+      }
+
+
+      h1 span {
+        color: var(--accent);
+      }
+
+
+      h2 {
+        margin-block: 1rem 1.5rem;
+        font-size: clamp(2rem, 4vw, 3.5rem);
+      }
+
+
+      p + p {
+        margin-top: 1.2rem;
+      }
+
+
+      .wrap {
+        width: min(1120px, calc(100% - 48px));
+        margin-inline: auto;
+      }
+
+
+      .site-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 2rem;
+        padding-block: 1.75rem;
+        border-bottom: 1px solid var(--line);
+      }
+
+
+      .app-brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 1rem;
+        font-size: 1.5rem;
+        font-weight: 650;
+        letter-spacing: -0.04em;
+        text-decoration: none;
+      }
+
+
+      .app-brand img {
+        width: 64px;
+        border-radius: 15px;
+      }
+
+
+      .site-header nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem 1.5rem;
+        font-size: 0.9rem;
+      }
+
+
+      .site-header nav a {
+        color: var(--muted);
+        text-decoration: none;
+      }
+
+
+      .site-header nav a:hover {
+        color: var(--accent);
+      }
+
+
+      .eyebrow {
+        color: var(--accent);
+        font-size: 0.75rem;
+        font-weight: 650;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+      }
+
+
+      .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
+        align-items: center;
+        gap: clamp(2rem, 6vw, 6rem);
+        padding-block: 4.5rem 5.5rem;
+      }
+
+
+      .lead {
+        max-width: 49ch;
+        color: var(--muted);
+        font-size: 1.15rem;
+      }
+
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 1rem 1.5rem;
+        margin-top: 2rem;
+      }
+
+
+      .button {
+        display: inline-block;
+        padding: 0.8rem 1.25rem;
+        border: 1px solid var(--accent);
+        border-radius: 6px;
+        background: var(--accent);
+        color: #0d2138;
+        font-weight: 650;
+        text-decoration: none;
+        transition: background-color 180ms ease;
+      }
+
+
+      .button:hover {
+        background: #a6d3ff;
+      }
+
+
+      .hero-actions > a:last-child {
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+
+      .phone-shot {
+        width: min(100%, 300px);
+        justify-self: center;
+      }
+
+
+      .phone-shot img {
+        width: 100%;
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        box-shadow: 0 24px 60px rgb(0 0 0 / 28%);
+      }
+
+
+      figcaption {
+        margin-top: 1rem;
+        color: var(--muted);
+        font-size: 0.8rem;
+        line-height: 1.5;
+      }
+
+
+      .phone-shot figcaption {
+        text-align: center;
+      }
+
+
+      .intro {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 2rem 5rem;
+        padding-block: 4.5rem;
+        border-top: 1px solid var(--line);
+      }
+
+
+      .intro h2 {
+        max-width: 16ch;
+      }
+
+
+      .intro-copy {
+        padding-top: 2.1rem;
+        color: var(--muted);
+      }
+
+
+      .filter-band {
+        background: var(--surface);
+      }
+
+
+      .filter-section {
+        display: grid;
+        grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+        align-items: center;
+        gap: 3rem 6rem;
+        padding-block: 5rem;
+      }
+
+
+      .filter-copy > p:not(.eyebrow) {
+        color: var(--muted);
+      }
+
+
+      .filter-steps {
+        margin: 2rem 0 0;
+        padding: 0;
+        list-style: none;
+        counter-reset: step;
+      }
+
+
+      .filter-steps li {
+        display: grid;
+        grid-template-columns: 2rem minmax(0, 1fr);
+        gap: 0.75rem;
+        padding-block: 1rem;
+        border-top: 1px solid var(--line);
+        counter-increment: step;
+      }
+
+
+      .filter-steps li::before {
+        content: "0" counter(step);
+        color: var(--accent);
+        font-size: 0.8rem;
+      }
+
+
+      .filter-steps h3 {
+        margin-bottom: 0.4rem;
+        font-size: 1.1rem;
+        letter-spacing: -0.02em;
+      }
+
+
+      .filter-steps p {
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+
+      .settings-section {
+        padding-block: 5rem;
+      }
+
+
+      .settings-section > p:not(.eyebrow) {
+        max-width: 70ch;
+        color: var(--muted);
+      }
+
+
+      .settings-shots {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 3rem;
+        max-width: 760px;
+        margin: 3rem auto 0;
+      }
+
+
+      .roadmap {
+        padding-block: 4rem;
+        border-top: 1px solid var(--line);
+      }
+
+
+      .roadmap-intro {
+        max-width: 65ch;
+        color: var(--muted);
+      }
+
+
+      .roadmap-list {
+        margin: 2rem 0;
+      }
+
+
+      .roadmap-list > div {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+        gap: 1rem 3rem;
+        padding-block: 1.5rem;
+        border-top: 1px solid var(--line);
+      }
+
+
+      .roadmap-list dt {
+        color: var(--text);
+        font-weight: 600;
+      }
+
+
+      .roadmap-list dd {
+        margin: 0;
+        color: var(--muted);
+      }
+
+
+      .status-note {
+        color: var(--accent);
+        font-size: 0.9rem;
+      }
+
+
+      footer {
+        margin-top: auto;
+        padding-block: 1.75rem;
+        border-top: 1px solid var(--line);
+      }
+
+
+      .footer-inner {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem 2rem;
+      }
+
+
+      .footer-brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        white-space: nowrap;
+        text-decoration: none;
+        font-size: 0.9rem;
+      }
+
+
+      .footer-brand img {
+        width: 32px;
+        height: 32px;
+        flex-shrink: 0;
+      }
+
+
+      .footer-inner > p {
+        color: var(--muted);
+        font-size: 0.85rem;
+      }
+
+
+      @media (max-width: 760px) {
+        .wrap {
+          width: min(100% - 32px, 600px);
+        }
+
+        .site-header {
+          align-items: flex-start;
+          flex-direction: column;
+          gap: 1.25rem;
+        }
+
+        .app-brand img {
+          width: 52px;
+          border-radius: 12px;
+        }
+
+        .hero, .intro, .filter-section {
+          grid-template-columns: minmax(0, 1fr);
+          gap: 2.5rem;
+          padding-block: 3rem;
+        }
+
+        .hero .phone-shot {
+          width: min(78%, 280px);
+        }
+
+        .intro h2 {
+          max-width: none;
+        }
+
+        .intro-copy {
+          padding-top: 0;
+        }
+
+        .filter-copy {
+          grid-row: 1;
+        }
+
+        .filter-section .phone-shot {
+          width: min(78%, 280px);
+        }
+
+        .settings-section, .roadmap {
+          padding-block: 3rem;
+        }
+
+        .settings-shots {
+          grid-template-columns: minmax(0, 1fr);
+          gap: 2rem;
+        }
+
+        .settings-shots .phone-shot {
+          width: min(78%, 280px);
+        }
+
+        .roadmap-list > div {
+          grid-template-columns: minmax(0, 1fr);
+          gap: 0.5rem;
+        }
+
+        .footer-inner {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+      }
+
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+
+        .button {
+          transition: none;
+        }
+      }
+    </style>
+
+    <link rel="canonical" href="https://metatronsw.github.io/app/counting/">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Metatron Software">
+    <meta property="og:title" content="Counting — Big buttons. Clear numbers.">
+    <meta property="og:description" content="Counting keeps track of what you count. Use simple, up-and-down or timed counters, customize every card, and increase multiple counters together. Currently in development.">
+    <meta property="og:url" content="https://metatronsw.github.io/app/counting/">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Counting — Big buttons. Clear numbers.">
+    <meta name="twitter:description" content="Counting keeps track of what you count. Use simple, up-and-down or timed counters, customize every card, and increase multiple counters together. Currently in development.">
+  </head>
+
+
+  <body>
+    <header class="wrap site-header">
+      <a class="app-brand" href="index.html" aria-label="Counting home">
+        <img src="appicon.svg" alt="" width="1024" height="1024">
+        <span>Counting</span>
+      </a>
+      <nav aria-label="Page navigation">
+        <a href="#counters">Counters</a>
+        <a href="#customize">Make it yours</a>
+        <a href="#roadmap">Roadmap</a>
+      </nav>
+    </header>
+
+
+    <main>
+      <section class="wrap hero" aria-labelledby="hero-title">
+        <div>
+          <p class="eyebrow">Keep count. Keep it simple. · In development</p>
+          <h1 id="hero-title">Big buttons.<br><span>Clear numbers.</span></h1>
+          <p class="lead">When you can no longer remember what you counted, or how many, Counting keeps track. Simple counters, flexible cards and one less thing to hold in your head.</p>
+          <div class="hero-actions">
+            <a class="button" href="#counters">Meet the counters <span aria-hidden="true">↓</span></a>
+            <a href="../index.html">Explore our apps <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+        <figure class="phone-shot">
+          <img src="counter-1.webp" alt="Counting on iPhone with a large basic counter, a timed counter and a plus-and-minus counter" width="1284" height="2778">
+          <figcaption>Different counters. One clear view.</figcaption>
+        </figure>
+      </section>
+
+
+      <section class="wrap intro" aria-labelledby="together-title">
+        <div>
+          <p class="eyebrow">One thing. Or several at once.</p>
+          <h2 id="together-title">Stop keeping everything in your head.</h2>
+        </div>
+        <div class="intro-copy">
+          <p>Counting is useful precisely because it keeps things simple. Give each item its own card, choose how it should count, and keep the numbers where you can see them.</p>
+          <p>Tracking several things together? You can increase every counter at once. Configure the cards for your task, then focus on what you are counting.</p>
+        </div>
+      </section>
+
+
+      <div class="filter-band">
+        <section class="wrap filter-section" id="counters" aria-labelledby="counters-title">
+          <figure class="phone-shot">
+            <img src="counter-2.webp" alt="Five individually colored counter cards with large, easy-to-read numbers" width="1284" height="2778" loading="lazy">
+            <figcaption>A separate card for everything you want to count.</figcaption>
+          </figure>
+          <div class="filter-copy">
+            <p class="eyebrow">Three ways to keep track</p>
+            <h2 id="counters-title">The right counter for the job.</h2>
+            <p>Sometimes you only need one more. Sometimes you need to take one away. And sometimes the time between taps matters just as much as the total.</p>
+            <ol class="filter-steps">
+              <li>
+                <div>
+                  <h3>Tap. Add one. Done.</h3>
+                  <p>The basic counter gives you a big button and a clearly visible number. Press it, and the count goes up by one. A straightforward tool without a complicated interface getting in the way.</p>
+                </div>
+              </li>
+              <li>
+                <div>
+                  <h3>Count up. Count down.</h3>
+                  <p>Add or subtract, including below zero when you need negative values. Set limits or target values, and adjust the counter to suit what you are keeping track of.</p>
+                </div>
+              </li>
+              <li>
+                <div>
+                  <h3>Keep track of the time, too.</h3>
+                  <p>The timed card records when you last tapped and shows how much time has passed since. Keep both the count and the timing in view.</p>
+                </div>
+              </li>
+            </ol>
+          </div>
+        </section>
+      </div>
+
+
+      <section class="wrap settings-section" id="customize" aria-labelledby="customize-title">
+        <p class="eyebrow">Your cards. Your way.</p>
+        <h2 id="customize-title">Make every counter your own.</h2>
+        <p>Mix the card types and configure each one individually. Choose its color and icon, add a label, or use a background image to make the card instantly recognizable.</p>
+        <p>Adjust starting values, steps, goals and limits. Then choose how much information to display and how the app should respond to a tap. Keep the setup simple, or fine-tune it for your task.</p>
+        <div class="settings-shots">
+          <figure class="phone-shot">
+            <img src="counter-customize.webp" alt="Counter editor with counter type, current value, base, step, goal, minimum, maximum, icon selection and color palette" width="1284" height="2778" loading="lazy">
+            <figcaption>Set the values, choose a type and pick a color.</figcaption>
+          </figure>
+          <figure class="phone-shot">
+            <img src="counter-setup.webp" alt="Counting configuration with display options, a step-all button setting, feedback and sound choices" width="1284" height="2778" loading="lazy">
+            <figcaption>Configure the display, feedback and the option to step all counters.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+
+      <section class="wrap roadmap" id="roadmap" aria-labelledby="roadmap-title">
+        <p class="eyebrow">Looking ahead</p>
+        <h2 id="roadmap-title">More ways to count.</h2>
+        <p class="roadmap-intro">Counting is currently in development. The following ideas are planned for the future; they are not available features yet.</p>
+        <dl class="roadmap-list">
+          <div>
+            <dt>Voice control</dt>
+            <dd>A planned way to operate counters using your voice.</dd>
+          </div>
+          <div>
+            <dt>Image-based triggers</dt>
+            <dd>Planned image-based triggering for counters.</dd>
+          </div>
+        </dl>
+        <p class="status-note">In development · Release details will follow.</p>
+        <p><a href="mailto:softwaremetatron@gmail.com">Have an idea for Counting? Get in touch <span aria-hidden="true">↗</span></a></p>
+      </section>
+    </main>
+
+
+    <footer>
+      <div class="wrap footer-inner">
+        <a class="footer-brand" href="../../index.html" aria-label="Metatron Software home">
+          <img src="../../main/metatron.svg" alt="" width="32" height="32">
+          <span>Metatron <strong>Software</strong></span>
+        </a>
+        <p>Independent software development from Budapest, Hungary.</p>
+      </div>
+    </footer>
+  </body>
+</html>

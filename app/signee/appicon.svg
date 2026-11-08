@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+    <path id="bg" fill="#0d2d43" fill-rule="evenodd" stroke="none" d="M 0 412 C -0 467.228485 44.771526 512 100 512 L 412 512 C 467.228485 512 512 467.228485 512 412 L 512 100 C 512 44.771515 467.228485 0 412 0 L 100 0 C 44.771526 0 0 44.771515 0 100 Z"/>
+    <radialGradient id="radialGradient1" cx="140.419603" cy="133.507416" r="403.050865" fx="140.419603" fy="133.507416" gradientUnits="userSpaceOnUse">
+        <stop offset="0" stop-color="#deedff" stop-opacity="1"/>
+        <stop offset="0.636482" stop-color="#8298b9" stop-opacity="1"/>
+    </radialGradient>
+    
+
+    <path id="circle" fill="url(#radialGradient1)" fill-rule="evenodd" stroke="none" d="M 425 256 C 425 162.663879 349.336121 87 256 87 C 162.663879 87 87 162.663879 87 256 C 87 349.336121 162.663879 425 256 425 C 349.336121 425 425 349.336121 425 256 Z"/>
+    <path id="hour" fill="none" stroke="#0d2d43" stroke-width="24" stroke-linecap="round" stroke-linejoin="round" d="M 256 256 L 256 166">
+        <animateTransform attributeName="transform" type="rotate" from="0 256 256" to="360 256 256" dur="600s" repeatCount="indefinite" calcMode="linear"/>
+    </path>
+
+    <path id="minute" fill="none" stroke="#0d2d43" stroke-width="24" stroke-linecap="round" stroke-linejoin="round" d="M 343 344 L 256 256">
+        <animateTransform attributeName="transform" type="rotate" dur="60s" repeatCount="indefinite" calcMode="discrete" values="0 256 256; 6 256 256; 12 256 256; 18 256 256; 24 256 256; 30 256 256; 36 256 256; 42 256 256; 48 256 256; 54 256 256; 60 256 256; 66 256 256; 72 256 256; 78 256 256; 84 256 256; 90 256 256; 96 256 256; 102 256 256; 108 256 256; 114 256 256; 120 256 256; 126 256 256; 132 256 256; 138 256 256; 144 256 256; 150 256 256; 156 256 256; 162 256 256; 168 256 256; 174 256 256; 180 256 256; 186 256 256; 192 256 256; 198 256 256; 204 256 256; 210 256 256; 216 256 256; 222 256 256; 228 256 256; 234 256 256; 240 256 256; 246 256 256; 252 256 256; 258 256 256; 264 256 256; 270 256 256; 276 256 256; 282 256 256; 288 256 256; 294 256 256; 300 256 256; 306 256 256; 312 256 256; 318 256 256; 324 256 256; 330 256 256; 336 256 256; 342 256 256; 348 256 256; 354 256 256"/>
+    </path>
+
+</svg>

@@ -1,0 +1,585 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="DemoZone brings the demoscene to your phone. Browse visual previews, find demos with YouTube videos, and narrow your search with layered filters.">
+    <meta name="theme-color" content="#111110">
+    <title>DemoZone — The demoscene, ready to watch</title>
+    <link rel="icon" type="image/svg+xml" href="../../main/favicon.svg">
+    <style>
+      :root {
+        color-scheme: dark;
+        --background: #111110;
+        --surface: #1a1a18;
+        --text: #f5f3ed;
+        --muted: #b3b1a8;
+        --accent: #ffad23;
+        --line: #343430;
+      }
+
+
+      * {
+        box-sizing: border-box;
+      }
+
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+
+      body {
+        min-height: 100vh;
+        min-height: 100svh;
+        display: flex;
+        flex-direction: column;
+        margin: 0;
+        background: var(--background);
+        color: var(--text);
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        line-height: 1.65;
+      }
+
+
+      body > * {
+        flex-shrink: 0;
+      }
+
+
+      a {
+        color: inherit;
+        text-underline-offset: 0.25em;
+      }
+
+
+      a:focus-visible {
+        outline: 3px solid var(--accent);
+        outline-offset: 6px;
+      }
+
+
+      img {
+        display: block;
+        max-width: 100%;
+        height: auto;
+      }
+
+
+      h1, h2, h3, p, figure {
+        margin: 0;
+      }
+
+
+      h1, h2, h3 {
+        line-height: 1.08;
+        letter-spacing: -0.045em;
+      }
+
+
+      h1 {
+        max-width: 11ch;
+        margin-block: 1.3rem;
+        font-size: clamp(3rem, 6.5vw, 5.5rem);
+        font-weight: 700;
+      }
+
+
+      h1 span {
+        color: var(--accent);
+      }
+
+
+      h2 {
+        margin-block: 1rem 1.5rem;
+        font-size: clamp(2rem, 4vw, 3.5rem);
+      }
+
+
+      p + p {
+        margin-top: 1.2rem;
+      }
+
+
+      .wrap {
+        width: min(1120px, calc(100% - 48px));
+        margin-inline: auto;
+      }
+
+
+      .site-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 2rem;
+        padding-block: 1.75rem;
+        border-bottom: 1px solid var(--line);
+      }
+
+
+      .app-brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 1rem;
+        font-size: 1.5rem;
+        font-weight: 650;
+        letter-spacing: -0.04em;
+        text-decoration: none;
+      }
+
+
+      .app-brand img {
+        width: 64px;
+        border-radius: 15px;
+      }
+
+
+      .site-header nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem 1.5rem;
+        font-size: 0.9rem;
+      }
+
+
+      .site-header nav a {
+        color: var(--muted);
+        text-decoration: none;
+      }
+
+
+      .site-header nav a:hover {
+        color: var(--accent);
+      }
+
+
+      .eyebrow {
+        color: var(--accent);
+        font-size: 0.75rem;
+        font-weight: 650;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+      }
+
+
+      .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
+        align-items: center;
+        gap: clamp(2rem, 6vw, 6rem);
+        padding-block: 4.5rem 5.5rem;
+      }
+
+
+      .lead {
+        max-width: 49ch;
+        color: var(--muted);
+        font-size: 1.15rem;
+      }
+
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 1rem 1.5rem;
+        margin-top: 2rem;
+      }
+
+
+      .button {
+        display: inline-block;
+        padding: 0.8rem 1.25rem;
+        border: 1px solid var(--accent);
+        border-radius: 6px;
+        background: var(--accent);
+        color: #17130a;
+        font-weight: 650;
+        text-decoration: none;
+        transition: background-color 180ms ease;
+      }
+
+
+      .button:hover {
+        background: #ffc563;
+      }
+
+
+      .hero-actions > a:last-child {
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+
+      .phone-shot {
+        width: min(100%, 300px);
+        justify-self: center;
+      }
+
+
+      .phone-shot img {
+        width: 100%;
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        box-shadow: 0 24px 60px rgb(0 0 0 / 28%);
+      }
+
+
+      figcaption {
+        margin-top: 1rem;
+        color: var(--muted);
+        font-size: 0.8rem;
+        line-height: 1.5;
+      }
+
+
+      .phone-shot figcaption {
+        text-align: center;
+      }
+
+
+      .intro {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 2rem 5rem;
+        padding-block: 4.5rem;
+        border-top: 1px solid var(--line);
+      }
+
+
+      .intro h2 {
+        max-width: 16ch;
+      }
+
+
+      .intro-copy {
+        padding-top: 2.1rem;
+        color: var(--muted);
+      }
+
+
+      .filter-band {
+        background: var(--surface);
+      }
+
+
+      .filter-section {
+        display: grid;
+        grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+        align-items: center;
+        gap: 3rem 6rem;
+        padding-block: 5rem;
+      }
+
+
+      .filter-copy > p:not(.eyebrow) {
+        color: var(--muted);
+      }
+
+
+      .filter-steps {
+        margin: 2rem 0 0;
+        padding: 0;
+        list-style: none;
+        counter-reset: step;
+      }
+
+
+      .filter-steps li {
+        display: grid;
+        grid-template-columns: 2rem minmax(0, 1fr);
+        gap: 0.75rem;
+        padding-block: 1rem;
+        border-top: 1px solid var(--line);
+        counter-increment: step;
+      }
+
+
+      .filter-steps li::before {
+        content: "0" counter(step);
+        color: var(--accent);
+        font-size: 0.8rem;
+      }
+
+
+      .filter-steps h3 {
+        margin-bottom: 0.4rem;
+        font-size: 1.1rem;
+        letter-spacing: -0.02em;
+      }
+
+
+      .filter-steps p {
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+
+      .behind-scenes {
+        padding-block: 5rem;
+      }
+
+
+      .behind-scenes > p:not(.eyebrow) {
+        max-width: 70ch;
+        color: var(--muted);
+      }
+
+
+      .admin-shot {
+        margin-top: 2.5rem;
+      }
+
+
+      .admin-shot a {
+        display: block;
+        border-radius: 10px;
+      }
+
+
+      .admin-shot img {
+        width: 100%;
+        border: 1px solid var(--line);
+        border-radius: inherit;
+      }
+
+
+      .source-note {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 1rem;
+        padding-block: 1.5rem;
+        border-top: 1px solid var(--line);
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+
+      footer {
+        margin-top: auto;
+        padding-block: 1.75rem;
+        border-top: 1px solid var(--line);
+      }
+
+
+      .footer-inner {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem 2rem;
+      }
+
+
+      .footer-brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        white-space: nowrap;
+        text-decoration: none;
+        font-size: 0.9rem;
+      }
+
+
+      .footer-brand img {
+        width: 32px;
+        height: 32px;
+        flex-shrink: 0;
+      }
+
+
+      .footer-inner > p {
+        color: var(--muted);
+        font-size: 0.85rem;
+      }
+
+
+      @media (max-width: 760px) {
+        .wrap {
+          width: min(100% - 32px, 600px);
+        }
+
+        .site-header {
+          align-items: flex-start;
+          flex-direction: column;
+          gap: 1.25rem;
+        }
+
+        .app-brand img {
+          width: 52px;
+          border-radius: 12px;
+        }
+
+        .hero, .intro, .filter-section {
+          grid-template-columns: minmax(0, 1fr);
+          gap: 2.5rem;
+          padding-block: 3rem;
+        }
+
+        .hero .phone-shot {
+          width: min(78%, 280px);
+        }
+
+        .intro h2 {
+          max-width: none;
+        }
+
+        .intro-copy {
+          padding-top: 0;
+        }
+
+        .filter-copy {
+          grid-row: 1;
+        }
+
+        .filter-section .phone-shot {
+          width: min(78%, 280px);
+        }
+
+        .behind-scenes {
+          padding-block: 3rem;
+        }
+
+        .footer-inner {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+      }
+
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+
+        .button {
+          transition: none;
+        }
+      }
+    </style>
+
+    <link rel="canonical" href="https://metatronsw.github.io/app/demozone/">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Metatron Software">
+    <meta property="og:title" content="DemoZone — The demoscene, ready to watch">
+    <meta property="og:description" content="DemoZone brings the demoscene to your phone. Browse visual previews, find demos with YouTube videos, and narrow your search with layered filters.">
+    <meta property="og:url" content="https://metatronsw.github.io/app/demozone/">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="DemoZone — The demoscene, ready to watch">
+    <meta name="twitter:description" content="DemoZone brings the demoscene to your phone. Browse visual previews, find demos with YouTube videos, and narrow your search with layered filters.">
+  </head>
+
+
+  <body>
+    <header class="wrap site-header">
+      <a class="app-brand" href="index.html" aria-label="DemoZone home">
+        <img src="appicon.svg" alt="" width="1024" height="1024">
+        <span>DemoZone</span>
+      </a>
+      <nav aria-label="Page navigation">
+        <a href="#browse">Discover</a>
+        <a href="#filters">Search &amp; filters</a>
+        <a href="#behind-scenes">Behind the scenes</a>
+      </nav>
+    </header>
+
+
+    <main>
+      <section class="wrap hero" aria-labelledby="hero-title">
+        <div>
+          <p class="eyebrow">Demoscene on your phone · Coming soon</p>
+          <h1 id="hero-title">The demoscene.<br><span>Ready to watch.</span></h1>
+          <p class="lead">From the earliest scene classics to the latest wild demos. Discover decades of creativity on your phone, with visual previews and a direct route to YouTube.</p>
+          <div class="hero-actions">
+            <a class="button" href="#browse">Take a look <span aria-hidden="true">↓</span></a>
+            <a href="../index.html">Explore our apps <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+        <figure class="phone-shot">
+          <img src="IMG_6980.webp" alt="DemoZone on iPhone showing demo thumbnails, titles, platforms and release dates" width="1284" height="2778">
+          <figcaption>See the demos before you press play.</figcaption>
+        </figure>
+      </section>
+
+
+      <section class="wrap intro" id="browse" aria-labelledby="browse-title">
+        <div>
+          <p class="eyebrow">Less browsing. More watching.</p>
+          <h2 id="browse-title">A visual way into the scene.</h2>
+        </div>
+        <div class="intro-copy">
+          <p>DemoZone is built to bring the demoscene to more people. It uses publicly available data from <a href="https://www.pouet.net/" target="_blank" rel="noopener noreferrer">Pouët.net</a>, presents demo information and images, and takes you to YouTube to watch.</p>
+          <p>Why use it instead of browsing the website? The pictures are right there, and the list only includes productions with a video link. You can focus on demos you can actually watch on your phone.</p>
+          <p>No need to run the original production on its original hardware. Explore the artwork, find something that catches your eye, and open its video on YouTube.</p>
+        </div>
+      </section>
+
+
+      <div class="filter-band">
+        <section class="wrap filter-section" id="filters" aria-labelledby="filters-title">
+          <figure class="phone-shot">
+            <img src="IMG_6981.webp" alt="DemoZone's filter layers on iPhone, with separate platform and scene-selection filters" width="1284" height="2778" loading="lazy">
+            <figcaption>Combine filter layers to narrow the results.</figcaption>
+          </figure>
+          <div class="filter-copy">
+            <p class="eyebrow">Your platform. Your era. Your scene.</p>
+            <h2 id="filters-title">Find your corner of the demoscene.</h2>
+            <p>Looking for Amiga demos from a particular era? Want the popular Commodore 64 releases, or would you rather skip them entirely? DemoZone's search and layered filters help you get straight to what interests you.</p>
+            <ol class="filter-steps">
+              <li>
+                <div>
+                  <h3>Start with a search</h3>
+                  <p>Look for a production, group or creator. Your search applies across the filter layers.</p>
+                </div>
+              </li>
+              <li>
+                <div>
+                  <h3>Keep narrowing it down</h3>
+                  <p>Combine filters for platform, period and popularity. Each layer refines the results of the previous one.</p>
+                </div>
+              </li>
+              <li>
+                <div>
+                  <h3>Find a demo. Watch the video.</h3>
+                  <p>Browse the matching previews, choose a production and continue to its YouTube video.</p>
+                </div>
+              </li>
+            </ol>
+          </div>
+        </section>
+      </div>
+
+
+      <section class="wrap behind-scenes" id="behind-scenes" aria-labelledby="behind-title">
+        <p class="eyebrow">Behind the collection</p>
+        <h2 id="behind-title">From scene data to a watchable collection.</h2>
+        <p>The companion data-preparation tool helps turn the Pouët dataset into the collection used by DemoZone. It brings production details, platform information, screenshots and YouTube references together, with filters for selecting the entries to include.</p>
+        <figure class="admin-shot">
+          <a href="Administrator.webp" aria-label="View the full-size DemoZone data-preparation screenshot">
+            <img src="Administrator.webp" alt="DemoZone's desktop data-preparation tool showing source records, platform filters and converted demos" width="3520" height="2678" loading="lazy">
+          </a>
+          <figcaption>A look at the tool behind the app. Development screenshots are shown in Hungarian.</figcaption>
+        </figure>
+      </section>
+
+
+      <div class="wrap source-note">
+        <p>Demo information and images from <a href="https://www.pouet.net/" target="_blank" rel="noopener noreferrer">Pouët.net</a>. Videos open on YouTube.</p>
+        <a href="mailto:softwaremetatron@gmail.com">Questions or ideas? Get in touch <span aria-hidden="true">↗</span></a>
+      </div>
+    </main>
+
+
+    <footer>
+      <div class="wrap footer-inner">
+        <a class="footer-brand" href="../../index.html" aria-label="Metatron Software home">
+          <img src="../../main/metatron.svg" alt="" width="32" height="32">
+          <span>Metatron <strong>Software</strong></span>
+        </a>
+        <p>Independent software development from Budapest, Hungary.</p>
+      </div>
+    </footer>
+  </body>
+</html>

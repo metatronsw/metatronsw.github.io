@@ -1,0 +1,677 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="CaseMaster is a condominium-management app in development for caretakers and building administrators. Planned tools connect people, premises, inventory, weighted votes, work records and documents across multiple buildings.">
+    <meta name="theme-color" content="#f8fafc">
+    <title>CaseMaster — Keep the building's affairs together</title>
+    <link rel="icon" type="image/svg+xml" href="../../main/favicon.svg">
+    <style>
+      :root {
+        color-scheme: light;
+        --background: #f8fafc;
+        --surface: #edf3f9;
+        --text: #1a2c42;
+        --muted: #566a7f;
+        --accent: #22669f;
+        --line: #d5e0eb;
+      }
+
+
+      * {
+        box-sizing: border-box;
+      }
+
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+
+      body {
+        min-height: 100vh;
+        min-height: 100svh;
+        display: flex;
+        flex-direction: column;
+        margin: 0;
+        background: var(--background);
+        color: var(--text);
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        line-height: 1.65;
+      }
+
+
+      body > * {
+        flex-shrink: 0;
+      }
+
+
+      a {
+        color: inherit;
+        text-underline-offset: 0.25em;
+      }
+
+
+      a:focus-visible {
+        outline: 3px solid var(--accent);
+        outline-offset: 6px;
+      }
+
+
+      img {
+        display: block;
+        max-width: 100%;
+        height: auto;
+      }
+
+
+      h1, h2, h3, p, figure {
+        margin: 0;
+      }
+
+
+      h1, h2, h3 {
+        line-height: 1.08;
+        letter-spacing: -0.045em;
+      }
+
+
+      h1 {
+        max-width: 11ch;
+        margin-block: 1.3rem;
+        font-size: clamp(3rem, 6.5vw, 5.5rem);
+        font-weight: 700;
+      }
+
+
+      h1 span {
+        color: var(--accent);
+      }
+
+
+      h2 {
+        margin-block: 1rem 1.5rem;
+        font-size: clamp(2rem, 4vw, 3.5rem);
+      }
+
+
+      p + p {
+        margin-top: 1.2rem;
+      }
+
+
+      .wrap {
+        width: min(1120px, calc(100% - 48px));
+        margin-inline: auto;
+      }
+
+
+      .site-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 2rem;
+        padding-block: 1.75rem;
+        border-bottom: 1px solid var(--line);
+      }
+
+
+      .app-brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 1rem;
+        font-size: 1.5rem;
+        font-weight: 650;
+        letter-spacing: -0.04em;
+        text-decoration: none;
+      }
+
+
+      .app-brand img {
+        width: 64px;
+        border-radius: 15px;
+      }
+
+
+      .site-header nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem 1.5rem;
+        font-size: 0.9rem;
+      }
+
+
+      .site-header nav a {
+        color: var(--muted);
+        text-decoration: none;
+      }
+
+
+      .site-header nav a:hover {
+        color: var(--accent);
+      }
+
+
+      .eyebrow {
+        color: var(--accent);
+        font-size: 0.75rem;
+        font-weight: 650;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+      }
+
+
+      .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
+        align-items: center;
+        gap: clamp(2rem, 6vw, 6rem);
+        padding-block: 4.5rem 5.5rem;
+      }
+
+
+      .lead {
+        max-width: 49ch;
+        color: var(--muted);
+        font-size: 1.15rem;
+      }
+
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 1rem 1.5rem;
+        margin-top: 2rem;
+      }
+
+
+      .button {
+        display: inline-block;
+        padding: 0.8rem 1.25rem;
+        border: 1px solid var(--accent);
+        border-radius: 6px;
+        background: var(--accent);
+        color: #ffffff;
+        font-weight: 650;
+        text-decoration: none;
+        transition: background-color 180ms ease;
+      }
+
+
+      .button:hover {
+        background: #194f7e;
+      }
+
+
+      .hero-actions > a:last-child {
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+
+      .phone-shot {
+        width: min(100%, 300px);
+        justify-self: center;
+      }
+
+
+      .phone-shot img {
+        width: 100%;
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        box-shadow: 0 24px 60px rgb(0 0 0 / 28%);
+      }
+
+
+      figcaption {
+        margin-top: 1rem;
+        color: var(--muted);
+        font-size: 0.8rem;
+        line-height: 1.5;
+      }
+
+
+      .phone-shot figcaption {
+        text-align: center;
+      }
+
+
+      .intro {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 2rem 5rem;
+        padding-block: 4.5rem;
+        border-top: 1px solid var(--line);
+      }
+
+
+      .intro h2 {
+        max-width: 16ch;
+      }
+
+
+      .intro-copy {
+        padding-top: 2.1rem;
+        color: var(--muted);
+      }
+
+
+      .filter-band {
+        background: var(--surface);
+      }
+
+
+      .filter-section {
+        display: grid;
+        grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+        align-items: center;
+        gap: 3rem 6rem;
+        padding-block: 5rem;
+      }
+
+
+      .filter-copy > p:not(.eyebrow) {
+        color: var(--muted);
+      }
+
+
+      .filter-steps {
+        margin: 2rem 0 0;
+        padding: 0;
+        list-style: none;
+        counter-reset: step;
+      }
+
+
+      .filter-steps li {
+        display: grid;
+        grid-template-columns: 2rem minmax(0, 1fr);
+        gap: 0.75rem;
+        padding-block: 1rem;
+        border-top: 1px solid var(--line);
+        counter-increment: step;
+      }
+
+
+      .filter-steps li::before {
+        content: "0" counter(step);
+        color: var(--accent);
+        font-size: 0.8rem;
+      }
+
+
+      .filter-steps h3 {
+        margin-bottom: 0.4rem;
+        font-size: 1.1rem;
+        letter-spacing: -0.02em;
+      }
+
+
+      .filter-steps p {
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+
+      .operations {
+        padding-block: 5rem;
+      }
+
+
+      .operations > p:not(.eyebrow) {
+        max-width: 70ch;
+        color: var(--muted);
+      }
+
+
+
+      .operations-list {
+        margin: 2rem 0 0;
+      }
+
+
+      .operations-list > div {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+        gap: 1rem 3rem;
+        padding-block: 1.5rem;
+        border-top: 1px solid var(--line);
+      }
+
+
+      .operations-list dt {
+        font-weight: 600;
+      }
+
+
+      .operations-list dd {
+        margin: 0;
+        color: var(--muted);
+      }
+
+
+      .roadmap {
+        padding-block: 4rem;
+        border-top: 1px solid var(--line);
+      }
+
+
+      .roadmap-intro {
+        max-width: 65ch;
+        color: var(--muted);
+      }
+
+
+      .roadmap-list {
+        margin: 2rem 0;
+      }
+
+
+      .roadmap-list > div {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+        gap: 1rem 3rem;
+        padding-block: 1.5rem;
+        border-top: 1px solid var(--line);
+      }
+
+
+      .roadmap-list dt {
+        color: var(--text);
+        font-weight: 600;
+      }
+
+
+      .roadmap-list dd {
+        margin: 0;
+        color: var(--muted);
+      }
+
+
+      .status-note {
+        color: var(--accent);
+        font-size: 0.9rem;
+      }
+
+
+      footer {
+        margin-top: auto;
+        padding-block: 1.75rem;
+        border-top: 1px solid var(--line);
+      }
+
+
+      .footer-inner {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem 2rem;
+      }
+
+
+      .footer-brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        white-space: nowrap;
+        text-decoration: none;
+        font-size: 0.9rem;
+      }
+
+
+      .footer-brand img {
+        width: 32px;
+        height: 32px;
+        flex-shrink: 0;
+      }
+
+
+      .footer-inner > p {
+        color: var(--muted);
+        font-size: 0.85rem;
+      }
+
+
+      @media (max-width: 760px) {
+        .wrap {
+          width: min(100% - 32px, 600px);
+        }
+
+        .site-header {
+          align-items: flex-start;
+          flex-direction: column;
+          gap: 1.25rem;
+        }
+
+        .app-brand img {
+          width: 52px;
+          border-radius: 12px;
+        }
+
+        .hero, .intro, .filter-section {
+          grid-template-columns: minmax(0, 1fr);
+          gap: 2.5rem;
+          padding-block: 3rem;
+        }
+
+        .hero .phone-shot {
+          width: min(78%, 280px);
+        }
+
+        .intro h2 {
+          max-width: none;
+        }
+
+        .intro-copy {
+          padding-top: 0;
+        }
+
+        .filter-copy {
+          grid-row: 1;
+        }
+
+        .filter-section .phone-shot {
+          width: min(78%, 280px);
+        }
+
+        .operations, .roadmap {
+          padding-block: 3rem;
+        }
+
+        .roadmap-list > div, .operations-list > div {
+          grid-template-columns: minmax(0, 1fr);
+          gap: 0.5rem;
+        }
+
+        .footer-inner {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+      }
+
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+
+        .button {
+          transition: none;
+        }
+      }
+    </style>
+
+    <link rel="canonical" href="https://metatronsw.github.io/app/casemaster/">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Metatron Software">
+    <meta property="og:title" content="CaseMaster — Keep the building's affairs together">
+    <meta property="og:description" content="CaseMaster is a condominium-management app in development for caretakers and building administrators. Planned tools connect people, premises, inventory, weighted votes, work records and documents across multiple buildings.">
+    <meta property="og:url" content="https://metatronsw.github.io/app/casemaster/">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="CaseMaster — Keep the building's affairs together">
+    <meta name="twitter:description" content="CaseMaster is a condominium-management app in development for caretakers and building administrators. Planned tools connect people, premises, inventory, weighted votes, work records and documents across multiple buildings.">
+  </head>
+
+
+  <body>
+    <header class="wrap site-header">
+      <a class="app-brand" href="index.html" aria-label="CaseMaster home">
+        <img src="appicon.svg" alt="" width="1024" height="1024">
+        <span>CaseMaster</span>
+      </a>
+      <nav aria-label="Page navigation">
+        <a href="#records">Records</a>
+        <a href="#voting">Voting</a>
+        <a href="#work">Daily work</a>
+        <a href="#roadmap">Roadmap</a>
+      </nav>
+    </header>
+
+
+    <main>
+      <section class="wrap hero" aria-labelledby="hero-title">
+        <div>
+          <p class="eyebrow">For caretakers &amp; condominium administrators</p>
+          <h1 id="hero-title">Every building.<br><span>Connected.</span></h1>
+          <p class="lead">CaseMaster is being developed for the people who look after a building's affairs. The aim is to bring people, premises, inventory, decisions and everyday work into one connected record, across one building or several.</p>
+          <p class="status-note">In development · Not yet released.</p>
+          <div class="hero-actions">
+            <a class="button" href="#records">Explore the plans <span aria-hidden="true">↓</span></a>
+            <a href="../index.html">Explore our apps <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+        <figure class="phone-shot">
+          <img src="IMG_6993.webp" alt="Early CaseMaster building overview with houses, areas, owners, voting, ownership ratios, tasks and time records" width="1284" height="2778">
+          <figcaption>An early development view of a test building.</figcaption>
+        </figure>
+      </section>
+
+
+      <section class="wrap intro" aria-labelledby="overview-title">
+        <div>
+          <p class="eyebrow">The building and the details behind it</p>
+          <h2 id="overview-title">Keep the connections in view.</h2>
+        </div>
+        <div class="intro-copy">
+          <p>Looking after a condominium means keeping track of people, rooms, objects, documents and the things that happen around them. CaseMaster is intended to connect those records, so information can be found in its proper context.</p>
+          <p>The following features are under development. The screenshots show early work with test records, rather than a finished application.</p>
+        </div>
+      </section>
+
+
+      <div class="filter-band">
+        <section class="wrap filter-section" id="records" aria-labelledby="records-title">
+          <figure class="phone-shot">
+            <img src="IMG_6995.webp" alt="CaseMaster person record with contact details, an ownership-share value and a linked unit" width="1284" height="2778" loading="lazy">
+            <figcaption>Connect a person's details to their place in the building.</figcaption>
+          </figure>
+          <div class="filter-copy">
+            <p class="eyebrow">People. Places. Objects. Events.</p>
+            <h2 id="records-title">A record with context.</h2>
+            <p>The planned record system brings the building's information together and links related details instead of leaving them scattered across separate lists.</p>
+            <ol class="filter-steps">
+              <li>
+                <div>
+                  <h3>People and premises</h3>
+                  <p>Keep records of owners, residents and other contacts, together with buildings, units, rooms and shared areas.</p>
+                </div>
+              </li>
+              <li>
+                <div>
+                  <h3>Objects and inventory</h3>
+                  <p>Register objects and maintain an inventory, with links to the places and information associated with them.</p>
+                </div>
+              </li>
+              <li>
+                <div>
+                  <h3>Events that belong somewhere</h3>
+                  <p>Connect an event to the relevant names, locations and dates, so you can follow what happened, where and when.</p>
+                </div>
+              </li>
+            </ol>
+          </div>
+        </section>
+      </div>
+
+
+      <section class="wrap filter-section" id="voting" aria-labelledby="voting-title">
+        <div class="filter-copy">
+          <p class="eyebrow">Ownership shares and configurable rules</p>
+          <h2 id="voting-title">See what each vote represents.</h2>
+          <p>The voting tools are being built to calculate vote weights from recorded ownership shares. You can see an owner's percentage share and the weight of their vote without repeatedly working out the proportions by hand.</p>
+          <p>The calculation rules will be configurable, so the tally can follow the settings chosen for the building and the vote.</p>
+          <p>Keeping the ownership information and the votes together makes it easier to review how the recorded result was calculated.</p>
+        </div>
+        <figure class="phone-shot">
+          <img src="IMG_6994.webp" alt="CaseMaster development voting screen with individual votes, share values and totals" width="1284" height="2778" loading="lazy">
+          <figcaption>An early voting view using test owners and share values.</figcaption>
+        </figure>
+      </section>
+
+
+      <div class="filter-band">
+        <section class="wrap operations" id="work" aria-labelledby="work-title">
+          <p class="eyebrow">The everyday work behind the building</p>
+          <h2 id="work-title">Make the work easier to account for.</h2>
+          <p>CaseMaster is also being designed to keep the administrative side of the job connected to the building it belongs to, with separate records for tasks, calls, documents and correspondence.</p>
+          <dl class="operations-list">
+            <div>
+              <dt>Work, calls and time</dt>
+              <dd>Record the time spent on the building, with each job and phone call logged separately. Prepare monthly or yearly summaries of recorded phone and administrative costs.</dd>
+            </div>
+            <div>
+              <dt>A searchable document record</dt>
+              <dd>Register and organize the building's documents so they can be retrieved later and kept alongside the matters they relate to.</dd>
+            </div>
+            <div>
+              <dt>Group and individual correspondence</dt>
+              <dd>Planned communication tools include group letters and individual reminders, such as a notice about outstanding common charges.</dd>
+            </div>
+            <div>
+              <dt>More than one building</dt>
+              <dd>Manage several buildings, keeping each property's people, premises, work and records in their own context.</dd>
+            </div>
+          </dl>
+        </section>
+      </div>
+
+
+      <section class="wrap roadmap" id="roadmap" aria-labelledby="roadmap-title">
+        <p class="eyebrow">Future development plans</p>
+        <h2 id="roadmap-title">From your records to a shared view.</h2>
+        <p class="roadmap-intro">These are future plans for CaseMaster. Desktop synchronization, website generation and the dedicated server are not available features yet.</p>
+        <dl class="roadmap-list">
+          <div>
+            <dt>Desktop synchronization</dt>
+            <dd>Synchronize with a desktop application to continue managing the building's records on a larger screen.</dd>
+          </div>
+          <div>
+            <dt>A website for residents and owners</dt>
+            <dd>Generate a website for sharing documents and reports, with public material and password-protected content for residents and owners.</dd>
+          </div>
+          <div>
+            <dt>A dedicated server</dt>
+            <dd>A server for managing sensitive building-related data is part of the longer-term plan.</dd>
+          </div>
+        </dl>
+        <p class="status-note">CaseMaster is not yet finished. The application and its planned features are in development.</p>
+        <p><a href="mailto:softwaremetatron@gmail.com">Have a building-management workflow in mind? Get in touch <span aria-hidden="true">↗</span></a></p>
+      </section>
+    </main>
+
+
+    <footer>
+      <div class="wrap footer-inner">
+        <a class="footer-brand" href="../../index.html" aria-label="Metatron Software home">
+          <img src="../../main/metatron.svg" alt="" width="32" height="32">
+          <span>Metatron <strong>Software</strong></span>
+        </a>
+        <p>Independent software development from Budapest, Hungary.</p>
+      </div>
+    </footer>
+  </body>
+</html>

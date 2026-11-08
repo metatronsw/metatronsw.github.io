@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Word games">
+  <rect x="3" y="8" width="32" height="39" rx="4" fill="#d6a539"/>
+  <rect x="3" y="6" width="32" height="37" rx="4" fill="#f3cf65"/>
+  <path d="m11 33 7-18h3l7 18h-4l-1.5-4h-8L14 33Zm5-7h5.5L19 19Z" fill="#795c35"/>
+  <rect x="29" y="23" width="32" height="39" rx="4" fill="#d6a539"/>
+  <rect x="29" y="21" width="32" height="37" rx="4" fill="#f3cf65"/>
+  <path d="M37 29h16v4h-6v16h-4V33h-6Z" fill="#795c35"/>
+</svg>
