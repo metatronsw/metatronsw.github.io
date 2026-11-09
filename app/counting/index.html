@@ -6,7 +6,8 @@
     <meta name="description" content="Counting keeps track of what you count. Use simple, up-and-down or timed counters, customize every card, and increase multiple counters together. Currently in development.">
     <meta name="theme-color" content="#10151e">
     <title>Counting — Big buttons. Clear numbers.</title>
-    <link rel="icon" type="image/svg+xml" href="../../main/favicon.svg">
+    <link rel="icon" type="image/svg+xml" href="../../main/favicon.svg" sizes="any">
+    <link rel="icon" type="image/png" href="../../main/favicon.png">
     <style>
       :root {
         color-scheme: dark;
@@ -494,6 +495,46 @@
           transition: none;
         }
       }
+
+
+      /* Direction markers for text links. */
+      a:is(.link-external, .link-internal)::after {
+        display: inline-block;
+        margin-inline-start: 0.3em;
+        text-decoration: none;
+      }
+
+      a.link-external::after {
+        content: "↗" / "";
+      }
+
+      a.link-internal::after {
+        content: "→" / "";
+      }
+
+
+      @media (prefers-reduced-motion: no-preference) {
+        a.link-external:is(:hover, :focus-visible)::after {
+          animation: github-arrow-sway 2s ease-in-out infinite;
+        }
+
+        a.link-internal:is(:hover, :focus-visible)::after {
+          animation: internal-arrow-nudge 500ms ease-in-out;
+        }
+      }
+
+
+      @keyframes internal-arrow-nudge {
+        50% {
+          transform: translateX(0.25em);
+        }
+      }
+
+
+      @keyframes github-arrow-sway {
+        0%, 100% { transform: rotate(-12deg); }
+        50% { transform: rotate(12deg); }
+      }
     </style>
 
     <link rel="canonical" href="https://metatronsw.github.io/app/counting/">
@@ -531,7 +572,7 @@
           <p class="lead">When you can no longer remember what you counted, or how many, Counting keeps track. Simple counters, flexible cards and one less thing to hold in your head.</p>
           <div class="hero-actions">
             <a class="button" href="#counters">Meet the counters <span aria-hidden="true">↓</span></a>
-            <a href="../index.html">Explore our apps <span aria-hidden="true">↗</span></a>
+            <a href="../index.html" class="link-internal">Explore our apps</a>
           </div>
         </div>
         <figure class="phone-shot">
@@ -621,7 +662,7 @@
           </div>
         </dl>
         <p class="status-note">In development · Release details will follow.</p>
-        <p><a href="mailto:softwaremetatron@gmail.com">Have an idea for Counting? Get in touch <span aria-hidden="true">↗</span></a></p>
+        <p><a href="mailto:softwaremetatron@gmail.com" class="link-external">Have an idea for Counting? Get in touch</a></p>
       </section>
     </main>
 

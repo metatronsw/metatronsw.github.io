@@ -6,7 +6,8 @@
     <meta name="description" content="CaseMaster is a condominium-management app in development for caretakers and building administrators. Planned tools connect people, premises, inventory, weighted votes, work records and documents across multiple buildings.">
     <meta name="theme-color" content="#f8fafc">
     <title>CaseMaster — Keep the building's affairs together</title>
-    <link rel="icon" type="image/svg+xml" href="../../main/favicon.svg">
+    <link rel="icon" type="image/svg+xml" href="../../main/favicon.svg" sizes="any">
+    <link rel="icon" type="image/png" href="../../main/favicon.png">
     <style>
       :root {
         color-scheme: light;
@@ -502,6 +503,46 @@
           transition: none;
         }
       }
+
+
+      /* Direction markers for text links. */
+      a:is(.link-external, .link-internal)::after {
+        display: inline-block;
+        margin-inline-start: 0.3em;
+        text-decoration: none;
+      }
+
+      a.link-external::after {
+        content: "↗" / "";
+      }
+
+      a.link-internal::after {
+        content: "→" / "";
+      }
+
+
+      @media (prefers-reduced-motion: no-preference) {
+        a.link-external:is(:hover, :focus-visible)::after {
+          animation: github-arrow-sway 2s ease-in-out infinite;
+        }
+
+        a.link-internal:is(:hover, :focus-visible)::after {
+          animation: internal-arrow-nudge 500ms ease-in-out;
+        }
+      }
+
+
+      @keyframes internal-arrow-nudge {
+        50% {
+          transform: translateX(0.25em);
+        }
+      }
+
+
+      @keyframes github-arrow-sway {
+        0%, 100% { transform: rotate(-12deg); }
+        50% { transform: rotate(12deg); }
+      }
     </style>
 
     <link rel="canonical" href="https://metatronsw.github.io/app/casemaster/">
@@ -541,7 +582,7 @@
           <p class="status-note">In development · Not yet released.</p>
           <div class="hero-actions">
             <a class="button" href="#records">Explore the plans <span aria-hidden="true">↓</span></a>
-            <a href="../index.html">Explore our apps <span aria-hidden="true">↗</span></a>
+            <a href="../index.html" class="link-internal">Explore our apps</a>
           </div>
         </div>
         <figure class="phone-shot">
@@ -659,7 +700,7 @@
           </div>
         </dl>
         <p class="status-note">CaseMaster is not yet finished. The application and its planned features are in development.</p>
-        <p><a href="mailto:softwaremetatron@gmail.com">Have a building-management workflow in mind? Get in touch <span aria-hidden="true">↗</span></a></p>
+        <p><a href="mailto:softwaremetatron@gmail.com" class="link-external">Have a building-management workflow in mind? Get in touch</a></p>
       </section>
     </main>
 

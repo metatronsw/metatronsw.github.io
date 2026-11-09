@@ -6,7 +6,8 @@
     <meta name="description" content="Outlays brings cash spending, card payments and bank CSV exports into one personal financial record, with Mac synchronization, Excel workflows and selective reporting. In development.">
     <meta name="theme-color" content="#f7f9f5">
     <title>Outlays — Know where it went</title>
-    <link rel="icon" type="image/svg+xml" href="../../main/favicon.svg">
+    <link rel="icon" type="image/svg+xml" href="../../main/favicon.svg" sizes="any">
+    <link rel="icon" type="image/png" href="../../main/favicon.png">
     <style>
       :root {
         color-scheme: light;
@@ -514,6 +515,46 @@
           transition: none;
         }
       }
+
+
+      /* Direction markers for text links. */
+      a:is(.link-external, .link-internal)::after {
+        display: inline-block;
+        margin-inline-start: 0.3em;
+        text-decoration: none;
+      }
+
+      a.link-external::after {
+        content: "↗" / "";
+      }
+
+      a.link-internal::after {
+        content: "→" / "";
+      }
+
+
+      @media (prefers-reduced-motion: no-preference) {
+        a.link-external:is(:hover, :focus-visible)::after {
+          animation: github-arrow-sway 2s ease-in-out infinite;
+        }
+
+        a.link-internal:is(:hover, :focus-visible)::after {
+          animation: internal-arrow-nudge 500ms ease-in-out;
+        }
+      }
+
+
+      @keyframes internal-arrow-nudge {
+        50% {
+          transform: translateX(0.25em);
+        }
+      }
+
+
+      @keyframes github-arrow-sway {
+        0%, 100% { transform: rotate(-12deg); }
+        50% { transform: rotate(12deg); }
+      }
     </style>
 
     <link rel="canonical" href="https://metatronsw.github.io/app/outlays/">
@@ -551,7 +592,7 @@
           <p class="lead">Cash in your pocket. Cards from different banks. Outlays brings your spending into one personal record, so you can see what you spent and exactly what it was for.</p>
           <div class="hero-actions">
             <a class="button" href="#record">Explore Outlays <span aria-hidden="true">↓</span></a>
-            <a href="../index.html">Explore our apps <span aria-hidden="true">↗</span></a>
+            <a href="../index.html" class="link-internal">Explore our apps</a>
           </div>
         </div>
         <figure class="phone-shot">
@@ -661,7 +702,7 @@
         <p>You may need a detailed private record and a much simpler report for someone else. Outlays lets you work from selected data and prepare a report containing the information you intend to share.</p>
         <p>For a shared expense summary or a public report, include the relevant spending details and leave unnecessary or sensitive fields out. This gives you a way to share a useful account of the costs without passing on an entire bank export.</p>
         <p class="status-note">Outlays is currently in development. Screenshots show a work in progress.</p>
-        <p><a href="mailto:softwaremetatron@gmail.com">Have a question or a spending workflow in mind? Get in touch <span aria-hidden="true">↗</span></a></p>
+        <p><a href="mailto:softwaremetatron@gmail.com" class="link-external">Have a question or a spending workflow in mind? Get in touch</a></p>
       </section>
     </main>
 

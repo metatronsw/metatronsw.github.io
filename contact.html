@@ -1,11 +1,15 @@
 <!doctype html>
-<html lang="en" class="site-page">
+<html lang="en" class="site-page auto-theme">
   <head>
     <meta charset="utf-8">
+    <meta name="color-scheme" content="light dark">
+    <meta name="theme-color" content="#f5f8fb" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#101923" media="(prefers-color-scheme: dark)">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Contact Metatron Software and connect through our social media channels.">
     <title>Contact — Metatron Software</title>
-    <link rel="icon" type="image/svg+xml" href="main/favicon.svg">
+    <link rel="icon" type="image/svg+xml" href="main/favicon.svg" sizes="any">
+    <link rel="icon" type="image/png" href="main/favicon.png">
     <link rel="stylesheet" href="style.css">
     <style>
       .contact-mail-art {
@@ -65,12 +69,12 @@
         <span>Metatron <strong>Software</strong></span>
       </a>
       <nav aria-label="Main navigation">
-        <a href="app/index.html">Develop</a>
-        <a href="about.html">About</a>
-        <a href="realtime/index.html">Realtime</a>
-        <a href="design/index.html">Design</a>
-        <a href="visual/index.html">Visual</a>
-        <a href="contact.html" aria-current="page">Contact</a>
+        <a href="app/index.html"><span data-label="Develop">Develop</span></a>
+        <a href="about.html"><span data-label="About">About</span></a>
+        <a href="realtime/index.html"><span data-label="Realtime">Realtime</span></a>
+        <a href="design/index.html"><span data-label="Design">Design</span></a>
+        <a href="visual/index.html"><span data-label="Visual">Visual</span></a>
+        <a href="contact.html" aria-current="page"><span data-label="Contact">Contact</span></a>
       </nav>
       <a class="sitemap-menu" href="sitemap.html" aria-label="Sitemap" title="Sitemap">
         <img src="main/menu.svg" alt="" width="24" height="24">
@@ -84,7 +88,7 @@
           <h1>Let’s make something useful</h1>
           <p class="contact-lead">Metatron Software is an independent software studio. We build our products and develop custom solutions from Budapest, Hungary.</p>
           <p class="contact-lead">Have an idea, a question, or a project in mind? We’d be glad to hear from you.</p>
-          <a class="button" href="mailto:softwaremetatron@gmail.com">Email us <span aria-hidden="true">→</span></a>
+          <a class="button link-external" href="mailto:softwaremetatron@gmail.com">Email us</a>
         </div>
       </section>
 
@@ -96,22 +100,37 @@
           </div>
         </div>
         <div class="contact-links">
-          <a href="https://www.facebook.com/szerencses.gabor.1" target="_blank" rel="noopener noreferrer"><img src="main/facebook.svg" alt="" width="32" height="32"><span>Facebook</span><span class="contact-arrow" aria-hidden="true">↗</span></a>
-          <a href="https://www.instagram.com/szerencsesg/" target="_blank" rel="noopener noreferrer"><img src="main/instagram.svg" alt="" width="32" height="32"><span>Instagram</span><span class="contact-arrow" aria-hidden="true">↗</span></a>
-          <a href="https://www.youtube.com/@varju-bacsi" target="_blank" rel="noopener noreferrer"><img src="main/youtube.svg" alt="" width="32" height="32"><span>YouTube</span><span class="contact-arrow" aria-hidden="true">↗</span></a>
-          <a href="https://www.linkedin.com/in/g%C3%A1bor-szerencs%C3%A9s-432a01233" target="_blank" rel="noopener noreferrer"><img src="main/linkedin.svg" alt="" width="32" height="32"><span>LinkedIn</span><span class="contact-arrow" aria-hidden="true">↗</span></a>
-          <a href="mailto:softwaremetatron@gmail.com"><img src="main/mail-social.svg" alt="" width="32" height="32"><span>Email</span><span class="contact-arrow" aria-hidden="true">→</span></a>
+          <a href="https://www.facebook.com/szerencses.gabor.1" target="_blank" rel="noopener noreferrer" class="link-external"><img src="main/facebook.svg" alt="" width="32" height="32"><span>Facebook</span></a>
+          <a href="https://www.instagram.com/szerencsesg/" target="_blank" rel="noopener noreferrer" class="link-external"><img src="main/instagram.svg" alt="" width="32" height="32"><span>Instagram</span></a>
+          <a href="https://www.youtube.com/@varju-bacsi" target="_blank" rel="noopener noreferrer" class="link-external"><img src="main/youtube.svg" alt="" width="32" height="32"><span>YouTube</span></a>
+          <a href="https://www.linkedin.com/in/g%C3%A1bor-szerencs%C3%A9s-432a01233" target="_blank" rel="noopener noreferrer" class="link-external"><img src="main/linkedin.svg" alt="" width="32" height="32"><span>LinkedIn</span></a>
+          <a href="mailto:softwaremetatron@gmail.com" class="link-external"><img src="main/mail-social.svg" alt="" width="32" height="32"><span>Email</span></a>
         </div>
       </section>
     </main>
     <footer class="site-footer">
-      <div class="section-wrap footer-inner footer-standard">
-        <a class="brand footer-brand" href="index.html" aria-label="Metatron Software home">
-          <img class="brand-mark" src="main/metatron.svg" alt="" aria-hidden="true" width="38" height="38">
-          <span>Metatron <strong>Software</strong></span>
+      <div class="section-wrap footer-inner">
+        <a class="brand footer-brand" href="index.html"> <img class="brand-mark" src="main/metatron.svg" alt="" aria-hidden="true" width="38" height="38"> <span>Metatron <strong>Software</strong></span> </a>
+        <nav class="social-links" aria-label="Social media and email">
+          <a href="https://www.facebook.com/szerencses.gabor.1" aria-label="Facebook" title="Facebook" target="_blank" rel="noopener noreferrer">
+            <img src="main/facebook.svg" alt="" width="24" height="24" loading="lazy">
+          </a>
+          <a href="https://www.instagram.com/szerencsesg/" aria-label="Instagram" title="Instagram" target="_blank" rel="noopener noreferrer">
+            <img src="main/instagram.svg" alt="" width="24" height="24" loading="lazy">
+          </a>
+          <a href="https://www.youtube.com/@varju-bacsi" aria-label="YouTube" title="YouTube" target="_blank" rel="noopener noreferrer">
+            <img src="main/youtube.svg" alt="" width="24" height="24" loading="lazy">
+          </a>
+          <a href="https://www.linkedin.com/in/g%C3%A1bor-szerencs%C3%A9s-432a01233" aria-label="LinkedIn" title="LinkedIn" target="_blank" rel="noopener noreferrer">
+            <img src="main/linkedin.svg" alt="" width="24" height="24" loading="lazy">
+          </a>
+          <a href="mailto:softwaremetatron@gmail.com" aria-label="Mail" title="Mail">
+            <img src="main/mail-social.svg" alt="" width="24" height="24" loading="lazy">
+          </a>
+        </nav>
+        <a class="sitemap-menu" href="sitemap.html" aria-label="Sitemap" title="Sitemap">
+          <img src="main/menu.svg" alt="" width="24" height="24">
         </a>
-        <p class="footer-description">Independent software development from Budapest, Hungary.</p>
-        <p class="footer-years">2018-2026</p>
       </div>
     </footer>
   </body>

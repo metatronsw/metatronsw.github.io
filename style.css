@@ -194,6 +194,55 @@ html:where(.site-page) {
   color: var(--blue);
 }
 
+.site-page a.link-underline-sweep {
+  text-decoration: none;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat;
+  background-position: left bottom;
+  background-size: 0 1px;
+  transition: background-size 250ms ease;
+}
+
+
+.site-page a.link-underline-sweep:is(:hover, :focus-visible) {
+  background-size: 100% 1px;
+}
+
+
+/* Direction markers for text links. */
+a:is(.link-external, .link-internal)::after {
+  display: inline-block;
+  margin-inline-start: 0.3em;
+  text-decoration: none;
+}
+
+a.link-external::after {
+  content: "↗" / "";
+}
+
+a.link-internal::after {
+  content: "→" / "";
+}
+
+
+@media (prefers-reduced-motion: no-preference) {
+  a.link-external:is(:hover, :focus-visible)::after {
+    animation: github-arrow-sway 2s ease-in-out infinite;
+  }
+
+  a.link-internal:is(:hover, :focus-visible)::after {
+    animation: internal-arrow-nudge 500ms ease-in-out;
+  }
+}
+
+
+@keyframes internal-arrow-nudge {
+  50% {
+    transform: translateX(0.25em);
+  }
+}
+
+
 :where(.site-page) .about {
   padding-block: 4.5rem;
   background: var(--paper);
@@ -514,8 +563,8 @@ html:where(.site-page) {
   opacity: 0.75;
 }
 
-:where(.site-page) .contact-arrow {
-  margin-left: auto;
+:where(.site-page) .contact-links a::after {
+  margin-inline-start: auto;
   color: var(--muted);
 }
 
@@ -695,7 +744,7 @@ html:where(.site-page) {
   filter: var(--image-shadow);
 }
 
-/* Standard footer for the main pages, excluding the homepage. */
+/* Shared footer for the main website pages. */
 footer.site-footer {
   padding: 0;
   color: var(--ink);
@@ -703,41 +752,75 @@ footer.site-footer {
   text-align: start;
 }
 
-.footer-inner.footer-standard {
+
+.site-footer .footer-inner {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
-  align-items: center;
 }
 
-.footer-standard > .footer-brand {
+
+.site-footer .footer-brand {
   justify-self: start;
-  white-space: nowrap;
 }
 
-.footer-standard > .footer-description {
-  text-align: center;
-}
 
-.footer-standard > .footer-years {
+.site-footer .sitemap-menu {
+  display: grid;
+  flex: 0 0 44px;
+  place-items: center;
   justify-self: end;
-  white-space: nowrap;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
 }
 
-@media (max-width: 900px) {
-  .footer-inner.footer-standard {
-    grid-template-columns: minmax(0, 1fr) auto;
-    padding-block: 1.3rem;
-    gap: 1rem;
+
+.site-footer .sitemap-menu:hover {
+  background: var(--paper);
+}
+
+
+@media (max-width: 760px) {
+  .site-footer .footer-inner {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    gap: 0;
   }
 
-  .footer-standard > .footer-description {
-    grid-column: 1 / -1;
-    grid-row: 2;
+
+  .site-footer .footer-brand {
+    flex-shrink: 0;
+    margin-right: 0.5rem;
+    white-space: nowrap;
   }
 
-  .footer-standard > .footer-years {
-    grid-column: 2;
-    grid-row: 1;
+
+  .site-footer .social-links {
+    flex: 0 1 220px;
+    flex-wrap: nowrap;
+    min-width: 0;
+    margin-left: auto;
+    gap: 0;
+  }
+
+
+  .site-footer .social-links a {
+    flex: 1 1 44px;
+    min-width: 0;
+  }
+}
+
+
+@media (max-width: 400px) {
+  .site-footer .footer-brand strong {
+    display: none;
+  }
+
+
+  .site-footer .sitemap-menu {
+    flex-basis: 32px;
+    width: 32px;
   }
 }
 
@@ -808,6 +891,48 @@ footer.site-footer {
 .menu-header nav {
   margin-left: auto;
   align-items: center;
+}
+
+
+.menu-header nav a {
+  position: relative;
+  text-align: center;
+  transition: color 250ms ease, font-weight 250ms ease;
+}
+
+
+/* Reserve the width of the bold label without adding a visible line. */
+.menu-header nav a [data-label]::after {
+  display: block;
+  height: 0;
+  overflow: hidden;
+  visibility: hidden;
+  white-space: nowrap;
+  font-weight: 700;
+  content: attr(data-label) / "";
+}
+
+
+.menu-header nav a::after {
+  position: absolute;
+  inset-inline: 0;
+  inset-block-end: 0;
+  height: 1px;
+  background: currentColor;
+  content: "";
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 250ms ease;
+}
+
+
+.menu-header nav a:is(:hover, :focus-visible) {
+  font-weight: 700;
+}
+
+
+.menu-header nav a:is(:hover, :focus-visible)::after {
+  transform: scaleX(1);
 }
 
 
@@ -1504,4 +1629,66 @@ body:not(.site-effects) .hero-icon:is(:hover, :focus-visible) img {
 
 .app-subsection > .gallery-intro {
   margin-bottom: 2rem;
+}
+
+
+/* Automatic theme is opt-in: standalone application pages retain their palettes. */
+@media (prefers-color-scheme: dark) {
+  :root.auto-theme {
+    color-scheme: dark;
+    --ink: #edf3f8;
+    --muted: #acbdcb;
+    --blue: #80c8f2;
+    --blue-dark: #a4d9f7;
+    --paper: #192735;
+    --line: #3c5061;
+    --white: #101923;
+    --button-text: #101923;
+    --shadow: 0 8px 18px rgb(0 0 0 / 40%);
+  }
+
+
+  .auto-theme :is(.hero, .contact-hero, .about-hero, .apps-hero) {
+    background: linear-gradient(120deg, #162330, #213748);
+  }
+
+
+  .auto-theme .virtual-hero {
+    background: var(--hero-background, linear-gradient(120deg, #162330, #213748));
+  }
+
+
+  .auto-theme .intro-card {
+    background: var(--paper);
+  }
+
+
+  .auto-theme :is(.button, .ribbon) {
+    color: var(--button-text);
+  }
+
+
+  .auto-theme .sitemap-menu img {
+    filter: brightness(0) invert(1);
+  }
+
+
+  .auto-theme :is(.social-links, .contact-links) img {
+    filter: grayscale(1) brightness(0) invert(1);
+    opacity: 0.85;
+  }
+
+
+  .auto-theme :is(.social-links, .contact-links) a:is(:hover, :focus-visible) img {
+    filter: none;
+    opacity: 1;
+  }
+
+}
+
+
+/* Embedded artwork keeps its original light rendering context and transparency.
+   The surrounding page still follows the system appearance. */
+.auto-theme :is(img, object, svg) {
+  color-scheme: only light;
 }

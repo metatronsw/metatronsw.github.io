@@ -1,11 +1,15 @@
 <!doctype html>
-<html lang="en" class="site-page">
+<html lang="en" class="site-page auto-theme">
   <head>
     <meta charset="utf-8">
+    <meta name="color-scheme" content="light dark">
+    <meta name="theme-color" content="#f5f8fb" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#101923" media="(prefers-color-scheme: dark)">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Explore native iPhone, iPad and Mac apps from Metatron Software, plus custom Linux, FreeBSD CLI and web server development.">
     <title>Our apps &amp; development — Metatron Software</title>
-    <link rel="icon" type="image/svg+xml" href="../main/favicon.svg">
+    <link rel="icon" type="image/svg+xml" href="../main/favicon.svg" sizes="any">
+    <link rel="icon" type="image/png" href="../main/favicon.png">
     <link rel="stylesheet" href="../style.css">
 
     <link rel="canonical" href="https://metatronsw.github.io/app/">
@@ -26,12 +30,12 @@
         <span>Metatron <strong>Software</strong></span>
       </a>
       <nav aria-label="Main navigation">
-        <a href="../app/index.html" aria-current="page">Develop</a>
-        <a href="../about.html">About</a>
-        <a href="../realtime/index.html">Realtime</a>
-        <a href="../design/index.html">Design</a>
-        <a href="../visual/index.html">Visual</a>
-        <a href="../contact.html">Contact</a>
+        <a href="../app/index.html" aria-current="page"><span data-label="Develop">Develop</span></a>
+        <a href="../about.html"><span data-label="About">About</span></a>
+        <a href="../realtime/index.html"><span data-label="Realtime">Realtime</span></a>
+        <a href="../design/index.html"><span data-label="Design">Design</span></a>
+        <a href="../visual/index.html"><span data-label="Visual">Visual</span></a>
+        <a href="../contact.html"><span data-label="Contact">Contact</span></a>
       </nav>
       <a class="sitemap-menu" href="../sitemap.html" aria-label="Sitemap" title="Sitemap">
         <img src="../main/menu.svg" alt="" width="24" height="24">
@@ -66,7 +70,7 @@
             </a>
             <div class="card-copy">
               <p class="card-label">Time &amp; productivity</p>
-              <h3><a href="signee/index.html">Signee Timer</a></h3>
+              <h3><a href="signee/index.html" class="link-underline-sweep">Signee Timer</a></h3>
               <p>An advanced stopwatch and event logger for routines, sports, cooking and creative work.</p>
             </div>
           </article>
@@ -79,7 +83,7 @@
             </a>
             <div class="card-copy">
               <p class="card-label">Games &amp; focus</p>
-              <h3><a href="splitclock/index.html">Split Clock</a></h3>
+              <h3><a href="splitclock/index.html" class="link-underline-sweep">Split Clock</a></h3>
               <p>A flexible chess and board-game clock, with precise timing and a wide range of game modes.</p>
             </div>
           </article>
@@ -88,7 +92,7 @@
             <a class="card-image" style="background-color: #ded3b8;" href="unichars/index.html" aria-label="Open uniCHaRs page"> <img class="app-artwork" src="unichars/infocard.svg" alt="uniCHaRs" width="512" height="512" loading="lazy"> </a>
             <div class="card-copy">
               <p class="card-label">Fonts &amp; characters</p>
-              <h3><a href="unichars/index.html">uniCHaRs</a></h3>
+              <h3><a href="unichars/index.html" class="link-underline-sweep">uniCHaRs</a></h3>
               <p>A handy font tool to browse, test and compare typefaces and explore special characters.</p>
             </div>
           </article>
@@ -96,7 +100,7 @@
             <a class="card-image" style="background-color: #fff0e5;" href="imgconverter/index.html" aria-label="Open Image Auto Convert page"> <img class="app-artwork" style="width: 50%; height: 50%;" src="imgconverter/appicon.svg" alt="Image Auto Convert app icon" width="512" height="512" loading="lazy"> </a>
             <div class="card-copy">
               <p class="card-label">Images &amp; utilities</p>
-              <h3><a href="imgconverter/index.html">Image Auto Convert</a></h3>
+              <h3><a href="imgconverter/index.html" class="link-underline-sweep">Image Auto Convert</a></h3>
               <p>Drop an image, convert it locally, and keep your original. No cloud uploads or watermarks.</p>
             </div>
           </article>
@@ -105,7 +109,7 @@
             <a href="calculio/index.html" aria-label="Open Calculio page" class="card-image" style="background-color: #fff2df;"> <img class="app-artwork" style="width: 50%; height: 50%;" src="calculio/appicon.svg" alt="Calculio app icon" width="512" height="512" loading="lazy"> </a>
             <div class="card-copy">
               <p class="card-label">Math &amp; productivity</p>
-              <h3><a href="calculio/index.html">Calculio</a></h3>
+              <h3><a href="calculio/index.html" class="link-underline-sweep">Calculio</a></h3>
               <p>An infinite-precision calculator with a fresh, block-based way to build and edit equations.</p>
             </div>
           </article>
@@ -114,7 +118,7 @@
             <a href="memmory/index.html" aria-label="Open Memmory page" class="card-image" style="background-color: #e3f6ff;"> <img class="app-artwork" style="width: 50%; height: 50%;" src="memmory/appicon.svg" alt="Memmory app icon" width="512" height="512" loading="lazy"> </a>
             <div class="card-copy">
               <p class="card-label">Nature &amp; games</p>
-              <h3><a href="memmory/index.html">Memmory</a></h3>
+              <h3><a href="memmory/index.html" class="link-underline-sweep">Memmory</a></h3>
               <p>A playful memory game that introduces edible plants and the natural world.</p>
             </div>
           </article>
@@ -136,7 +140,7 @@
               </a>
               <div class="card-copy">
                 <p class="card-label">Coming soon</p>
-                <h3><a href="verbose/index.html">Verbose</a></h3>
+                <h3><a href="verbose/index.html" class="link-underline-sweep">Verbose</a></h3>
                 <p>A learning companion with a personal dictionary you can fill with every new word you discover.</p>
               </div>
             </article>
@@ -147,7 +151,7 @@
               </a>
               <div class="card-copy">
                 <p class="card-label">Coming soon</p>
-                <h3><a href="saveus/index.html">SaveUs</a></h3>
+                <h3><a href="saveus/index.html" class="link-underline-sweep">SaveUs</a></h3>
                 <p>Use your iPhone as a portable backup destination, with a local catalogue of your saved files.</p>
               </div>
             </article>
@@ -158,7 +162,7 @@
               </a>
               <div class="card-copy">
                 <p class="card-label">Coming soon</p>
-                <h3><a href="outlays/index.html">Outlays</a></h3>
+                <h3><a href="outlays/index.html" class="link-underline-sweep">Outlays</a></h3>
                 <p>Keep track of how much money you have spent and where the rest has gone.</p>
               </div>
             </article>
@@ -169,7 +173,7 @@
               </a>
               <div class="card-copy">
                 <p class="card-label">Coming soon</p>
-                <h3><a href="counting/index.html">Counting</a></h3>
+                <h3><a href="counting/index.html" class="link-underline-sweep">Counting</a></h3>
                 <p>There is hardly anything you cannot count with this handy tool.</p>
               </div>
             </article>
@@ -180,7 +184,7 @@
               </a>
               <div class="card-copy">
                 <p class="card-label">Coming soon</p>
-                <h3><a href="casemaster/index.html">CaseMaster</a></h3>
+                <h3><a href="casemaster/index.html" class="link-underline-sweep">CaseMaster</a></h3>
                 <p>A trusted assistant for building managers and landlords, with the tools you need to take care of a property.</p>
               </div>
             </article>
@@ -189,7 +193,7 @@
 				  <a href="demozone/index.html" aria-label="Open DemoZone page" class="card-image" style="background-color: #f5f8fb;"> <img class="app-artwork" style="width: 50%; height: 50%;" src="demozone/appicon.svg" alt="DemoZone" width="512" height="512" loading="lazy"></a>
               <div class="card-copy">
                 <p class="card-label">Coming soon</p>
-					 <h3><a href="demozone/index.html">DemoZone</a></h3>
+					 <h3><a href="demozone/index.html" class="link-underline-sweep">DemoZone</a></h3>
                 <p>Search for and discover fantastic demos, from the early days to the present.</p>
               </div>
             </article>
@@ -221,7 +225,7 @@
           <p class="eyebrow">Open-source development</p>
           <h2 id="opensource-title">GitHub projects</h2>
           <p>Explore our public libraries, developer tools and website source. Each project links directly to its GitHub repository.</p>
-          <a class="text-link" href="https://github.com/metatronsw?tab=repositories" target="_blank" rel="noopener noreferrer">All repositories on GitHub <span aria-hidden="true">↗</span></a>
+          <a class="text-link link-external" href="https://github.com/metatronsw?tab=repositories" target="_blank" rel="noopener noreferrer">All repositories on GitHub</a>
         </header>
         <div class="github-grid">
           <article class="github-box">
@@ -267,13 +271,28 @@
       </section>
     </main>
     <footer class="site-footer">
-      <div class="section-wrap footer-inner footer-standard">
-        <a class="brand footer-brand" href="../index.html" aria-label="Metatron Software home">
-          <img class="brand-mark" src="../main/metatron.svg" alt="" aria-hidden="true" width="38" height="38">
-          <span>Metatron <strong>Software</strong></span>
+      <div class="section-wrap footer-inner">
+        <a class="brand footer-brand" href="../index.html"> <img class="brand-mark" src="../main/metatron.svg" alt="" aria-hidden="true" width="38" height="38"> <span>Metatron <strong>Software</strong></span> </a>
+        <nav class="social-links" aria-label="Social media and email">
+          <a href="https://www.facebook.com/szerencses.gabor.1" aria-label="Facebook" title="Facebook" target="_blank" rel="noopener noreferrer">
+            <img src="../main/facebook.svg" alt="" width="24" height="24" loading="lazy">
+          </a>
+          <a href="https://www.instagram.com/szerencsesg/" aria-label="Instagram" title="Instagram" target="_blank" rel="noopener noreferrer">
+            <img src="../main/instagram.svg" alt="" width="24" height="24" loading="lazy">
+          </a>
+          <a href="https://www.youtube.com/@varju-bacsi" aria-label="YouTube" title="YouTube" target="_blank" rel="noopener noreferrer">
+            <img src="../main/youtube.svg" alt="" width="24" height="24" loading="lazy">
+          </a>
+          <a href="https://www.linkedin.com/in/g%C3%A1bor-szerencs%C3%A9s-432a01233" aria-label="LinkedIn" title="LinkedIn" target="_blank" rel="noopener noreferrer">
+            <img src="../main/linkedin.svg" alt="" width="24" height="24" loading="lazy">
+          </a>
+          <a href="mailto:softwaremetatron@gmail.com" aria-label="Mail" title="Mail">
+            <img src="../main/mail-social.svg" alt="" width="24" height="24" loading="lazy">
+          </a>
+        </nav>
+        <a class="sitemap-menu" href="../sitemap.html" aria-label="Sitemap" title="Sitemap">
+          <img src="../main/menu.svg" alt="" width="24" height="24">
         </a>
-        <p class="footer-description">Independent software development from Budapest, Hungary.</p>
-        <p class="footer-years">2018-2026</p>
       </div>
     </footer>
   </body>

@@ -6,7 +6,8 @@
     <meta name="description" content="DemoZone brings the demoscene to your phone. Browse visual previews, find demos with YouTube videos, and narrow your search with layered filters.">
     <meta name="theme-color" content="#111110">
     <title>DemoZone — The demoscene, ready to watch</title>
-    <link rel="icon" type="image/svg+xml" href="../../main/favicon.svg">
+    <link rel="icon" type="image/svg+xml" href="../../main/favicon.svg" sizes="any">
+    <link rel="icon" type="image/png" href="../../main/favicon.png">
     <style>
       :root {
         color-scheme: dark;
@@ -457,6 +458,46 @@
           transition: none;
         }
       }
+
+
+      /* Direction markers for text links. */
+      a:is(.link-external, .link-internal)::after {
+        display: inline-block;
+        margin-inline-start: 0.3em;
+        text-decoration: none;
+      }
+
+      a.link-external::after {
+        content: "↗" / "";
+      }
+
+      a.link-internal::after {
+        content: "→" / "";
+      }
+
+
+      @media (prefers-reduced-motion: no-preference) {
+        a.link-external:is(:hover, :focus-visible)::after {
+          animation: github-arrow-sway 2s ease-in-out infinite;
+        }
+
+        a.link-internal:is(:hover, :focus-visible)::after {
+          animation: internal-arrow-nudge 500ms ease-in-out;
+        }
+      }
+
+
+      @keyframes internal-arrow-nudge {
+        50% {
+          transform: translateX(0.25em);
+        }
+      }
+
+
+      @keyframes github-arrow-sway {
+        0%, 100% { transform: rotate(-12deg); }
+        50% { transform: rotate(12deg); }
+      }
     </style>
 
     <link rel="canonical" href="https://metatronsw.github.io/app/demozone/">
@@ -494,7 +535,7 @@
           <p class="lead">From the earliest scene classics to the latest wild demos. Discover decades of creativity on your phone, with visual previews and a direct route to YouTube.</p>
           <div class="hero-actions">
             <a class="button" href="#browse">Take a look <span aria-hidden="true">↓</span></a>
-            <a href="../index.html">Explore our apps <span aria-hidden="true">↗</span></a>
+            <a href="../index.html" class="link-internal">Explore our apps</a>
           </div>
         </div>
         <figure class="phone-shot">
@@ -567,7 +608,7 @@
 
       <div class="wrap source-note">
         <p>Demo information and images from <a href="https://www.pouet.net/" target="_blank" rel="noopener noreferrer">Pouët.net</a>. Videos open on YouTube.</p>
-        <a href="mailto:softwaremetatron@gmail.com">Questions or ideas? Get in touch <span aria-hidden="true">↗</span></a>
+        <a href="mailto:softwaremetatron@gmail.com" class="link-external">Questions or ideas? Get in touch</a>
       </div>
     </main>
 
