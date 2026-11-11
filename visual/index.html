@@ -117,7 +117,6 @@
       .virtual-hero .hero-background-art path:is(#L1, #L2, #L3, #L4, #L5, #L6, #L7) {
         opacity: 0;
         transform-box: view-box;
-        transform: rotate(var(--ray-angle, 0deg)) scaleX(0) rotate(calc(0deg - var(--ray-angle, 0deg)));
         animation: visual-rays-on 500ms ease-out 1s forwards;
       }
       .lamp-ray-tip {
@@ -175,8 +174,6 @@
             color-mix(in srgb, var(--visual-hero-end), #385469 var(--lamp-highlight)));
           animation-name: visual-lights-on-dark;
         }
-
-
         @keyframes visual-lights-on-dark {
           to {
             --ink: #edf3f8;
@@ -186,24 +183,16 @@
             --visual-hero-end: #213748;
           }
         }
-
-
         .virtual-hero .hero-background-art {
           opacity: calc(0.05 + var(--lamp-proximity) * 0.45);
         }
-
-
         .virtual-hero > .section-wrap {
           color: color-mix(in srgb, var(--ink), #fff var(--lamp-highlight));
           opacity: 1;
         }
-
-
         .virtual-hero > .section-wrap p:not(.eyebrow) {
           color: color-mix(in srgb, var(--muted), #dbe8f2 var(--lamp-highlight));
         }
-
-
         .virtual-hero .eyebrow {
           color: color-mix(in srgb, var(--blue), #b8e5ff var(--lamp-highlight));
         }
@@ -442,14 +431,14 @@
 
 
           <figure id="image-event-bank-center-decoration">
-            <button type="button" popovertarget="view-event-bank-center-decoration" aria-label="Enlarge Bank Center - Decoration"><img src="event/thumb/bank-center-decoration.webp" alt="Bank Center - Decoration" width="600" height="800" loading="lazy" decoding="async"></button>
+            <button type="button" popovertarget="view-event-bank-center-decoration" aria-label="Enlarge Bank Center - Decoration"><img src="event/thumb/bank-center-decoration.webp" alt="Bank Center - Decoration" width="600" height="840" loading="lazy" decoding="async"></button>
             <figcaption>Bank Center - Decoration</figcaption>
           </figure>
 
 
-			 <figure id="image-event-bank-center-fnd">
-				 <button type="button" popovertarget="view-event-bank-center-fnd" aria-label="Enlarge Bank Center - Fnd"><img src="event/thumb/bank-center-fnd.webp" alt="Bank Center - Fnd" width="600" height="450" loading="lazy" decoding="async"></button>
-				 <figcaption>Bank Center - Fnd</figcaption>
+			 <figure id="image-event-2014-debrecen-bmw-salon-2">
+				 <button type="button" popovertarget="view-event-2014-debrecen-bmw-salon-2" aria-label="Enlarge 2014 Debrecen - BMW Salon 2"><img src="event/thumb/2014-debrecen-bmw-salon-2.webp" alt="2014 Debrecen - BMW Salon 2" width="600" height="400" loading="lazy" decoding="async"></button>
+				 <figcaption>2014 Debrecen - BMW Salon 2</figcaption>
 			 </figure>
 
 			 <figure id="image-event-2014-debrecen-bmw-salon-3">
@@ -483,6 +472,7 @@
 
           <p>Another distinctive experiment involved projecting dense, textural visuals directly onto the audience. The crowd became an organic surface, bringing the imagery to life together with the music and the movement of the participants.</p>
         </header>
+
         <div class="studio-grid studio-grid--archive">
           <figure id="image-2005-2012-2008-katlan-minimalheadz-1">
             <button type="button" popovertarget="view-2005-2012-2008-katlan-minimalheadz-1" aria-label="Enlarge 2008 Katlan - Minimalheadz 1"><img src="2005-2012/thumb/2008-katlan-minimalheadz-1.webp" alt="2008 Katlan - Minimalheadz 1" width="600" height="400" loading="lazy" decoding="async"></button>
@@ -796,15 +786,27 @@
       </div>
     </div>
 
-
-    <div class="lightbox" id="view-event-2014-debrecen-bmw-salon-3" popover role="dialog" aria-label="2014 Debrecen - BMW Salon 3">
+ <div class="lightbox" id="view-event-2014-debrecen-bmw-salon-3" popover role="dialog" aria-label="2014 Debrecen - BMW Salon 3">
       <button type="button" class="lightbox-backdrop" popovertarget="view-event-2014-debrecen-bmw-salon-3" popovertargetaction="hide" aria-label="Close enlarged image"></button>
       <div class="lightbox-content">
-        <button type="button" class="lightbox-image" popovertarget="view-event-2014-debrecen-bmw-salon-3" popovertargetaction="hide" aria-label="Close enlarged image"><img src="event/2014-debrecen-bmw-salon-3.webp" alt="2014 Debrecen - BMW Salon 3" width="2244" height="1496" loading="lazy" decoding="async"></button>
+        <button type="button" class="lightbox-image" popovertarget="view-event-2014-debrecen-bmw-salon-3" popovertargetaction="hide" aria-label="Close enlarged image"><img src="event/2014-debrecen-bmw-salon-3.webp" alt="2014 Debrecen - BMW Salon 3" width="2016" height="780" loading="lazy" decoding="async"></button>
         <div class="lightbox-caption">
-          <a href="event/2014-debrecen-bmw-salon-3.webp">2014 Debrecen - BMW Salon 3</a>
+          <a href="event/2014-debrecen-bmw-salon-3.webp">2014 Debrecen - BMW Salon 1</a>
           <span aria-hidden="true">·</span>
           <button type="button" popovertarget="view-event-2014-debrecen-bmw-salon-3" popovertargetaction="hide">Close</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="lightbox" id="view-event-2014-debrecen-bmw-salon-2" popover role="dialog" aria-label="2014 Debrecen - BMW Salon 2">
+      <button type="button" class="lightbox-backdrop" popovertarget="view-event-2014-debrecen-bmw-salon-2" popovertargetaction="hide" aria-label="Close enlarged image"></button>
+      <div class="lightbox-content">
+        <button type="button" class="lightbox-image" popovertarget="view-event-2014-debrecen-bmw-salon-2" popovertargetaction="hide" aria-label="Close enlarged image"><img src="event/2014-debrecen-bmw-salon-2.webp" alt="2014 Debrecen - BMW Salon 2" width="2244" height="1496" loading="lazy" decoding="async"></button>
+        <div class="lightbox-caption">
+          <a href="event/2014-debrecen-bmw-salon-2.webp">2014 Debrecen - BMW Salon 3</a>
+          <span aria-hidden="true">·</span>
+          <button type="button" popovertarget="view-event-2014-debrecen-bmw-salon-2" popovertargetaction="hide">Close</button>
         </div>
       </div>
     </div>
@@ -875,17 +877,6 @@
     </div>
 
 
-    <div class="lightbox" id="view-event-bank-center-fnd" popover role="dialog" aria-label="Bank Center - Fnd">
-      <button type="button" class="lightbox-backdrop" popovertarget="view-event-bank-center-fnd" popovertargetaction="hide" aria-label="Close enlarged image"></button>
-      <div class="lightbox-content">
-        <button type="button" class="lightbox-image" popovertarget="view-event-bank-center-fnd" popovertargetaction="hide" aria-label="Close enlarged image"><img src="event/bank-center-fnd.webp" alt="Bank Center - Fnd" width="1448" height="1086" loading="lazy" decoding="async"></button>
-        <div class="lightbox-caption">
-          <a href="event/bank-center-fnd.webp">Bank Center - Fnd</a>
-          <span aria-hidden="true">·</span>
-          <button type="button" popovertarget="view-event-bank-center-fnd" popovertargetaction="hide">Close</button>
-        </div>
-      </div>
-    </div>
 
 
     <div class="lightbox" id="view-event-complet-kone" popover role="dialog" aria-label="Complet - Kone">
