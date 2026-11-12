@@ -6,8 +6,8 @@
     <meta name="description" content="DemoZone brings the demoscene to your phone. Browse visual previews, find demos with YouTube videos, and narrow your search with layered filters.">
     <meta name="theme-color" content="#111110">
     <title>DemoZone — The demoscene, ready to watch</title>
-    <link rel="icon" type="image/svg+xml" href="../../main/favicon.svg" sizes="any">
-    <link rel="icon" type="image/png" href="../../main/favicon.png">
+    <link rel="icon" type="image/svg+xml" href="appicon.svg" sizes="any">
+    <link rel="icon" type="image/png" href="favicon.png">
     <style>
       :root {
         color-scheme: dark;
@@ -212,6 +212,19 @@
       }
 
 
+      .store-badge {
+        display: inline-block;
+        width: min(220px, 100%);
+        margin-top: 1.5rem;
+      }
+
+
+      .store-badge img {
+        width: 100%;
+        transition: transform 350ms ease;
+      }
+
+
       .phone-shot {
         width: min(100%, 300px);
         justify-self: center;
@@ -316,12 +329,43 @@
       }
 
 
-      .behind-scenes {
+      .filter-preview {
         padding-block: 5rem;
       }
 
 
-      .behind-scenes > p:not(.eyebrow) {
+      .filter-preview > p:not(.eyebrow) {
+        max-width: 70ch;
+        color: var(--muted);
+      }
+
+
+      .filter-preview-shot {
+        width: min(100%, 760px);
+        margin: 2.5rem auto 0;
+      }
+
+
+      .filter-preview-shot img {
+        width: 100%;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        box-shadow: 0 24px 60px rgb(0 0 0 / 28%);
+      }
+
+
+      .filter-preview-shot figcaption {
+        text-align: center;
+      }
+
+
+      .collection-builder {
+        padding-block: 5rem;
+        border-top: 1px solid var(--line);
+      }
+
+
+      .collection-builder > p:not(.eyebrow) {
         max-width: 70ch;
         color: var(--muted);
       }
@@ -332,16 +376,10 @@
       }
 
 
-      .admin-shot a {
-        display: block;
-        border-radius: 10px;
-      }
-
-
       .admin-shot img {
         width: 100%;
         border: 1px solid var(--line);
-        border-radius: inherit;
+        border-radius: 10px;
       }
 
 
@@ -438,7 +476,7 @@
           width: min(78%, 280px);
         }
 
-        .behind-scenes {
+        .filter-preview, .collection-builder {
           padding-block: 3rem;
         }
 
@@ -455,6 +493,10 @@
         }
 
         .button {
+          transition: none;
+        }
+
+        .store-badge img {
           transition: none;
         }
       }
@@ -477,6 +519,10 @@
 
 
       @media (prefers-reduced-motion: no-preference) {
+        .store-badge:is(:hover, :focus-visible) img {
+          transform: translateY(5px);
+        }
+
         a.link-external:is(:hover, :focus-visible)::after {
           animation: github-arrow-sway 2s ease-in-out infinite;
         }
@@ -522,7 +568,8 @@
       <nav aria-label="Page navigation">
         <a href="#browse">Discover</a>
         <a href="#filters">Search &amp; filters</a>
-        <a href="#behind-scenes">Behind the scenes</a>
+        <a href="#filter-preview">Filter preview</a>
+        <a href="#collection-builder">Make your list</a>
       </nav>
     </header>
 
@@ -537,9 +584,12 @@
             <a class="button" href="#browse">Take a look <span aria-hidden="true">↓</span></a>
             <a href="../index.html" class="link-internal">Explore our apps</a>
           </div>
+          <a class="store-badge" href="https://apps.apple.com/hu/app/id6832092223">
+            <img src="../../main/appstore-logo-gray.svg" alt="Download DemoZone on the App Store" width="380" height="128">
+          </a>
         </div>
         <figure class="phone-shot">
-          <img src="IMG_6980.webp" alt="DemoZone on iPhone showing demo thumbnails, titles, platforms and release dates" width="1284" height="2778">
+          <img src="demo-zone-1.webp" alt="DemoZone on iPhone showing demo cards for Atomic Playboy, Bad Robots and Sugar Spin" width="1206" height="2622">
           <figcaption>See the demos before you press play.</figcaption>
         </figure>
       </section>
@@ -561,8 +611,8 @@
       <div class="filter-band">
         <section class="wrap filter-section" id="filters" aria-labelledby="filters-title">
           <figure class="phone-shot">
-            <img src="IMG_6981.webp" alt="DemoZone's filter layers on iPhone, with separate platform and scene-selection filters" width="1284" height="2778" loading="lazy">
-            <figcaption>Combine filter layers to narrow the results.</figcaption>
+            <img src="demo-zone-2.webp" alt="DemoZone on iPhone showing a search for 2020 and its matching demos" width="1206" height="2622" loading="lazy">
+            <figcaption>Search by year and browse the matching demos.</figcaption>
           </figure>
           <div class="filter-copy">
             <p class="eyebrow">Your platform. Your era. Your scene.</p>
@@ -593,15 +643,25 @@
       </div>
 
 
-      <section class="wrap behind-scenes" id="behind-scenes" aria-labelledby="behind-title">
-        <p class="eyebrow">Behind the collection</p>
-        <h2 id="behind-title">From scene data to a watchable collection.</h2>
-        <p>The companion data-preparation tool helps turn the Pouët dataset into the collection used by DemoZone. It brings production details, platform information, screenshots and YouTube references together, with filters for selecting the entries to include.</p>
+      <section class="wrap filter-preview" id="filter-preview" aria-labelledby="filter-preview-title">
+        <p class="eyebrow">Filter layers in detail</p>
+        <h2 id="filter-preview-title">Shape the collection around you.</h2>
+        <p>On a larger screen, DemoZone gives each filter layer room to breathe. Choose a platform, year and award type while the demo grid stays in view behind the controls.</p>
+        <figure class="filter-preview-shot">
+          <img src="demo-zone-filter.webp" alt="DemoZone on iPad showing the filter layers panel over a grid of demo previews" width="1520" height="2028" loading="lazy">
+          <figcaption>Platform, year and award filters on iPad.</figcaption>
+        </figure>
+      </section>
+
+
+      <section class="wrap collection-builder" id="collection-builder" aria-labelledby="collection-builder-title">
+        <p class="eyebrow">Companion macOS tool</p>
+        <h2 id="collection-builder-title">Make the collection your own.</h2>
+        <p>Build your own selection of favorite demos on macOS, or make a list of unfamiliar productions you want to watch from start to finish.</p>
+        <p>The companion data-preparation tool brings together demo details, platform information, screenshots and video references from the Pouët dataset. Use its filters to choose the entries for your collection, then explore the results in DemoZone on your phone.</p>
         <figure class="admin-shot">
-          <a href="Administrator.webp" aria-label="View the full-size DemoZone data-preparation screenshot">
-            <img src="Administrator.webp" alt="DemoZone's desktop data-preparation tool showing source records, platform filters and converted demos" width="3520" height="2678" loading="lazy">
-          </a>
-          <figcaption>A look at the tool behind the app. Development screenshots are shown in Hungarian.</figcaption>
+          <img src="administrator.webp" alt="DemoZone's macOS data-preparation tool showing source records, platform filters and selected demos" width="2800" height="2130" loading="lazy">
+          <figcaption>The macOS tool used to prepare a personal demo collection. Development screenshots are shown in Hungarian.</figcaption>
         </figure>
       </section>
 
