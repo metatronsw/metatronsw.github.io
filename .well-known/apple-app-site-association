@@ -4,7 +4,8 @@
       {
         "appIDs": ["5FL7ATW4PP.com.metatron.DemoZone"],
         "components": [
-          { "/": "/app/demozone/filter/" }
+          { "/": "/app/demozone/filter/" },
+          { "/": "/app/demozone/visit/" }
         ]
       }
     ]

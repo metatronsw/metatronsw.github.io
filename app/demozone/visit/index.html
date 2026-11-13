@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Shared DemoZone demos</title>
+  <meta name="description" content="Open shared demos in DemoZone.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="DemoZone">
+  <meta property="og:title" content="Shared DemoZone demos">
+  <meta property="og:description" content="Open shared demos in DemoZone.">
+  <meta property="og:image" content="https://metatronsw.github.io/app/demozone/filter/icon.png">
+  <meta property="og:image:width" content="1024">
+  <meta property="og:image:height" content="1024">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Shared DemoZone demos">
+  <meta name="twitter:description" content="Open shared demos in DemoZone.">
+  <meta name="twitter:image" content="https://metatronsw.github.io/app/demozone/filter/icon.png">
+  <link rel="apple-touch-icon" href="../filter/icon.png">
+  <style>
+    body { margin: 0; background: #101116; color: #f5f5f5; font: 16px/1.6 -apple-system, BlinkMacSystemFont, sans-serif; }
+    main { max-width: 34rem; margin: 12vh auto; padding: 1.5rem; text-align: center; }
+    img { width: 120px; height: 120px; border-radius: 24px; }
+    a { color: #ffa94d; }
+    .open { display: none; margin: 1rem; padding: .65rem 1.1rem; border-radius: .6rem; background: #ff9f43; color: #151515; text-decoration: none; font-weight: 600; }
+  </style>
+</head>
+<body>
+  <main>
+    <img src="../filter/icon.png" alt="DemoZone icon">
+    <h1>Shared DemoZone demos</h1>
+    <p>Open this link in DemoZone to view the shared demos.</p>
+    <a class="open" id="open" href="#">Open in DemoZone</a>
+    <p><a href="https://apps.apple.com/hu/app/id6832092223">Get DemoZone on the App Store</a></p>
+    <p><a href="/app/demozone/">About DemoZone</a></p>
+  </main>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const values = params.getAll('visit');
+    if (values.length === 1 && /^[0-9]+(,[0-9]+)*$/.test(values[0])) {
+      const link = document.getElementById('open');
+      link.href = 'demoZone://?visit=' + values[0];
+      link.style.display = 'inline-block';
+    }
+  </script>
+</body>
+</html>
