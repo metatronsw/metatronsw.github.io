@@ -215,7 +215,7 @@
       .store-badge {
         display: inline-block;
         width: min(220px, 100%);
-        margin-top: 1.5rem;
+        margin-top: 3rem;
       }
 
 
@@ -371,6 +371,30 @@
       }
 
 
+      .sharing {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 2rem 5rem;
+        padding-block: 5rem;
+        border-top: 1px solid var(--line);
+      }
+
+
+      .sharing-icon {
+        width: clamp(100px, 15vw, 160px);
+        height: auto;
+        fill: var(--accent);
+      }
+
+
+      .sharing p {
+        max-width: 70ch;
+        color: var(--muted);
+        overflow-wrap: anywhere;
+      }
+
+
       .admin-shot {
         margin-top: 2.5rem;
       }
@@ -392,6 +416,18 @@
         border-top: 1px solid var(--line);
         color: var(--muted);
         font-size: 0.9rem;
+      }
+
+
+      .privacy {
+        padding-block: 4.5rem;
+        border-top: 1px solid var(--line);
+      }
+
+
+      .privacy p {
+        max-width: 70ch;
+        color: var(--muted);
       }
 
 
@@ -476,8 +512,12 @@
           width: min(78%, 280px);
         }
 
-        .filter-preview, .collection-builder {
+        .filter-preview, .collection-builder, .sharing {
           padding-block: 3rem;
+        }
+
+        .sharing {
+          grid-template-columns: minmax(0, 1fr);
         }
 
         .footer-inner {
@@ -569,6 +609,7 @@
         <a href="#browse">Discover</a>
         <a href="#filters">Search &amp; filters</a>
         <a href="#filter-preview">Filter preview</a>
+        <a href="#sharing">Share</a>
         <a href="#collection-builder">Make your list</a>
       </nav>
     </header>
@@ -577,7 +618,7 @@
     <main>
       <section class="wrap hero" aria-labelledby="hero-title">
         <div>
-          <p class="eyebrow">Demoscene on your phone · Coming soon</p>
+          <p class="eyebrow">Demoscene on your phone</p>
           <h1 id="hero-title">The demoscene.<br><span>Ready to watch.</span></h1>
           <p class="lead">From the earliest scene classics to the latest wild demos. Discover decades of creativity on your phone, with visual previews and a direct route to YouTube.</p>
           <div class="hero-actions">
@@ -654,6 +695,21 @@
       </section>
 
 
+      <section class="wrap sharing" id="sharing" aria-labelledby="sharing-title">
+        <div>
+          <h2 id="sharing-title">Share with friends.</h2>
+          <p>Share your choice of demos or complex filter settings with friends, or post them publicly using a link. Share directly through iMessage or publish the link as plain text.</p>
+          <p>For example: <a href="demoZone://?f=17,46,47,48&amp;f=4,2000&amp;s=3,0&amp;s=4,0">demoZone://?f=17,46,47,48&amp;f=4,2000&amp;s=3,0&amp;s=4,0</a></p>
+          <p>These links can also be opened from the website and show the corresponding search results in the app.</p>
+        </div>
+        <svg class="sharing-icon" viewBox="0 0 50 50" aria-hidden="true">
+          <path d="M30.3 13.7L25 8.4l-5.3 5.3-1.4-1.4L25 5.6l6.7 6.7z"/>
+          <path d="M24 7h2v21h-2z"/>
+          <path d="M35 40H15c-1.7 0-3-1.3-3-3V19c0-1.7 1.3-3 3-3h7v2h-7c-.6 0-1 .4-1 1v18c0 .6.4 1 1 1h20c.6 0 1-.4 1-1V19c0-.6-.4-1-1-1h-7v-2h7c1.7 0 3 1.3 3 3v18c0 1.7-1.3 3-3 3z"/>
+        </svg>
+      </section>
+
+
       <section class="wrap collection-builder" id="collection-builder" aria-labelledby="collection-builder-title">
         <p class="eyebrow">Companion macOS tool</p>
         <h2 id="collection-builder-title">Make the collection your own.</h2>
@@ -670,6 +726,16 @@
         <p>Demo information and images from <a href="https://www.pouet.net/" target="_blank" rel="noopener noreferrer">Pouët.net</a>. Videos open on YouTube.</p>
         <a href="mailto:softwaremetatron@gmail.com" class="link-external">Questions or ideas? Get in touch</a>
       </div>
+
+
+      <section class="wrap privacy" aria-labelledby="privacy-title">
+        <h2 id="privacy-title">Privacy</h2>
+        <p>DemoZone is a free app created to promote the demoscene. It does not collect, sell, or share personal data, and it does not use advertising or tracking systems.</p>
+        <p>Settings, favorites, filters, and cached images are stored on your device. Screenshots are downloaded from Pouët’s server, which may receive technical information such as your IP address.</p>
+        <p>The iMessage extension lets you share searches, filters, sorting settings, and selected demos from within the app. Shared content is limited to the checked catalogue available in DemoZone.</p>
+        <p>When you open external websites or videos, or choose to share content, the selected service’s own privacy policy applies.</p>
+        <p><a href="../../main/nodatacollect.html" class="link-internal">Our privacy policy</a></p>
+      </section>
     </main>
 
 
