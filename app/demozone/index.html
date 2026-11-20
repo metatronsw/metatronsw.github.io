@@ -212,16 +212,64 @@
       }
 
 
-      .store-badge {
-        display: inline-block;
-        width: min(220px, 100%);
+      .app-downloads {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.75rem;
+        width: min(calc(440px + 0.75rem), 100%);
         margin-top: 3rem;
+      }
+
+
+      .app-downloads > :is(.store-badge, .android-download) {
+        width: 100%;
+        aspect-ratio: 380 / 128;
+      }
+
+
+      .store-badge {
+        display: block;
       }
 
 
       .store-badge img {
         width: 100%;
         transition: transform 350ms ease;
+      }
+
+
+      .android-download {
+        display: grid;
+        place-content: center;
+        place-items: center;
+        gap: 0.25rem;
+        border: 1px solid #b7b7b7;
+        border-radius: 6.8% / 20%;
+        background: rgb(183 183 183 / 10%);
+        color: #b7b7b7;
+        font-size: 0.875rem;
+        line-height: 1.2;
+        text-align: center;
+        text-decoration: none;
+      }
+
+
+      .android-download img {
+        width: 132px;
+        height: 24px;
+      }
+
+
+      .android-download:is(:hover, :focus-visible) {
+        background: rgb(183 183 183 / 18%);
+      }
+
+
+      .android-checksum {
+        grid-column: 1;
+        justify-self: center;
+        color: #b7b7b7;
+        font-size: 0.875rem;
       }
 
 
@@ -245,13 +293,9 @@
         font-size: 0.8rem;
         line-height: 1.5;
       }
-
-
       .phone-shot figcaption {
         text-align: center;
       }
-
-
       .intro {
         display: grid;
         grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
@@ -259,8 +303,6 @@
         padding-block: 4.5rem;
         border-top: 1px solid var(--line);
       }
-
-
       .intro h2 {
         max-width: 16ch;
       }
@@ -496,6 +538,12 @@
           width: min(78%, 280px);
         }
 
+        .app-downloads {
+          grid-template-columns: minmax(0, 1fr);
+          width: min(220px, 100%);
+          margin-inline: auto;
+        }
+
         .intro h2 {
           max-width: none;
         }
@@ -626,23 +674,20 @@
             <a href="../index.html" class="link-internal">Explore our apps</a>
           </div>
 
-          <a class="store-badge" href="https://apps.apple.com/hu/app/id6832092223">
-            <img src="../../main/appstore-logo-gray.svg" alt="Download DemoZone on the App Store" width="380" height="128">
-          </a>
+          <div class="app-downloads">
+            <a class="android-download" href="https://github.com/metatronsw/metatronsw.github.io/releases/download/DemoZone/DemoZone-0.1.0-arm64-v8a.apk">
+              <img src="../../main/android.svg" alt="Android" width="132" height="24">
+              <span>Download APK</span>
+            </a>
 
+            <a class="store-badge" href="https://apps.apple.com/hu/app/id6832092223">
+              <img src="../../main/appstore-logo-gray.svg" alt="Download DemoZone on the App Store" width="380" height="128">
+            </a>
 
-<div class="hero-actions">
+            <a class="android-checksum link-internal" href="https://github.com/metatronsw/metatronsw.github.io/releases/download/DemoZone/DemoZone-0.1.0-arm64-v8a.apk.sha256">SHA-256 checksum</a>
+          </div>
+        </div>
 
-
-<a href="https://github.com/metatronsw/metatronsw.github.io/releases/download/DemoZone/DemoZone-0.1.0-arm64-v8a.apk.sha256" class="link-internal">DemoZone-0.1.0-arm64-v8a.apk.sha256</a>
-
-<a href="https://github.com/metatronsw/metatronsw.github.io/releases/download/DemoZone/DemoZone-0.1.0-arm64-v8a.apk" class="link-internal">DemoZone-0.1.0-arm64-v8a.apk</a>
-  </div>
-
-   </div>
-
-
-           </div>
 
         <figure class="phone-shot">
           <img src="demo-zone-1.webp" alt="DemoZone on iPhone showing demo cards for Atomic Playboy, Bad Robots and Sugar Spin" width="1206" height="2622">
